@@ -1,1 +1,1 @@
-# Authors: *Nicco Ryan, Andrew Smith, Lami Beach*
+Authors: *Nicco Ryan, Andrew Smith, Lami Beach*
