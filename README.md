@@ -6,6 +6,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 ## Planned Endpoints
 #### Characters
 */Characters*
+
 **Authorization** - GM only
 
 **Get** - All characters and their information (including Inventory, Stats and Weapon)
@@ -14,6 +15,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 
 
 */Characters/{Name}* 
+
 **Authorization** - GM can do anything, users can update and view their own character
 
 **Get** - Character with the given name and their associated information.
@@ -23,6 +25,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 
 #### Locations
 */Locations*
+
 **Authorization** - GM only
 
 **Get** - All Locations and their information (characters and enemies in location)
@@ -31,6 +34,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 
 
 */Locations/{Name}* 
+
 **Authorization** - Users can get their current location, only GM for other operations
 
 **Get** - Location with the given name and their associated information.
@@ -39,6 +43,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 
 #### Enemies
 */Enemies*
+
 **Authorization** - GM only
 
 **Get** - All Enemies and their information
@@ -47,6 +52,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 
 
 */Enemies/{Name}* 
+
 **Authorization** - Users can get enemies in their current location, only GM for other operations
 
 **Get** - Enemy with the given name and their associated information.
@@ -55,6 +61,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 
 #### Items
 */Items*
+
 **Authorization** - Allow anonymous for all gets, DM only for post
 
 **Get** - All Items and their information
@@ -63,6 +70,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 
 
 */Items/{id}* 
+
 **Authorization** - Allow anonymous for all gets, DM only for put
 
 **Get** - Item with the given id and it's associated information.
@@ -72,6 +80,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 
 #### Weapons
 */Weapons*
+
 **Authorization** - Allow anonymous for all get, DM only for post
 
 **Get** - All Weapon items and their information
@@ -79,6 +88,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 **Post** - Create new weapon by supplying: Name and type
 
 */Weapons/{id}* 
+
 **Authorization** - Allow anonymous for all gets, DM only for put
 
 **Get** - Weapon with the given id and it's associated information.
