@@ -10,6 +10,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 ## Visuals
 ### Database ERD
 ![Database ERD](assets/DatabaseERD.png)
+[ERD Explanantions](https://docs.google.com/document/d/18l6eFtC1B1aWomSokPo2aEY6dHkXdq_5J7Jy7JMoAOw/edit?usp=sharing)
 
 ### Domain Model
 ![Domain Model](assets/DomainModel.png)
