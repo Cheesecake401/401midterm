@@ -5,6 +5,8 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 
 [How to use](requirements.md)
 
+[Azure Boards](https://dev.azure.com/CryptsAndCoders/CryptsAndCoders)
+
 ## Visuals
 ### Database ERD
 ![Database ERD](assets/DatabaseERD.png)
