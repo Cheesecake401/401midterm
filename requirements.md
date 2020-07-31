@@ -2,7 +2,7 @@
 API hosted at: *dummy.com*
 
 ## Planned Endpoints
-#### Characters
+### Characters
 */Characters*
 
 **Authorization** - GM only
@@ -21,7 +21,7 @@ API hosted at: *dummy.com*
 **Put** - Update character info
 
 
-#### Locations
+### Locations
 */Locations*
 
 **Authorization** - GM only
@@ -39,7 +39,7 @@ API hosted at: *dummy.com*
 
 **Put** - Update location info
 
-#### Enemies
+### Enemies
 */Enemies*
 
 **Authorization** - GM only
@@ -57,7 +57,7 @@ API hosted at: *dummy.com*
 
 **Put** - Update enemy info
 
-#### Items
+### Items
 */Items*
 
 **Authorization** - Allow anonymous for all gets, DM only for post
@@ -76,7 +76,7 @@ API hosted at: *dummy.com*
 **Put** - Update item info
 
 
-#### Weapons
+### Weapons
 */Weapons*
 
 **Authorization** - Allow anonymous for all get, DM only for post
