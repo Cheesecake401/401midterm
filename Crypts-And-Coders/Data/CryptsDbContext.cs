@@ -119,6 +119,29 @@ namespace Crypts_And_Coders.Data
                     Description = "Lyderton is full of simpletons who prefer to keep war and conflict outside of their borders. It is rich farmland with dense amounts of beautiful wildlife."
                 }
             );
+
+            modelBuilder.Entity<Weapon>().HasData(
+                new Weapon
+                {
+                    Name = "Claymore",
+                    Type = "Close Range",
+                    BaseDamage = 15
+                },
+
+                new Weapon
+                {
+                    Name = "Wizard Staff",
+                    Type = "Magical",
+                    BaseDamage = 18
+                },
+
+                new Weapon
+                {
+                    Name = "Longbow",
+                    Type = "Long Range",
+                    BaseDamage = 10
+                }
+            );
         }
     }
 }
