@@ -10,34 +10,12 @@ namespace Crypts_And_Coders.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Species Species { get; set; }
-        public Class Class { get; set;}
+        public int WeaponId { get; set; }
+        public int LocationId { get; set; }
+        public SpeciesAndClass.Species Species { get; set; }
+        public SpeciesAndClass.Class Class { get; set; }
         public Weapon Weapon { get; set; }
         public Location CurrentLocation { get; set; }
         public List<CharacterInventory> Inventory { get; set; }
-
-    }
-
-    public enum Species
-    {
-        Human,
-        Elf,
-        Gnome,
-        Dwarf,
-        HalfOrc,
-        Dragonborn
-    }
-
-    public enum Class
-    {
-        Paladin,
-        Wizard,
-        Ranger,
-        Thief,
-        Bard,
-        Cleric,
-        Monk,
-        Fighter,
-        Druid
     }
 }
