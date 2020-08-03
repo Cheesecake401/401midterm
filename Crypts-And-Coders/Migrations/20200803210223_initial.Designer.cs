@@ -3,14 +3,16 @@ using Crypts_And_Coders.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crypts_And_Coders.Migrations
 {
     [DbContext(typeof(CryptsDbContext))]
-    partial class CryptsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200803210223_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,38 +227,6 @@ namespace Crypts_And_Coders.Migrations
                             Id = 3,
                             Description = "Lyderton is full of simpletons who prefer to keep war and conflict outside of their borders. It is rich farmland with dense amounts of beautiful wildlife.",
                             Name = "Lyderton"
-                        });
-                });
-
-            modelBuilder.Entity("Crypts_And_Coders.Models.Stat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Stat");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Strength"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Cunning"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Constitution"
                         });
                 });
 

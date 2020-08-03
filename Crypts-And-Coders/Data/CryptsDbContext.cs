@@ -21,6 +21,9 @@ namespace Crypts_And_Coders.Data
         public DbSet<Enemy> Enemy { get; set; }
         public DbSet<Location> Location { get; set; }
         public DbSet<EnemyInLocation> EnemyInLocation { get; set; }
+        public DbSet<Stat> Stat { get; set; }
+        public DbSet<CharacterStat> StatSheet { get; set; }
+
 
         public CryptsDbContext(DbContextOptions<CryptsDbContext> options) : base(options)
         {
@@ -32,6 +35,8 @@ namespace Crypts_And_Coders.Data
 
             modelBuilder.Entity<CharacterInventory>().HasKey(x => new { x.CharacterId, x.ItemId });
             modelBuilder.Entity<EnemyInLocation>().HasKey(x => new { x.LocationId, x.EnemyId });
+            modelBuilder.Entity<CharacterStat>().HasKey(x => new { x.StatId, x.CharacterId });
+
 
             // seed data
             modelBuilder.Entity<Character>().HasData(
@@ -163,6 +168,26 @@ namespace Crypts_And_Coders.Data
                     BaseDamage = 10
                 }
             );
+
+            modelBuilder.Entity<Stat>().HasData(
+               new Stat
+               {
+                   Id = 1,
+                   Name = "Strength"
+               },
+
+               new Stat
+               {
+                   Id = 2,
+                   Name = "Cunning"
+               },
+
+               new Stat
+               {
+                   Id = 3,
+                   Name = "Constitution"
+               }
+           );
         }
     }
 }
