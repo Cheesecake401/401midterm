@@ -15,27 +15,25 @@ namespace Crypts_And_Coders.Controllers
     [ApiController]
     public class LocationsController : ControllerBase
     {
-        private readonly CryptsDbContext _context;
         private readonly ILocation _location;
 
-        public LocationsController(CryptsDbContext context, ILocation location)
+        public LocationsController(ILocation location)
         {
             _location = location;
-            _context = context;
         }
 
         // GET: api/Locations
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Location>>> GetLocation()
         {
-            return await _context.Location.ToListAsync();
+            return await _location.GetLocations();
         }
 
         // GET: api/Locations/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Location>> GetLocation(int id)
         {
-            var location = await _context.Location.FindAsync(id);
+            var location = await _location.GetLocation(id);
 
             if (location == null)
             {
@@ -78,12 +76,6 @@ namespace Crypts_And_Coders.Controllers
         {
             await _location.Delete(id);
             return NoContent();
-        }
-
-        // TODO: keep??
-        private bool LocationExists(int id)
-        {
-            return _context.Location.Any(e => e.Id == id);
         }
     }
 }

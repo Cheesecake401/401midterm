@@ -25,7 +25,7 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/Characters
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Character>>> GetCharacter()
+        public async Task<ActionResult<IEnumerable<Character>>> GetCharacters()
         {
             return await _character.GetCharacters();
         }
