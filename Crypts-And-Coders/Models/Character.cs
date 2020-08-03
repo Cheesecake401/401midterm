@@ -8,6 +8,7 @@ namespace Crypts_And_Coders.Models
 {
     public class Character
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int WeaponId { get; set; }
         public int LocationId { get; set; }

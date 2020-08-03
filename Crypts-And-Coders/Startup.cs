@@ -59,7 +59,6 @@ namespace Crypts_And_Coders
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
