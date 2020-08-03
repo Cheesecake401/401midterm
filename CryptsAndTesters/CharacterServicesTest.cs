@@ -14,7 +14,7 @@ namespace CryptsAndTesters
     {
         private ICharacter BuildRepo()
         {
-            return new CharacterRepository(_db);
+            return new CharacterRepository(_db, null);
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace CryptsAndTesters
             };
             var repo = BuildRepo();
 
-            var saved = await repo.Create(newChar);
+            repo.Create(newChar);
 
             var result = await repo.GetCharacter(newChar.Id);
 

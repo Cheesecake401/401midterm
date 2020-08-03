@@ -1,4 +1,5 @@
 using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.Services;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,8 @@ namespace CryptsAndTesters
                 .UseSqlite(_connection)
                 .Options);
             _db.Database.EnsureCreated();
+
+            //_characterStats = new CharacterStatRepository();
         }
         public void Dispose()
         {

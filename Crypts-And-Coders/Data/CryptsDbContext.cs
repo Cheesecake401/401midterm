@@ -188,6 +188,44 @@ namespace Crypts_And_Coders.Data
                    Name = "Constitution"
                }
            );
+
+            modelBuilder.Entity<CharacterStat>().HasData(
+               new CharacterStat
+               {
+                   StatId = 1,
+                   CharacterId = 1
+               },
+
+               new CharacterStat
+               {
+                   StatId = 2,
+                   CharacterId = 1
+               },
+
+               new CharacterStat
+               {
+                   StatId = 2,
+                   CharacterId = 2
+               },
+
+               new CharacterStat
+               {
+                   StatId = 3,
+                   CharacterId = 2
+               },
+
+               new CharacterStat
+               {
+                   StatId = 1,
+                   CharacterId = 3
+               },
+
+               new CharacterStat
+               {
+                   StatId = 3,
+                   CharacterId = 3
+               }
+           );
         }
     }
 }

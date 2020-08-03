@@ -11,11 +11,10 @@ namespace Crypts_And_Coders.Models.Services
     public class LocationsRepository : ILocation
     {
         private CryptsDbContext _context;
-        
+
         public LocationsRepository(CryptsDbContext context)
         {
             _context = context;
-
         }
 
         public async Task<Location> Create(Location location)
