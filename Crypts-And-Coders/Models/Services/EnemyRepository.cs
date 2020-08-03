@@ -24,18 +24,8 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of enemy creation</returns>
         public async Task<Enemy> Create(Enemy enemy)
         {
-            Enemy entity = new Enemy()
-            {
-                Id = enemy.Id,
-                Abilities = enemy.Abilities,
-                Type = enemy.Type,
-                Species = SpeciesAndClass.Species.Dragon
-            };
-
             _context.Entry(enemy).State = EntityState.Added;
             await _context.SaveChangesAsync();
-
-            enemy.Id = entity.Id;
             return enemy;
         }
 
@@ -46,9 +36,12 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Task of completion for enemy delete</returns>
         public async Task Delete(int id)
         {
-            Enemy enemy = await GetEnemy(id);
-            _context.Entry(enemy).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-            await _context.SaveChangesAsync();
+            Enemy enemy = await _context.Enemy.FindAsync(id);
+            if (enemy != null)
+            {
+                _context.Entry(enemy).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+            }
         }
 
         /// <summary>
@@ -57,7 +50,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result with list of enemies</returns>
         public async Task<List<Enemy>> GetEnemies()
         {
-            var enemy = await _context.Enemy.ToListAsync();
+            List<Enemy> enemy = await _context.Enemy.ToListAsync();
             return enemy;
         }
 
@@ -68,7 +61,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of specified enemy</returns>
         public async Task<Enemy> GetEnemy(int id)
         {
-            Enemy enemy = await _context.Enemy.FindAsync(id);
+            Enemy enemy = await _context.Enemy.Where(x => x.Id == id).FirstOrDefaultAsync();
             return enemy;
         }
 
