@@ -48,7 +48,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <param name="charId">Id of character</param>
         /// <param name="itemId">Id of item</param>
         /// <returns>Successful result of item addition</returns>
-        Task<CharacterInventory> AddItemToInventory(int charId, int itemId);
+        Task AddItemToInventory(int charId, int itemId);
 
         /// <summary>
         /// Remove an item from a character's inventory
@@ -56,6 +56,6 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <param name="charId">Id of character</param>
         /// <param name="itemId">Id of item</param>
         /// <returns>Successful result of item removal</returns>
-        Task<CharacterInventory> RemoveItemFromInventory(int charId, int itemId);
+        Task RemoveItemFromInventory(int charId, int itemId);
     }
 }

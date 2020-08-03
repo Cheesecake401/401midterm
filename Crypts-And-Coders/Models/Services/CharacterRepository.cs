@@ -1,4 +1,7 @@
-﻿using Crypts_And_Coders.Models.Interfaces;
+﻿using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,39 +11,71 @@ namespace Crypts_And_Coders.Models.Services
 {
     public class CharacterRepository : ICharacter
     {
-        public Task<CharacterInventory> AddItemToInventory(int charId, int itemId)
+        private readonly CryptsDbContext _context;
+
+        public CharacterRepository(CryptsDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<Character> Create(Character character)
+        public async Task<Character> Create(Character character)
         {
-            throw new NotImplementedException();
+            _context.Entry(character).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+            return character;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            Character character = await _context.Character.FindAsync(id);
+            if(character != null)
+            {
+                _context.Entry(character).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+            } 
         }
 
-        public Task<Character> GetCharacter(int id)
+        public async Task<Character> GetCharacter(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Character.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return result;
         }
 
-        public Task<List<Character>> GetCharacters()
+        public async Task<List<Character>> GetCharacters()
         {
-            throw new NotImplementedException();
+            List<Character> result = await _context.Character.ToListAsync();
+            return result;
         }
 
-        public Task<CharacterInventory> RemoveItemFromInventory(int charId, int itemId)
+        public async Task<Character> Update(int id, Character character)
         {
-            throw new NotImplementedException();
+            _context.Entry(character).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return character;
+       }
+
+        public async Task AddItemToInventory(int charId, int itemId)
+        {
+            CharacterInventory inventory = new CharacterInventory()
+            {
+                CharacterId = charId,
+                ItemId = itemId
+            };
+
+            _context.Entry(inventory).State = EntityState.Added;
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Character> Update(int id, Character character)
+        public async Task RemoveItemFromInventory(int charId, int itemId)
         {
-            throw new NotImplementedException();
+            CharacterInventory result = await _context.CharacterInventory.FindAsync(charId, itemId);
+
+            if (result != null)
+            {
+                _context.Entry(result).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+            }
         }
+
     }
 }
