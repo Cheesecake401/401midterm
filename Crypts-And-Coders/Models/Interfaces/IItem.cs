@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.Interfaces
 {
-    internal interface IItem
+    public interface IItem
     {
         /// <summary>
         /// Creates a new item in the database
@@ -18,14 +18,14 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// Get a list of all items in the database
         /// </summary>
         /// <returns>Successful result with list of items</returns>
-        Task<Item> GetItems(int id);
+        Task<List<Item>> GetItems();
 
         /// <summary>
         /// Get a specific item in the database by ID
         /// </summary>
         /// <param name="id">Id of item to search for</param>
         /// <returns>Successful result of specified item</returns>
-        Task<List<Item>> GetItem();
+        Task<Item> GetItem(int id);
 
         /// <summary>
         /// Update a given item in the database
