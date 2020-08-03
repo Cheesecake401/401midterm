@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crypts-And-Coders", "Crypts-And-Coders\Crypts-And-Coders.csproj", "{FE7AD9F3-9F5D-4680-BA24-E60AC74CB32E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE7AD9F3-9F5D-4680-BA24-E60AC74CB32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE7AD9F3-9F5D-4680-BA24-E60AC74CB32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE7AD9F3-9F5D-4680-BA24-E60AC74CB32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE7AD9F3-9F5D-4680-BA24-E60AC74CB32E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE3C389C-EED4-4BB8-8979-5224A7CB0231}
+	EndGlobalSection
+EndGlobal
