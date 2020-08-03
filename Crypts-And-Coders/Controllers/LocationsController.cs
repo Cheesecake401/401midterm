@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
+using Crypts_And_Coders.Models.Interfaces;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -15,9 +16,11 @@ namespace Crypts_And_Coders.Controllers
     public class LocationsController : ControllerBase
     {
         private readonly CryptsDbContext _context;
+        private readonly ILocation _location;
 
-        public LocationsController(CryptsDbContext context)
+        public LocationsController(CryptsDbContext context, ILocation location)
         {
+            _location = location;
             _context = context;
         }
 

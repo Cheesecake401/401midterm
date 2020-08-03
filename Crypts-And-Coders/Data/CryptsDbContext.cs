@@ -1,5 +1,6 @@
 using Crypts_And_Coders.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
@@ -14,6 +15,7 @@ namespace Crypts_And_Coders.Data
     {
         public DbSet<Character> Character { get; set; }
         public DbSet<CharacterInventory> CharacterInventory { get; set; }
+        public DbSet<Weapon> Weapon { get; set; }
         public DbSet<Item> Item { get; set; }
         public DbSet<Enemy> Enemy { get; set; }
         public DbSet<Location> Location { get; set; }
