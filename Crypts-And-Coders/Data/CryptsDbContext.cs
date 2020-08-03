@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Data
@@ -34,8 +35,8 @@ namespace Crypts_And_Coders.Data
                     Name = "Galdifor",
                     Species = SpeciesAndClass.Species.Elf,
                     Class = SpeciesAndClass.Class.Thief,
-                    WeaponId = 1,
-                    LocationId = 1
+                    //WeaponId = this.Weapons.FindAsync(1),
+                    //LocationId = 1
                 },
 
                 new Character
@@ -44,8 +45,6 @@ namespace Crypts_And_Coders.Data
                     Name = "Dragorn",
                     Species = SpeciesAndClass.Species.Dwarf,
                     Class = SpeciesAndClass.Class.Paladin,
-                    WeaponId = 1,
-                    LocationId = 1
                 },
 
                 new Character
@@ -54,8 +53,6 @@ namespace Crypts_And_Coders.Data
                     Name = "Glen",
                     Species = SpeciesAndClass.Species.Human,
                     Class = SpeciesAndClass.Class.Bard,
-                    WeaponId = 1,
-                    LocationId = 1
                 }
             );
 
@@ -88,18 +85,21 @@ namespace Crypts_And_Coders.Data
             modelBuilder.Entity<Item>().HasData(
                 new Item
                 {
+                    Id = 1,
                     Name = "Health Potion",
                     Value = 25
                 },
 
                 new Item
                 {
+                    Id = 2,
                     Name = "Cup",
                     Value = 5
                 },
 
                 new Item
                 {
+                    Id = 3,
                     Name = "Dungeon Key",
                     Value = 100
                 }
@@ -131,6 +131,7 @@ namespace Crypts_And_Coders.Data
             modelBuilder.Entity<Weapon>().HasData(
                 new Weapon
                 {
+                    Id = 1,
                     Name = "Claymore",
                     Type = "Close Range",
                     BaseDamage = 15
@@ -138,6 +139,7 @@ namespace Crypts_And_Coders.Data
 
                 new Weapon
                 {
+                    Id = 2,
                     Name = "Wizard Staff",
                     Type = "Magical",
                     BaseDamage = 18
@@ -145,6 +147,7 @@ namespace Crypts_And_Coders.Data
 
                 new Weapon
                 {
+                    Id = 3,
                     Name = "Longbow",
                     Type = "Long Range",
                     BaseDamage = 10
