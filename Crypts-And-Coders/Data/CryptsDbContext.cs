@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace Crypts_And_Coders.Data
 {
@@ -16,8 +17,6 @@ namespace Crypts_And_Coders.Data
         public DbSet<Item> Item { get; set; }
         public DbSet<Enemy> Enemy { get; set; }
         public DbSet<Location> Location { get; set; }
-
-
 
         public CryptsDbContext(DbContextOptions<CryptsDbContext> options) : base(options)
         {
@@ -34,8 +33,8 @@ namespace Crypts_And_Coders.Data
                 {
                     Id = 1,
                     Name = "Galdifor",
-                    Species = SpeciesAndClass.Species.Elf,
-                    Class = SpeciesAndClass.Class.Thief,
+                    Species = Species.Elf,
+                    Class = Class.Thief,
                     WeaponId = 1,
                     LocationId = 1
                 },
@@ -44,8 +43,8 @@ namespace Crypts_And_Coders.Data
                 {
                     Id = 2,
                     Name = "Dragorn",
-                    Species = SpeciesAndClass.Species.Dwarf,
-                    Class = SpeciesAndClass.Class.Paladin,
+                    Species = Species.Dwarf,
+                    Class = Class.Paladin,
                     WeaponId = 1,
                     LocationId = 1
                 },
@@ -54,8 +53,8 @@ namespace Crypts_And_Coders.Data
                 {
                     Id = 3,
                     Name = "Glen",
-                    Species = SpeciesAndClass.Species.Human,
-                    Class = SpeciesAndClass.Class.Bard,
+                    Species = Species.Human,
+                    Class = Class.Bard,
                     WeaponId = 1,
                     LocationId = 1
                 }
@@ -65,25 +64,25 @@ namespace Crypts_And_Coders.Data
                 new Enemy
                 {
                     Id = 1,
-                    Abilities = 1,
+                    Abilities = "Slash",
                     Type = "Warrior",
-                    Species = SpeciesAndClass.Species.Goblin,
+                    Species = Species.Goblin,
                 },
 
                 new Enemy
                 {
                     Id = 2,
-                    Abilities = 1,
+                    Abilities = "Smash",
                     Type = "Beast",
-                    Species = SpeciesAndClass.Species.Troll,
+                    Species = Species.Troll,
                 },
 
                 new Enemy
                 {
                     Id = 3,
-                    Abilities = 1,
+                    Abilities = "Firebreath",
                     Type = "Mythical",
-                    Species = SpeciesAndClass.Species.Dragon
+                    Species = Species.Dragon
                 }
             );
 
