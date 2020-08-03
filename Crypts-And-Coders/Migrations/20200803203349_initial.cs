@@ -7,6 +7,21 @@ namespace Crypts_And_Coders.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Enemy",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Abilities = table.Column<int>(nullable: false),
+                    Type = table.Column<string>(nullable: true),
+                    Species = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Enemy", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Item",
                 columns: table => new
                 {
@@ -56,26 +71,26 @@ namespace Crypts_And_Coders.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
+                    WeaponId = table.Column<int>(nullable: false),
+                    LocationId = table.Column<int>(nullable: false),
                     Species = table.Column<int>(nullable: false),
-                    Class = table.Column<int>(nullable: false),
-                    WeaponId = table.Column<int>(nullable: true),
-                    CurrentLocationId = table.Column<int>(nullable: true)
+                    Class = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Character", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Character_Location_CurrentLocationId",
-                        column: x => x.CurrentLocationId,
+                        name: "FK_Character_Location_LocationId",
+                        column: x => x.LocationId,
                         principalTable: "Location",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Character_Weapon_WeaponId",
                         column: x => x.WeaponId,
                         principalTable: "Weapon",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,23 +119,58 @@ namespace Crypts_And_Coders.Migrations
 
             migrationBuilder.InsertData(
                 table: "Character",
-                columns: new[] { "Id", "Class", "CurrentLocationId", "Name", "Species", "WeaponId" },
-                values: new object[] { 1, 3, null, "Galdifor", 1, null });
+                columns: new[] { "Id", "Class", "LocationId", "Name", "Species", "WeaponId" },
+                values: new object[,]
+                {
+                    { 1, 3, 0, "Galdifor", 1, 0 },
+                    { 2, 0, 0, "Dragorn", 3, 0 },
+                    { 3, 4, 0, "Glen", 0, 0 }
+                });
 
             migrationBuilder.InsertData(
-                table: "Character",
-                columns: new[] { "Id", "Class", "CurrentLocationId", "Name", "Species", "WeaponId" },
-                values: new object[] { 2, 0, null, "Dragorn", 3, null });
+                table: "Enemy",
+                columns: new[] { "Id", "Abilities", "Species", "Type" },
+                values: new object[,]
+                {
+                    { 1, 1, 6, "Warrior" },
+                    { 2, 1, 7, "Beast" },
+                    { 3, 1, 8, "Mythical" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Character",
-                columns: new[] { "Id", "Class", "CurrentLocationId", "Name", "Species", "WeaponId" },
-                values: new object[] { 3, 4, null, "Glen", 0, null });
+                table: "Item",
+                columns: new[] { "Id", "Name", "Value" },
+                values: new object[,]
+                {
+                    { 1, "Health Potion", 25 },
+                    { 2, "Cup", 5 },
+                    { 3, "Dungeon Key", 100 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Location",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Occupied by the forces of evil, Faldor consists of open, hilly plains that separate it's eastern border with towering mountains.", "Faldor" },
+                    { 2, "Plagued by the great war, Murkden remains uninhibited from all intelligent life forms, although various beasts still dwell in the deep marshes.", "Murkden" },
+                    { 3, "Lyderton is full of simpletons who prefer to keep war and conflict outside of their borders. It is rich farmland with dense amounts of beautiful wildlife.", "Lyderton" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Weapon",
+                columns: new[] { "Id", "BaseDamage", "Name", "Type" },
+                values: new object[,]
+                {
+                    { 1, 15, "Claymore", "Close Range" },
+                    { 2, 18, "Wizard Staff", "Magical" },
+                    { 3, 10, "Longbow", "Long Range" }
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Character_CurrentLocationId",
+                name: "IX_Character_LocationId",
                 table: "Character",
-                column: "CurrentLocationId");
+                column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Character_WeaponId",
@@ -137,6 +187,9 @@ namespace Crypts_And_Coders.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CharacterInventory");
+
+            migrationBuilder.DropTable(
+                name: "Enemy");
 
             migrationBuilder.DropTable(
                 name: "Character");

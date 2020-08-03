@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using static Crypts_And_Coders.Models.SpeciesAndClass;
 
@@ -40,6 +41,7 @@ namespace Crypts_And_Coders.Data
                     Class = Class.Thief,
                     WeaponId = 1,
                     LocationId = 1
+
                 },
 
                 new Character
