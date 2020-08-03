@@ -120,7 +120,7 @@ namespace CryptsAndTesters
             };
             var repo = BuildRepo();
 
-            await repo.Update(1, enemy);
+            await repo.Update(enemy);
 
             var result = await repo.GetEnemy(1);
 

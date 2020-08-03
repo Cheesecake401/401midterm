@@ -102,7 +102,7 @@ namespace CryptsAndTesters
             };
             var repo = BuildRepo();
 
-            await repo.Update(1, location);
+            await repo.Update(location);
 
             var result = await repo.GetLocation(1);
 
