@@ -50,9 +50,12 @@ namespace Crypts_And_Coders
             // TODO: AddJwtBearer
             // TODO: Add authorization policies
 
+            services.AddTransient<IEnemy, EnemyRepository>();
+            services.AddTransient<ILocation, LocationsRepository>();
+            services.AddTransient<IItem, ItemRepository>();
             services.AddTransient<ICharacter, CharacterRepository>();
             services.AddTransient<IStat, StatRepository>();
-
+            services.AddTransient<ICharacterStat, CharacterStatRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,13 +66,12 @@ namespace Crypts_And_Coders
                 app.UseDeveloperExceptionPage();
             }
 
-
             app.UseRouting();
 
             //app.UseAuthorization();
 
             // TODO: serviceProvider.GetRequiredService<>();
-            /// TODO: Role initializer
+            // TODO: Role initializer
 
             app.UseEndpoints(endpoints =>
             {
