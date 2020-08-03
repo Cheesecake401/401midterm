@@ -54,7 +54,7 @@ namespace Crypts_And_Coders.Controllers
             {
                 return BadRequest();
             }
-            var result = await _character.Update(id, character);
+            var result = await _character.Update(character);
 
             return Ok(result);
         }

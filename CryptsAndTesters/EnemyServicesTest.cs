@@ -25,7 +25,7 @@ namespace CryptsAndTesters
             Enemy enemy = new Enemy()
             {
                 Id = 4,
-                Abilities = 1,
+                Abilities = "Fire",
                 Type = "Warrior",
             };
             var repo = BuildRepo();
