@@ -76,6 +76,26 @@ namespace Crypts_And_Coders.Data
                     Species = SpeciesAndClass.Species.Dragon
                 }
             );
+
+            modelBuilder.Entity<Item>().HasData(
+                new Item
+                {
+                    Name = "Health Potion",
+                    Value = 25
+                },
+
+                new Item
+                {
+                    Name = "Cup",
+                    Value = 5
+                },
+
+                new Item
+                {
+                    Name = "Dungeon Key",
+                    Value = 100
+                }
+            );
         }
     }
 }
