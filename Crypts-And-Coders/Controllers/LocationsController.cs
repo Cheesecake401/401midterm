@@ -56,23 +56,7 @@ namespace Crypts_And_Coders.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(location).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LocationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _location.Update(location);
 
             return NoContent();
         }
