@@ -1,4 +1,4 @@
-﻿using Crypts_And_Coders.Models;
+using Crypts_And_Coders.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
