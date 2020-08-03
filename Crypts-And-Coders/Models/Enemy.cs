@@ -15,17 +15,8 @@ namespace Crypts_And_Coders.Models
         public string Abilities {get; set;}
         public string Type {get; set;}
 
-        public Species EnemySpecies { get; set; }
-
-        public enum Species
-        {
-            Human,
-            Elf,
-            Gnome,
-            Dwarf,
-            HalfOrc,
-            Dragonborn
-        }
-
+        public int Abilities { get; set; }
+        public string Type { get; set; }
+        public SpeciesAndClass.Species Species { get; set; }
     }
 }

@@ -33,10 +33,12 @@ namespace Crypts_And_Coders
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options =>
-            {
-                options.Filters.Add(new AuthorizeFilter());
-            });
+            //services.AddControllers(options =>
+            //{
+            //    options.Filters.Add(new AuthorizeFilter());
+            //});
+
+            services.AddControllers();
 
             services.AddDbContext<CryptsDbContext>(options =>
             {
@@ -62,7 +64,7 @@ namespace Crypts_And_Coders
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             // TODO: serviceProvider.GetRequiredService<>();
             /// TODO: Role initializer

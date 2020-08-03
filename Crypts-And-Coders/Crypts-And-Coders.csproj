@@ -3,8 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Crypts_And_Coders</RootNamespace>
-    <UserSecretsId>266cc4e3-20e8-4740-afba-1c2722296070</UserSecretsId>
-    <UserSecretsId>33ebf0ac-526e-4960-ad17-1d889eb31d06</UserSecretsId>
+    <UserSecretsId>0f14c218-d87c-4cf3-b83c-117017f43d93</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,10 +13,6 @@
     <Compile Remove="Migrations\20200803175939_initial.Designer.cs" />
     <Compile Remove="Migrations\20200803180109_initial.cs" />
     <Compile Remove="Migrations\20200803180109_initial.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +29,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
 
   </ItemGroup>
 
