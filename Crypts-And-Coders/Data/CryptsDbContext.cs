@@ -20,8 +20,10 @@ namespace Crypts_And_Coders.Data
         public DbSet<Item> Item { get; set; }
         public DbSet<Enemy> Enemy { get; set; }
         public DbSet<Location> Location { get; set; }
+        public DbSet<EnemyInLocation> EnemyInLocation { get; set; }
         public DbSet<Stat> Stat { get; set; }
         public DbSet<CharacterStat> StatSheet { get; set; }
+
 
         public CryptsDbContext(DbContextOptions<CryptsDbContext> options) : base(options)
         {
@@ -46,7 +48,6 @@ namespace Crypts_And_Coders.Data
                     Class = Class.Thief,
                     WeaponId = 1,
                     LocationId = 1
-
                 },
 
                 new Character
