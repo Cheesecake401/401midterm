@@ -6,15 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace Crypts_And_Coders.Models.Services
 {
     //enemy repo//
     public class EnemyRepository : IEnemy
     {
-    private CryptsDbContext _context;
-
-
+        private CryptsDbContext _context;
 
         public EnemyRepository(CryptsDbContext context)
         {
@@ -23,7 +20,6 @@ namespace Crypts_And_Coders.Models.Services
 
         public async Task<Enemy> Create(Enemy enemy)
         {
-
             Enemy entity = new Enemy()
             {
                 Id = enemy.Id,
@@ -37,7 +33,6 @@ namespace Crypts_And_Coders.Models.Services
 
             enemy.Id = entity.Id;
             return enemy;
-
         }
 
         public async Task Delete(int id)
@@ -59,7 +54,7 @@ namespace Crypts_And_Coders.Models.Services
             return enemy;
         }
 
-        public async Task<Enemy> Update(int id, Enemy enemy)
+        public async Task<Enemy> Update(Enemy enemy)
         {
             _context.Entry(enemy).State = EntityState.Modified;
             await _context.SaveChangesAsync();

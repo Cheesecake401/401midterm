@@ -28,11 +28,11 @@ namespace Crypts_And_Coders.Models.Services
         public async Task Delete(int id)
         {
             Character character = await _context.Character.FindAsync(id);
-            if(character != null)
+            if (character != null)
             {
                 _context.Entry(character).State = EntityState.Deleted;
                 await _context.SaveChangesAsync();
-            } 
+            }
         }
 
         public async Task<Character> GetCharacter(int id)
@@ -47,12 +47,12 @@ namespace Crypts_And_Coders.Models.Services
             return result;
         }
 
-        public async Task<Character> Update(int id, Character character)
+        public async Task<Character> Update(Character character)
         {
             _context.Entry(character).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return character;
-       }
+        }
 
         public async Task AddItemToInventory(int charId, int itemId)
         {
@@ -76,6 +76,5 @@ namespace Crypts_And_Coders.Models.Services
                 await _context.SaveChangesAsync();
             }
         }
-
     }
 }

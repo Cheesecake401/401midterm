@@ -30,10 +30,9 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <summary>
         /// Update a given item in the database
         /// </summary>
-        /// <param name="id">Id of item to be updated</param>
         /// <param name="item">Item information for update</param>
         /// <returns>Successful result of specified updated item</returns>
-        Task<Item> Update(int id, Item item);
+        Task<Item> Update(Item item);
 
         /// <summary>
         /// Delete an item from the database

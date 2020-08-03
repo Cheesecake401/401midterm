@@ -30,16 +30,15 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <summary>
         /// Update a given enemy in the database
         /// </summary>
-        /// <param name="id">Id of enemy to be updated</param>
         /// <param name="enemy">Enemy information for update</param>
         /// <returns>Successful result of specified updated enemy</returns>
-        Task<Enemy> Update(int id, Enemy enemy);
+        Task<Enemy> Update(Enemy enemy);
 
         /// <summary>
-        /// Delete a enemy from the database
+        /// Delete a character from the database
         /// </summary>
-        /// <param name="id">Id of enemy to be deleted</param>
-        /// <returns>Task of completion for enemy delete</returns>
+        /// <param name="id">Id of character to be deleted</param>
+        /// <returns>Task of completion for character delete</returns>
         Task Delete(int id);
     }
 }

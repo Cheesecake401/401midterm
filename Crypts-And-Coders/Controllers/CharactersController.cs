@@ -50,11 +50,11 @@ namespace Crypts_And_Coders.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCharacter(int id, Character character)
         {
-            if(id != character.Id)
+            if (id != character.Id)
             {
                 return BadRequest();
             }
-            var result = await _character.Update(id, character);
+            var result = await _character.Update(character);
 
             return Ok(result);
         }
@@ -77,6 +77,5 @@ namespace Crypts_And_Coders.Controllers
             await _character.Delete(id);
             return NoContent();
         }
-
     }
 }

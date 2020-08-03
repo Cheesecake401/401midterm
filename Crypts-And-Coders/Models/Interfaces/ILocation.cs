@@ -30,10 +30,9 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <summary>
         /// Update a given location in the database
         /// </summary>
-        /// <param name="id">Id of location to be updated</param>
         /// <param name="location">Location information for update</param>
         /// <returns>Successful result of specified updated location</returns>
-        Task<Location> Update(int id, Location location);
+        Task<Location> Update(Location location);
 
         /// <summary>
         /// Delete a location from the database
@@ -41,5 +40,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <param name="id">Id of location to be deleted</param>
         /// <returns>Task of completion for location delete</returns>
         Task Delete(int id);
+
+        // TODO: add enemy to locations?
     }
 }
