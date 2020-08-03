@@ -32,7 +32,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// </summary>
         /// <param name="location">Location information for update</param>
         /// <returns>Successful result of specified updated location</returns>
-        Task<Location> Update(int id, Location location);
+        Task<Location> Update(Location location);
 
         /// <summary>
         /// Delete a location from the database
