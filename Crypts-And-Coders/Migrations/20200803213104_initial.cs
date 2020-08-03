@@ -2,7 +2,7 @@
 
 namespace Crypts_And_Coders.Migrations
 {
-    public partial class addedWeaponsDbSet : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

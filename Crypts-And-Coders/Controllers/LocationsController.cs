@@ -56,9 +56,9 @@ namespace Crypts_And_Coders.Controllers
                 return BadRequest();
             }
 
-            await _location.Update(location);
+            var result = await _location.Update(location);
 
-            return NoContent();
+            return Ok(result);
         }
 
         // POST: api/Locations
@@ -67,8 +67,7 @@ namespace Crypts_And_Coders.Controllers
         [HttpPost]
         public async Task<ActionResult<Location>> PostLocation(Location location)
         {
-            _context.Location.Add(location);
-            await _context.SaveChangesAsync();
+            await _location.Create(location);
 
             return CreatedAtAction("GetLocation", new { id = location.Id }, location);
         }
@@ -77,18 +76,11 @@ namespace Crypts_And_Coders.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Location>> DeleteLocation(int id)
         {
-            var location = await _context.Location.FindAsync(id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            _context.Location.Remove(location);
-            await _context.SaveChangesAsync();
-
-            return location;
+            await _location.Delete(id);
+            return NoContent();
         }
 
+        // TODO: keep??
         private bool LocationExists(int id)
         {
             return _context.Location.Any(e => e.Id == id);
