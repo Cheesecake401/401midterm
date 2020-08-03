@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.Interfaces
 {
-    public interface IEnemies
+    public interface IEnemy
     {
         //Create a enemy
-        Task<Enemies> Create(Enemies enemies);
+        Task<Enemy> Create(Enemy enemy);
         //Read a enemy/Get
-        Task<List<Enemies>> GetEnemies();
+        Task<List<Enemy>> GetEnemies();
         //Get by enemy id
-        Task<Enemies> GetEnemies(int id);
+        Task<Enemy> GetEnemies(int id);
         //Update a enemy
-        Task Update(Enemies enemies);
+        Task Update(Enemy enemy);
         //Delete a enemy
         Task Delete(int id);
     }

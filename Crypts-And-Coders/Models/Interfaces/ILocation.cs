@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.Interfaces
 {
-    public interface ILocations
+    public interface ILocation
     {
         //Create a location
-        Task<Locations> Create(Locations locations);
+        Task<Location> Create(Location location);
         //Read a location/Get
-        Task<List<Locations>> GetLocations();
+        Task<List<Location>> GetLocations();
         //Get by location id
-        Task<Locations> GetLocations(int id);
+        Task<Location> GetLocations(int id);
         //Update a location
-        Task Update(Locations locations);
+        Task Update(Location location);
         //Delete a location
         Task Delete(int id);
     }
