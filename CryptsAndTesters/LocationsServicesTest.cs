@@ -74,7 +74,7 @@ namespace CryptsAndTesters
 
             var saved = await repo.Create(location);
 
-            var result = await repo.GetLocations(location.Id);
+            var result = await repo.GetLocation(location.Id);
 
             Assert.Equal(location.Id, result.Id);
 
@@ -104,7 +104,7 @@ namespace CryptsAndTesters
 
             await repo.Update(1, location);
 
-            var result = await repo.GetLocations(1);
+            var result = await repo.GetLocation(1);
 
             Assert.Equal(1, result.Id);
             Assert.Equal(result.Id, location.Id);
