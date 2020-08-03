@@ -1,4 +1,5 @@
 using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,8 @@ namespace CryptsAndTesters
     {
         private readonly SqliteConnection _connection;
         protected readonly CryptsDbContext _db;
+        protected readonly ICharacterStat _characterStat;
+        protected readonly ILocation _location;
 
         public DatabaseTest()
         {
@@ -23,7 +26,8 @@ namespace CryptsAndTesters
                 .Options);
             _db.Database.EnsureCreated();
 
-            //_characterStats = new CharacterStatRepository();
+            _characterStat = new CharacterStatRepository(_db);
+            _location = new LocationsRepository(_db);
         }
         public void Dispose()
         {

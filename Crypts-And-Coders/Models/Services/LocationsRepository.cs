@@ -13,12 +13,10 @@ namespace Crypts_And_Coders.Models.Services
     {
 
     private CryptsDbContext _context;
-    private ILocation _location;
 
-        public LocationsRepository(CryptsDbContext context, ILocation location)
+        public LocationsRepository(CryptsDbContext context)
         {
             _context = context;
-            _location = location;
         }
         public async Task<Location> Create(Location location)
         {
@@ -38,7 +36,7 @@ namespace Crypts_And_Coders.Models.Services
 
         public async Task Delete(int id)
         {
-            Location location = await GetLocations(id);
+            Location location = await GetLocation(id);
             _context.Entry(location).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
@@ -49,7 +47,7 @@ namespace Crypts_And_Coders.Models.Services
             return location;
         }
 
-        public async Task<Location> GetLocations(int id)
+        public async Task<Location> GetLocation(int id)
         {
             Location location = await _context.Location.FindAsync(id);
             return location;

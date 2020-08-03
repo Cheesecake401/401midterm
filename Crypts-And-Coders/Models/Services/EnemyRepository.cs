@@ -6,15 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace Crypts_And_Coders.Models.Services
 {
-    //enemy repo//
     public class EnemyRepository : IEnemy
     {
-    private CryptsDbContext _context;
-
-
+        private CryptsDbContext _context;
 
         public EnemyRepository(CryptsDbContext context)
         {
@@ -23,7 +19,6 @@ namespace Crypts_And_Coders.Models.Services
 
         public async Task<Enemy> Create(Enemy enemy)
         {
-
             Enemy entity = new Enemy()
             {
                 Id = enemy.Id,
@@ -37,12 +32,11 @@ namespace Crypts_And_Coders.Models.Services
 
             enemy.Id = entity.Id;
             return enemy;
-
         }
 
         public async Task Delete(int id)
         {
-            Enemy enemy = await GetEnemies(id);
+            Enemy enemy = await GetEnemy(id);
             _context.Entry(enemy).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
@@ -53,13 +47,13 @@ namespace Crypts_And_Coders.Models.Services
             return enemy;
         }
 
-        public async Task<Enemy> GetEnemies(int id)
+        public async Task<Enemy> GetEnemy(int id)
         {
             Enemy enemy = await _context.Enemy.FindAsync(id);
             return enemy;
         }
 
-        public async Task<Enemy> Update(int id, Enemy enemy)
+        public async Task<Enemy> Update(Enemy enemy)
         {
             _context.Entry(enemy).State = EntityState.Modified;
             await _context.SaveChangesAsync();
