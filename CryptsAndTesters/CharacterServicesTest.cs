@@ -36,22 +36,53 @@ namespace CryptsAndTesters
             Assert.Equal(saved.Name, newChar.Name);
         }
 
-        [Fact]
-        public async Task CanGetCharacter()
-        {
-            Character newChar = new Character()
-            {
-                Name = "Redhawk",
-                Species = Species.Dragonborn,
-                Class = Class.Monk,
-            };
-            var repo = BuildRepo();
+        //[Fact]
+        //public async Task CanGetCharacter()
+        //{
+        //    Character newChar = new Character()
+        //    {
+        //        Name = "Redhawk",
+        //        Species = Species.Dragonborn,
+        //        Class = Class.Monk,
+        //    };
+        //    var repo = BuildRepo();
 
-            var saved = repo.Create(newChar);
+        //    var saved = await repo.Create(newChar);
 
-            var result = await repo.GetCharacter(newChar.Id);
+        //    var result = await repo.GetCharacter(newChar.Id);
 
-            Assert.Equal(newChar.Id, result.Id);
-        }
+        //    Assert.Equal(newChar.Id, result.Id);
+        //}
+
+        //[Fact]
+        //public async Task CanGetAllCharacters()
+        //{
+        //    var repo = BuildRepo();
+
+        //    var result = await repo.GetCharacters();
+
+        //    // Three from seeded data
+        //    Assert.Equal(3, result.Count);
+        //}
+
+        //[Fact]
+        //public async Task CanUpdateCharacter()
+        //{
+        //    Character newChar = new Character()
+        //    {
+        //        Name = "Redhawk",
+        //        Species = Species.Dragonborn,
+        //        Class = Class.Monk,
+        //    };
+        //    var repo = BuildRepo();
+
+        //    await repo.Update(1, newChar);
+
+        //    var result = await repo.GetCharacter(1);
+
+        //    Assert.Equal(1, result.Id);
+        //    Assert.Equal(newChar.Name, result.Name);
+
+        //}
     }
 }
