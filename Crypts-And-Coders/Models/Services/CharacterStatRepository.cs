@@ -61,7 +61,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result with list of characterStats</returns>
         public async Task<List<CharacterStat>> GetCharacterStats(int id)
         {
-            List<CharacterStat> result = await _context.StatSheet.Where(x => x.CharacterId == id).ToListAsync();
+            List<CharacterStat> result = await _context.StatSheet.Where(x => x.CharacterId == id).Include(x => x.Stat).ToListAsync();
             return result;
         }
 

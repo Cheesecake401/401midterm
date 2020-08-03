@@ -12,10 +12,12 @@ namespace Crypts_And_Coders.Models.Services
     public class CharacterRepository : ICharacter
     {
         private readonly CryptsDbContext _context;
+        private readonly ICharacterStat _characterStat;
 
-        public CharacterRepository(CryptsDbContext context)
+        public CharacterRepository(CryptsDbContext context, ICharacterStat characterStat)
         {
             _context = context;
+            _characterStat = characterStat;
         }
 
         /// <summary>
@@ -54,15 +56,8 @@ namespace Crypts_And_Coders.Models.Services
         {
             var result = await _context.Character.Where(x => x.Id == id)
                                                  .FirstOrDefaultAsync();
-
-
-            var stats = await _context.StatSheet.Where(x => x.CharacterId == id).Include(x => x.Level).Include(x => x.Stat.Name).ToListAsync();
-            var characterStats = new Dictionary<string, int>();
-            foreach (var item in stats)
-            {
-                characterStats.Add(item.Stat.Name, item.Level);
-            }
-            result.StatSheet = characterStats;
+            var stats = await _characterStat.GetCharacterStats(id);
+            result.StatSheet = stats;
             return result;
         }
 
@@ -73,6 +68,11 @@ namespace Crypts_And_Coders.Models.Services
         public async Task<List<Character>> GetCharacters()
         {
             List<Character> result = await _context.Character.ToListAsync();
+            foreach (var item in result)
+            {
+                var stats = await _characterStat.GetCharacterStats(item.Id);
+                item.StatSheet = stats;
+            }
             return result;
         }
 
