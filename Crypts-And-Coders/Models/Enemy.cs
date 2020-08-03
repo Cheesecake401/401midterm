@@ -11,21 +11,10 @@ namespace Crypts_And_Coders.Models
         /// Id, Ability, and Type properties
         /// Enemy Species specifically for enemies
         /// </summary>
-        public int Id {get; set;}
-        public int Abilities {get; set;}
-        public string Type {get; set;}
+        public int Id { get; set; }
 
-        public Species EnemySpecies { get; set; }
-
-        public enum Species
-        {
-            Human,
-            Elf,
-            Gnome,
-            Dwarf,
-            HalfOrc,
-            Dragonborn
-        }
-
+        public int Abilities { get; set; }
+        public string Type { get; set; }
+        public SpeciesAndClass.Species Species { get; set; }
     }
 }
