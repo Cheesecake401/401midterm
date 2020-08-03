@@ -18,6 +18,8 @@
     <Compile Include="Migrations\20200803210223_initial.Designer.cs" />
     <Compile Include="Migrations\20200803213331_seeding.cs" />
     <Compile Include="Migrations\20200803213331_seeding.Designer.cs" />
+    <Compile Include="Migrations\20200803224806_newSeeds.cs" />
+    <Compile Include="Migrations\20200803224806_newSeeds.Designer.cs" />
     <Compile Include="Migrations\CryptsDbContextModelSnapshot.cs" />
   </ItemGroup>
 
