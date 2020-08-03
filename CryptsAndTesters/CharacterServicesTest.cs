@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace CryptsAndTesters
 {

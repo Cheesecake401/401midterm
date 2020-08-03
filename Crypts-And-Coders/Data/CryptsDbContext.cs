@@ -28,6 +28,7 @@ namespace Crypts_And_Coders.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<CharacterInventory>().HasKey(x => new { x.CharacterId, x.ItemId });
+            modelBuilder.Entity<EnemyInLocation>().HasKey(x => new { x.LocationId, x.EnemyId });
             // seed data
             modelBuilder.Entity<Character>().HasData(
                 new Character
@@ -90,18 +91,21 @@ namespace Crypts_And_Coders.Data
             modelBuilder.Entity<Item>().HasData(
                 new Item
                 {
+                    Id = 1,
                     Name = "Health Potion",
                     Value = 25
                 },
 
                 new Item
                 {
+                    Id = 2,
                     Name = "Cup",
                     Value = 5
                 },
 
                 new Item
                 {
+                    Id = 3,
                     Name = "Dungeon Key",
                     Value = 100
                 }
@@ -133,6 +137,7 @@ namespace Crypts_And_Coders.Data
             modelBuilder.Entity<Weapon>().HasData(
                 new Weapon
                 {
+                    Id = 1,
                     Name = "Claymore",
                     Type = "Close Range",
                     BaseDamage = 15
@@ -140,6 +145,7 @@ namespace Crypts_And_Coders.Data
 
                 new Weapon
                 {
+                    Id = 2,
                     Name = "Wizard Staff",
                     Type = "Magical",
                     BaseDamage = 18
@@ -147,6 +153,7 @@ namespace Crypts_And_Coders.Data
 
                 new Weapon
                 {
+                    Id = 3,
                     Name = "Longbow",
                     Type = "Long Range",
                     BaseDamage = 10
