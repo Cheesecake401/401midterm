@@ -15,27 +15,25 @@ namespace Crypts_And_Coders.Controllers
     [ApiController]
     public class LocationsController : ControllerBase
     {
-        private readonly CryptsDbContext _context;
         private readonly ILocation _location;
 
-        public LocationsController(CryptsDbContext context, ILocation location)
+        public LocationsController(ILocation location)
         {
             _location = location;
-            _context = context;
         }
 
         // GET: api/Locations
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Location>>> GetLocation()
+        public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
         {
-            return await _context.Location.ToListAsync();
+            return await _location.GetLocations();
         }
 
         // GET: api/Locations/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Location>> GetLocation(int id)
         {
-            var location = await _context.Location.FindAsync(id);
+            var location = await _location.GetLocation(id);
 
             if (location == null)
             {
@@ -56,9 +54,9 @@ namespace Crypts_And_Coders.Controllers
                 return BadRequest();
             }
 
-            await _location.Update(location);
+            var result = await _location.Update(location);
 
-            return NoContent();
+            return Ok(result);
         }
 
         // POST: api/Locations
@@ -67,8 +65,7 @@ namespace Crypts_And_Coders.Controllers
         [HttpPost]
         public async Task<ActionResult<Location>> PostLocation(Location location)
         {
-            _context.Location.Add(location);
-            await _context.SaveChangesAsync();
+            await _location.Create(location);
 
             return CreatedAtAction("GetLocation", new { id = location.Id }, location);
         }
@@ -77,21 +74,8 @@ namespace Crypts_And_Coders.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Location>> DeleteLocation(int id)
         {
-            var location = await _context.Location.FindAsync(id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            _context.Location.Remove(location);
-            await _context.SaveChangesAsync();
-
-            return location;
-        }
-
-        private bool LocationExists(int id)
-        {
-            return _context.Location.Any(e => e.Id == id);
+            await _location.Delete(id);
+            return NoContent();
         }
     }
 }

@@ -30,7 +30,6 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <summary>
         /// Update a given character in the database
         /// </summary>
-        /// <param name="id">Id of character to be updated</param>
         /// <param name="character">Character information for update</param>
         /// <returns>Successful result of specified updated character</returns>
         Task<Character> Update(Character character);
