@@ -12,7 +12,7 @@ namespace Crypts_And_Coders.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Abilities = table.Column<int>(nullable: false),
+                    Abilities = table.Column<string>(nullable: true),
                     Type = table.Column<string>(nullable: true),
                     Species = table.Column<int>(nullable: false)
                 },
@@ -62,6 +62,30 @@ namespace Crypts_And_Coders.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Weapon", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EnemyInLocation",
+                columns: table => new
+                {
+                    LocationId = table.Column<int>(nullable: false),
+                    EnemyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EnemyInLocation", x => new { x.LocationId, x.EnemyId });
+                    table.ForeignKey(
+                        name: "FK_EnemyInLocation_Enemy_EnemyId",
+                        column: x => x.EnemyId,
+                        principalTable: "Enemy",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EnemyInLocation_Location_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Location",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,23 +142,13 @@ namespace Crypts_And_Coders.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Character",
-                columns: new[] { "Id", "Class", "LocationId", "Name", "Species", "WeaponId" },
-                values: new object[,]
-                {
-                    { 1, 3, 0, "Galdifor", 1, 0 },
-                    { 2, 0, 0, "Dragorn", 3, 0 },
-                    { 3, 4, 0, "Glen", 0, 0 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Enemy",
                 columns: new[] { "Id", "Abilities", "Species", "Type" },
                 values: new object[,]
                 {
-                    { 1, 1, 6, "Warrior" },
-                    { 2, 1, 7, "Beast" },
-                    { 3, 1, 8, "Mythical" }
+                    { 1, "Slash", 6, "Warrior" },
+                    { 2, "Smash", 7, "Beast" },
+                    { 3, "Firebreath", 8, "Mythical" }
                 });
 
             migrationBuilder.InsertData(
@@ -167,6 +181,21 @@ namespace Crypts_And_Coders.Migrations
                     { 3, 10, "Longbow", "Long Range" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Character",
+                columns: new[] { "Id", "Class", "LocationId", "Name", "Species", "WeaponId" },
+                values: new object[] { 1, 3, 1, "Galdifor", 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Character",
+                columns: new[] { "Id", "Class", "LocationId", "Name", "Species", "WeaponId" },
+                values: new object[] { 2, 0, 1, "Dragorn", 3, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Character",
+                columns: new[] { "Id", "Class", "LocationId", "Name", "Species", "WeaponId" },
+                values: new object[] { 3, 4, 1, "Glen", 0, 1 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Character_LocationId",
                 table: "Character",
@@ -181,6 +210,11 @@ namespace Crypts_And_Coders.Migrations
                 name: "IX_CharacterInventory_ItemId",
                 table: "CharacterInventory",
                 column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EnemyInLocation_EnemyId",
+                table: "EnemyInLocation",
+                column: "EnemyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -189,13 +223,16 @@ namespace Crypts_And_Coders.Migrations
                 name: "CharacterInventory");
 
             migrationBuilder.DropTable(
-                name: "Enemy");
+                name: "EnemyInLocation");
 
             migrationBuilder.DropTable(
                 name: "Character");
 
             migrationBuilder.DropTable(
                 name: "Item");
+
+            migrationBuilder.DropTable(
+                name: "Enemy");
 
             migrationBuilder.DropTable(
                 name: "Location");

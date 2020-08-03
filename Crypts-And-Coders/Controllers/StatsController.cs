@@ -13,67 +13,69 @@ namespace Crypts_And_Coders.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EnemiesController : ControllerBase
+    public class StatsController : ControllerBase
     {
-        private readonly IEnemy _enemy;
+        private readonly IStat _stat;
 
-        public EnemiesController(IEnemy enemy)
+        public StatsController(IStat stat)
         {
-            _enemy = enemy;
+            _stat = stat;
         }
 
-        // GET: api/Enemies
+        // GET: api/Stats
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Enemy>>> GetEnemy()
+        public async Task<ActionResult<IEnumerable<Stat>>> GetStat()
         {
-            return await _enemy.GetEnemies();
+            return await _stat.GetStats();
         }
 
-        // GET: api/Enemies/5
+        // GET: api/Stats/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Enemy>> GetEnemy(int id)
+        public async Task<ActionResult<Stat>> GetStat(int id)
         {
-            var enemy = await _enemy.GetEnemy(id);
+            var stat = await _stat.GetStat(id);
 
-            if (enemy == null)
+            if (stat == null)
             {
                 return NotFound();
             }
 
-            return enemy;
+            return stat;
         }
 
-        // PUT: api/Enemies/5
+        // PUT: api/Stats/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEnemy(int id, Enemy enemy)
+        public async Task<IActionResult> PutStat(int id, Stat stat)
         {
-            if (id != enemy.Id)
+            if (id != stat.Id)
             {
                 return BadRequest();
             }
-            var result = await _enemy.Update(enemy);
+
+            var result = await _stat.Update(stat);
 
             return Ok(result);
         }
 
-        // POST: api/Enemies
+        // POST: api/Stats
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Enemy>> PostEnemy(Enemy enemy)
+        public async Task<ActionResult<Stat>> PostStat(Stat stat)
         {
-            await _enemy.Create(enemy);
+            await _stat.Create(stat);
 
-            return CreatedAtAction("GetEnemy", new { id = enemy.Id }, enemy);
+            return CreatedAtAction("GetStat", new { id = stat.Id }, stat);
         }
 
-        // DELETE: api/Enemies/5
+        // DELETE: api/Stats/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Enemy>> DeleteEnemy(int id)
+        public async Task<ActionResult<Stat>> DeleteStat(int id)
         {
-            await _enemy.Delete(id);
+            await _stat.Delete(id);
+
             return NoContent();
         }
     }

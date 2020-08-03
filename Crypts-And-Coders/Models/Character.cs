@@ -17,5 +17,6 @@ namespace Crypts_And_Coders.Models
         public Weapon Weapon { get; set; }
         public Location CurrentLocation { get; set; }
         public List<CharacterInventory> Inventory { get; set; }
+        public Dictionary<string, int> StatSheet { get; set; }
     }
 }

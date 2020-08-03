@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Xunit;
 using static Crypts_And_Coders.Models.SpeciesAndClass;
 
-
 namespace CryptsAndTesters
 {
     public class EnemyServicesTest : DatabaseTest
