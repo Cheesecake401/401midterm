@@ -15,8 +15,7 @@ namespace Crypts_And_Coders.Models
         public string Abilities {get; set;}
         public string Type {get; set;}
 
-        public int Abilities { get; set; }
-        public string Type { get; set; }
+
         public SpeciesAndClass.Species Species { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Crypts_And_Coders.Models.Services
 {
     public class EnemyRepository : IEnemy
@@ -29,7 +30,7 @@ namespace Crypts_And_Coders.Models.Services
                 Id = enemy.Id,
                 Abilities = enemy.Abilities,
                 Type = enemy.Type,
-                EnemySpecies = enemy.EnemySpecies,
+                Species = SpeciesAndClass.Species.Dragon
             };
 
             _context.Entry(enemy).State = EntityState.Added;
