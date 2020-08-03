@@ -27,7 +27,5 @@ namespace Crypts_And_Coders.Models
             Dragonborn
         }
 
-
-
     }
 }
