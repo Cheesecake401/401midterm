@@ -14,7 +14,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         //Get by location id
         Task<Location> GetLocations(int id);
         //Update a location
-        Task<Location> Update(Location location);
+        Task<Location> Update(int id, Location location);
         //Delete a location
         Task Delete(int id);
     }

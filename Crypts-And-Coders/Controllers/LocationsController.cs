@@ -56,7 +56,7 @@ namespace Crypts_And_Coders.Controllers
                 return BadRequest();
             }
 
-            await _location.Update(location);
+            await _location.Update(id, location);
 
             return NoContent();
         }

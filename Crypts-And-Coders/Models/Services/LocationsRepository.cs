@@ -13,12 +13,11 @@ namespace Crypts_And_Coders.Models.Services
     {
 
     private CryptsDbContext _context;
-    private ILocation _location;
 
-        public LocationsRepository(CryptsDbContext context, ILocation location)
+        public LocationsRepository(CryptsDbContext context)
         {
             _context = context;
-            _location = location;
+          
         }
         public async Task<Location> Create(Location location)
         {
@@ -55,7 +54,7 @@ namespace Crypts_And_Coders.Models.Services
             return location;
         }
 
-        public async Task<Location> Update(Location location)
+        public async Task<Location> Update(int id, Location location)
         {
             _context.Entry(location).State = EntityState.Modified;
             await _context.SaveChangesAsync();
