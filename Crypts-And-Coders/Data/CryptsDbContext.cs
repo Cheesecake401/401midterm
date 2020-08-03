@@ -96,6 +96,29 @@ namespace Crypts_And_Coders.Data
                     Value = 100
                 }
             );
+
+            modelBuilder.Entity<Location>().HasData(
+                new Location
+                {
+                    Id = 1,
+                    Name = "Faldor",
+                    Description = "Occupied by the forces of evil, Faldor consists of open, hilly plains that separate it's eastern border with towering mountains."
+                },
+
+                new Location
+                {
+                    Id = 2,
+                    Name = "Murkden",
+                    Description = "Plagued by the great war, Murkden remains uninhibited from all intelligent life forms, although various beasts still dwell in the deep marshes."
+                },
+
+                new Location
+                {
+                    Id = 3,
+                    Name = "Lyderton",
+                    Description = "Lyderton is full of simpletons who prefer to keep war and conflict outside of their borders. It is rich farmland with dense amounts of beautiful wildlife."
+                }
+            );
         }
     }
 }
