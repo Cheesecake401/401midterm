@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.Services
 {
-    //enemy repo//
     public class EnemyRepository : IEnemy
     {
         private CryptsDbContext _context;
@@ -37,7 +36,7 @@ namespace Crypts_And_Coders.Models.Services
 
         public async Task Delete(int id)
         {
-            Enemy enemy = await GetEnemies(id);
+            Enemy enemy = await GetEnemy(id);
             _context.Entry(enemy).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
@@ -48,7 +47,7 @@ namespace Crypts_And_Coders.Models.Services
             return enemy;
         }
 
-        public async Task<Enemy> GetEnemies(int id)
+        public async Task<Enemy> GetEnemy(int id)
         {
             Enemy enemy = await _context.Enemy.FindAsync(id);
             return enemy;

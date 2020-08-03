@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Xunit;
 using static Crypts_And_Coders.Models.SpeciesAndClass;
 
-
 namespace CryptsAndTesters
 {
     public class EnemyServicesTest : DatabaseTest
@@ -18,14 +17,13 @@ namespace CryptsAndTesters
             return new EnemyRepository(_db);
         }
 
-
         [Fact]
         public async Task CanSaveEnemy()
         {
             Enemy enemy = new Enemy()
             {
                 Id = 4,
-                Abilities = 1,
+                Abilities = "test",
                 Type = "Warrior",
             };
             var repo = BuildRepo();
