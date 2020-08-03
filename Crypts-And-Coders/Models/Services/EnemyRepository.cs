@@ -13,14 +13,12 @@ namespace Crypts_And_Coders.Models.Services
     public class EnemyRepository : IEnemy
     {
     private CryptsDbContext _context;
-        private IEnemy _enemy;
 
 
 
-        public EnemyRepository(CryptsDbContext context, IEnemy enemy)
+        public EnemyRepository(CryptsDbContext context)
         {
             _context = context;
-            _enemy = enemy;
         }
 
         public async Task<Enemy> Create(Enemy enemy)
@@ -61,7 +59,7 @@ namespace Crypts_And_Coders.Models.Services
             return enemy;
         }
 
-        public async Task<Enemy> Update(Enemy enemy)
+        public async Task<Enemy> Update(int id, Enemy enemy)
         {
             _context.Entry(enemy).State = EntityState.Modified;
             await _context.SaveChangesAsync();

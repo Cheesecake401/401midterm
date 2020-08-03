@@ -30,6 +30,7 @@ namespace Crypts_And_Coders.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<CharacterInventory>().HasKey(x => new { x.CharacterId, x.ItemId });
+            modelBuilder.Entity<EnemyInLocation>().HasKey(x => new { x.LocationId, x.EnemyId });
 
             // seed data
             modelBuilder.Entity<Character>().HasData(
