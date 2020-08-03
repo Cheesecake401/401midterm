@@ -12,6 +12,10 @@ namespace Crypts_And_Coders.Data
     public class CryptsDbContext : DbContext
     {
         public DbSet<Character> Character { get; set; }
+        public DbSet<CharacterInventory> CharacterInventory { get; set; }
+        public DbSet<Item> Item { get; set; }
+
+
 
         public CryptsDbContext(DbContextOptions<CryptsDbContext> options) : base(options)
         {
