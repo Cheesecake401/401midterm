@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Data
 {
-    public class CryptsDbContext : IdentityDbContext
+    public class CryptsDbContext : DbContext
     {
         public DbSet<Character> Character { get; set; }
 
@@ -21,10 +21,12 @@ namespace Crypts_And_Coders.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<CharacterInventory>().HasKey(x => new { x.CharacterId, x.ItemId });
             // seed data
             modelBuilder.Entity<Character>().HasData(
                 new Character
                 {
+                    Id = 1,
                     Name = "Galdifor",
                     Species = Species.Elf,
                     Class = Class.Thief
@@ -32,6 +34,7 @@ namespace Crypts_And_Coders.Data
 
                 new Character
                 {
+                    Id = 2,
                     Name = "Dragorn",
                     Species = Species.Dwarf,
                     Class = Class.Paladin
@@ -39,6 +42,7 @@ namespace Crypts_And_Coders.Data
 
                 new Character
                 {
+                    Id = 3,
                     Name = "Glen",
                     Species = Species.Human,
                     Class = Class.Bard
