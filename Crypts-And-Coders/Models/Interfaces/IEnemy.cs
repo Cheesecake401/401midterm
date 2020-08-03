@@ -14,7 +14,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         //Get by enemy id
         Task<Enemy> GetEnemies(int id);
         //Update a enemy
-        Task Update(Enemy enemy);
+        Task<Enemy> Update(Enemy enemy);
         //Delete a enemy
         Task Delete(int id);
     }

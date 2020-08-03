@@ -14,6 +14,8 @@ namespace Crypts_And_Coders.Data
         public DbSet<Character> Character { get; set; }
         public DbSet<CharacterInventory> CharacterInventory { get; set; }
         public DbSet<Item> Item { get; set; }
+        public DbSet<Enemy> Enemy { get; set; }
+        public DbSet<Location> Location { get; set; }
 
 
 
