@@ -51,6 +51,8 @@ namespace Crypts_And_Coders
             // TODO: Add authorization policies
 
             services.AddTransient<ICharacter, CharacterRepository>();
+            services.AddTransient<IStat, StatRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -137,6 +137,21 @@ namespace Crypts_And_Coders.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Crypts_And_Coders.Models.EnemyInLocation", b =>
+                {
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnemyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LocationId", "EnemyId");
+
+                    b.HasIndex("EnemyId");
+
+                    b.ToTable("EnemyInLocation");
+                });
+
             modelBuilder.Entity("Crypts_And_Coders.Models.Item", b =>
                 {
                     b.Property<int>("Id")
@@ -213,6 +228,38 @@ namespace Crypts_And_Coders.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Crypts_And_Coders.Models.Stat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Stat");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Strength"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Cunning"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Constitution"
+                        });
+                });
+
             modelBuilder.Entity("Crypts_And_Coders.Models.Weapon", b =>
                 {
                     b.Property<int>("Id")
@@ -283,6 +330,21 @@ namespace Crypts_And_Coders.Migrations
                     b.HasOne("Crypts_And_Coders.Models.Item", "Item")
                         .WithMany()
                         .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Crypts_And_Coders.Models.EnemyInLocation", b =>
+                {
+                    b.HasOne("Crypts_And_Coders.Models.Enemy", "Enemy")
+                        .WithMany("EnemyInLocation")
+                        .HasForeignKey("EnemyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Crypts_And_Coders.Models.Location", "Location")
+                        .WithMany("EnemyInLocation")
+                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
