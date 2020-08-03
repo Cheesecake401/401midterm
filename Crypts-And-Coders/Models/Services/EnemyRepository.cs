@@ -53,7 +53,7 @@ namespace Crypts_And_Coders.Models.Services
             return enemy;
         }
 
-        public async Task<Enemy> Update(int id, Enemy enemy)
+        public async Task<Enemy> Update(Enemy enemy)
         {
             _context.Entry(enemy).State = EntityState.Modified;
             await _context.SaveChangesAsync();

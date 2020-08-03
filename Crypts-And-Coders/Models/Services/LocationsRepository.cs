@@ -47,7 +47,7 @@ namespace Crypts_And_Coders.Models.Services
             return result;
         }
 
-        public async Task<Location> Update(int id, Location location)
+        public async Task<Location> Update(Location location)
         {
             _context.Entry(location).State = EntityState.Modified;
             await _context.SaveChangesAsync();
