@@ -11,6 +11,8 @@ namespace Crypts_And_Coders.Data
 {
     public class CryptsDbContext : IdentityDbContext
     {
+        public DbSet<Character> Character { get; set; }
+
         public CryptsDbContext(DbContextOptions<CryptsDbContext> options) : base(options)
         {
         }
