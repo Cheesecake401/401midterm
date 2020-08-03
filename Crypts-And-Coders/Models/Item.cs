@@ -9,5 +9,6 @@ namespace Crypts_And_Coders.Models
     {
         public string Name { get; set; }
         public int Value { get; set; }
+
     }
 }
