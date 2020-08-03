@@ -1,5 +1,6 @@
 ﻿using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +11,59 @@ namespace Crypts_And_Coders.Models.Services
     public class EnemyRepository : IEnemy
     {
     private CryptsDbContext _context;
-        public Task<Enemy> Create(Enemy enemy)
+        private IEnemy _enemy;
+
+
+
+        public EnemyRepository(CryptsDbContext context, IEnemy enemy)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _enemy = enemy;
         }
 
-        public Task Delete(int id)
+        public async Task<Enemy> Create(Enemy enemy)
         {
-            throw new NotImplementedException();
+
+            Enemy entity = new Enemy()
+            {
+                Id = enemy.Id,
+                Abilities = enemy.Abilities,
+                Type = enemy.Type,
+                EnemySpecies = enemy.EnemySpecies,
+            };
+
+            _context.Entry(enemy).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+
+            enemy.Id = entity.Id;
+            return enemy;
+
         }
 
-        public Task<List<Enemy>> GetEnemies()
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            Enemy enemy = await GetEnemies(id);
+            _context.Entry(enemy).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Enemy> GetEnemies(int id)
+        public async Task<List<Enemy>> GetEnemies()
         {
-            throw new NotImplementedException();
+            var enemy = await _context.Enemy.ToListAsync();
+            return enemy;
         }
 
-        public Task Update(Enemy enemy)
+        public async Task<Enemy> GetEnemies(int id)
         {
-            throw new NotImplementedException();
+            Enemy enemy = await _context.Enemy.FindAsync(id);
+            return enemy;
+        }
+
+        public async Task<Enemy> Update(Enemy enemy)
+        {
+            _context.Entry(enemy).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return enemy;
         }
     }
 }

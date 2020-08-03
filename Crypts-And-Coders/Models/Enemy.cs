@@ -12,7 +12,7 @@ namespace Crypts_And_Coders.Models
         /// Enemy Species specifically for enemies
         /// </summary>
         public int Id {get; set;}
-        public int Abilities {get; set;}
+        public string Abilities {get; set;}
         public string Type {get; set;}
 
         public Species EnemySpecies { get; set; }

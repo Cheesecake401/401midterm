@@ -1,4 +1,6 @@
-﻿using Crypts_And_Coders.Models.Interfaces;
+﻿using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,31 +8,58 @@ using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.Services
 {
+
     public class LocationsRepository : ILocation
     {
-        public Task<Location> Create(Location location)
+
+    private CryptsDbContext _context;
+    private ILocation _location;
+
+        public LocationsRepository(CryptsDbContext context, ILocation location)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _location = location;
+        }
+        public async Task<Location> Create(Location location)
+        {
+            Location entity = new Location()
+            {
+                Id = location.Id,
+                Name = location.Name,
+                Description = location.Description,
+            };
+
+            _context.Entry(location).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+
+            location.Id = entity.Id;
+            return location;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            Location location = await GetLocations(id);
+            _context.Entry(location).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
-        public Task<List<Location>> GetLocations()
+        public async Task<List<Location>> GetLocations()
         {
-            throw new NotImplementedException();
+            var location = await _context.Location.ToListAsync();
+            return location;
         }
 
-        public Task<Location> GetLocations(int id)
+        public async Task<Location> GetLocations(int id)
         {
-            throw new NotImplementedException();
+            Location location = await _context.Location.FindAsync(id);
+            return location;
         }
 
-        public Task Update(Location location)
+        public async Task<Location> Update(Location location)
         {
-            throw new NotImplementedException();
+            _context.Entry(location).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return location;
         }
     }
 }
