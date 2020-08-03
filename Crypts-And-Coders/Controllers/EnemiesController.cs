@@ -33,7 +33,7 @@ namespace Crypts_And_Coders.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Enemy>> GetEnemy(int id)
         {
-            var enemy = await _enemy.GetEnemies(id);
+            var enemy = await _enemy.GetEnemy(id);
 
             if (enemy == null)
             {
@@ -56,7 +56,6 @@ namespace Crypts_And_Coders.Controllers
             var result = await _enemy.Update(id, enemy);
 
             return Ok(result);
-
         }
 
         // POST: api/Enemies
@@ -74,7 +73,6 @@ namespace Crypts_And_Coders.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Enemy>> DeleteEnemy(int id)
         {
-
             await _enemy.Delete(id);
             return NoContent();
         }
