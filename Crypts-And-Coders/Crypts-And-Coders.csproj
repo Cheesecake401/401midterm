@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Crypts_And_Coders</RootNamespace>
+    <UserSecretsId>266cc4e3-20e8-4740-afba-1c2722296070</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,9 +13,14 @@
   <ItemGroup>
 
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.6" />
+
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 
   </ItemGroup>
 
