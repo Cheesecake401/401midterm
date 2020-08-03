@@ -17,7 +17,7 @@ namespace CryptsAndTesters
         }
 
         [Fact]
-        public async Task CanSaveAndGetCharacter()
+        public async Task CanSaveCharacter()
         {
             Character newChar = new Character()
             {
@@ -33,6 +33,24 @@ namespace CryptsAndTesters
             Assert.NotEqual(0, saved.Id);
             Assert.Equal(saved.Id, newChar.Id);
             Assert.Equal(saved.Name, newChar.Name);
+        }
+
+        [Fact]
+        public async Task CanGetCharacter()
+        {
+            Character newChar = new Character()
+            {
+                Name = "Redhawk",
+                Species = Species.Dragonborn,
+                Class = Class.Monk,
+            };
+            var repo = BuildRepo();
+
+            var saved = repo.Create(newChar);
+
+            var result = await repo.GetCharacter(newChar.Id);
+
+            Assert.Equal(newChar.Id, result.Id);
         }
     }
 }
