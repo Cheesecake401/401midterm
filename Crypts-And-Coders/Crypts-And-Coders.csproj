@@ -4,7 +4,17 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Crypts_And_Coders</RootNamespace>
     <UserSecretsId>266cc4e3-20e8-4740-afba-1c2722296070</UserSecretsId>
+    <UserSecretsId>33ebf0ac-526e-4960-ad17-1d889eb31d06</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200803175710_initial.cs" />
+    <Compile Remove="Migrations\20200803175710_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200803175939_initial.cs" />
+    <Compile Remove="Migrations\20200803175939_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200803180109_initial.cs" />
+    <Compile Remove="Migrations\20200803180109_initial.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -20,7 +30,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
 
   </ItemGroup>
 

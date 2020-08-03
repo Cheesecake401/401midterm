@@ -17,6 +17,7 @@ using Crypts_And_Coders.Data;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models;
+using Crypts_And_Coders.Models.Services;
 
 namespace Crypts_And_Coders
 {
@@ -47,7 +48,7 @@ namespace Crypts_And_Coders
             // TODO: AddJwtBearer
             // TODO: Add authorization policies
 
-            //services.AddTransient<ICharacter, Character>();
+            services.AddTransient<ICharacter, CharacterRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +59,6 @@ namespace Crypts_And_Coders
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
