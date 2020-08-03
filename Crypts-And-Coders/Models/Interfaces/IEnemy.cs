@@ -32,7 +32,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// </summary>
         /// <param name="enemy">Enemy information for update</param>
         /// <returns>Successful result of specified updated enemy</returns>
-        Task<Enemy> Update(Enemy enemy);
+        Task<Enemy> Update(int id, Enemy enemy);
 
         /// <summary>
         /// Delete a character from the database

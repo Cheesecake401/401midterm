@@ -84,7 +84,7 @@ namespace CryptsAndTesters
 
             var saved = await repo.Create(enemy);
 
-            var result = await repo.GetEnemies(enemy.Id);
+            var result = await repo.GetEnemy(enemy.Id);
 
             Assert.Equal(enemy.Id, result.Id);
         }
@@ -122,7 +122,7 @@ namespace CryptsAndTesters
 
             await repo.Update(1, enemy);
 
-            var result = await repo.GetEnemies(1);
+            var result = await repo.GetEnemy(1);
 
             Assert.Equal(1, result.Id);
             Assert.Equal(result.Id, enemy.Id);
