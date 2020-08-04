@@ -28,8 +28,8 @@ namespace CryptsAndTesters
                 Name = "Redhawk",
                 Species = "Dragonborn",
                 Class = "Monk",
-                Weapon = null,
-                CurrentLocation = null
+                WeaponId = 1,
+                LocationId = 1
             };
             var repo = BuildRepo();
 
@@ -44,22 +44,11 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanGetCharacter()
         {
-            CharacterDTO newChar = new CharacterDTO()
-            {
-                Id = 9,
-                Name = "Redhawk",
-                Species = "Dragonborn",
-                Class = "Monk",
-                Weapon = null,
-                CurrentLocation = null
-            };
             var repo = BuildRepo();
 
-            await repo.Create(newChar);
+            var result = await repo.GetCharacter(1);
 
-            var result = await repo.GetCharacter(newChar.Id);
-
-            Assert.Equal(newChar.Id, result.Id);
+            Assert.Equal("Galdifor", result.Name);
         }
 
         [Fact]
@@ -82,8 +71,8 @@ namespace CryptsAndTesters
                 Name = "Redhawk",
                 Species = "Dragonborn",
                 Class = "Monk",
-                Weapon = null,
-                CurrentLocation = null
+                WeaponId = 1,
+                LocationId = 1
             };
             var repo = BuildRepo();
 
