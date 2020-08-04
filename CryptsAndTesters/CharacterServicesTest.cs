@@ -14,7 +14,7 @@ namespace CryptsAndTesters
     {
         private ICharacter BuildRepo()
         {
-            return new CharacterRepository(_db, null);
+            return new CharacterRepository(_db, _characterStat);
         }
 
         [Fact]

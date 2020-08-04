@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/Enemies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Enemy>>> GetEnemy()
+        public async Task<ActionResult<IEnumerable<Enemy>>> GetEnemies()
         {
             return await _enemy.GetEnemies();
         }

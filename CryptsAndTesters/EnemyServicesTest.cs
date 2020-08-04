@@ -156,8 +156,5 @@ namespace CryptsAndTesters
             Assert.NotNull(returnFromMethod);
             Assert.Equal(expected, returnList);
         }
-
-
-
     }
 }
