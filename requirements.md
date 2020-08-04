@@ -126,3 +126,59 @@ The various routes and their methods are listed below.
 **Get** - Weapon with the given id and it's associated information.
 
 **Put** - Update weapon info
+
+
+##Character Stats
+*Character/CharacterId/Stats* 
+
+**Authorization** - Allow anonymous for all get, DM only for post
+
+**Get** - All Characters and CharacterStats
+
+**Post** - Create new character by supplying: Stat, Character, and Level
+
+*Character/CharacterId/CharacterStats* 
+
+**Authorization** - Allow anonymous for all get specific Character Stats, DM only for put
+
+**Get** - All  Specific Character and CharacterStats
+
+**Put** - Update CharacterStats info
+
+
+##Enemy Loot
+
+*Enemies/CharacterId/ItemId/EnemyLoot*
+
+**Authorization** - Allow anonymous for all get, DM only for post
+
+**Get** - All Enemies and EnemyLoot 
+
+**Post** - Create new Enemy Loot by supplying: Character and Item 
+
+*Enemies/CharacterId/ItemId/EnemyLoot*
+
+**Authorization** - Allow anonymous for all gets, DM only for put
+
+**Get** - Item with the given id inside EnemyLoot
+
+**Put** - Update item in Enemy Loot
+
+
+##EnemyInLocation
+
+*Enemies/LocationId/EnemyId*
+
+**Authorization** - Allow anonymous for all get, DM only for post
+
+**Get** - All Enemies and their locations 
+
+**Post** - Create new Enemy location by supplying: LocationId and EnemyId 
+
+*Enemies/LocationId/EnemyId*
+
+**Authorization** - Allow anonymous for all gets, DM only for put
+
+**Get** - Location with the given id inside Enemy
+
+**Put** - Update Location in Enemy 
