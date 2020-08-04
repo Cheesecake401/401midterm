@@ -8,39 +8,37 @@ namespace Crypts_And_Coders.Models.Interfaces
     public interface IWeapon
     {
         /// <summary>
-        /// create property
+        /// Creates a new weapon in the database
         /// </summary>
-        /// <param name="weapon"></param>
-        /// <returns></returns>
+        /// <param name="weapon">Weapon information for creation</param>
+        /// <returns>Successful result of weapon creation</returns>
         Task<Weapon> Create(Weapon weapon);
 
         /// <summary>
-        /// read property
+        /// Get a list of all weapons in the database
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Successful result with list of weapons</returns>
         Task<List<Weapon>> GetWeapons();
 
         /// <summary>
-        /// read specific property
+        /// Get a specific weapon in the database by ID
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Id of weapon to search for</param>
+        /// <returns>Successful result of specified weapon</returns>
         Task<Weapon> GetWeapon(int id);
 
         /// <summary>
-        /// update property
+        /// Update a given weapon in the database
         /// </summary>
-        /// <param name="weapon"></param>
-        /// <returns></returns>
+        /// <param name="weapon">Weapon information for update</param>
+        /// <returns>Successful result of specified updated weapon</returns>
         Task<Weapon> Update(Weapon weapon);
 
         /// <summary>
-        /// delete property
+        /// Delete a weapon from the database
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Id of weapon to be deleted</param>
+        /// <returns>Task of completion for weapon delete</returns>
         Task Delete(int id);
-
-
     }
 }
