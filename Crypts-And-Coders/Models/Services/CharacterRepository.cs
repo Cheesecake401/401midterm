@@ -19,7 +19,6 @@ namespace Crypts_And_Coders.Models.Services
         private readonly IWeapon _weapon;
         private readonly ILocation _location;
 
-
         public CharacterRepository(CryptsDbContext context, ICharacterStat characterStat, IItem item, IWeapon weapon, ILocation location)
         {
             _context = context;
@@ -155,7 +154,6 @@ namespace Crypts_And_Coders.Models.Services
             return resultDTO;
         }
 
-
         /// <summary>
         /// Update a given character in the database
         /// </summary>
@@ -221,6 +219,5 @@ namespace Crypts_And_Coders.Models.Services
             var result = await _context.CharacterInventory.Where(x => x.CharacterId == charId).Include(x => x.Item).ToListAsync();
             return result;
         }
-
     }
 }
