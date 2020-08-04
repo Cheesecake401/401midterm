@@ -18,14 +18,16 @@ namespace Crypts_And_Coders.Models.Services
         private readonly IItem _item;
         private readonly IWeapon _weapon;
         private readonly ILocation _location;
+        private readonly IEnemy _enemy;
 
-        public CharacterRepository(CryptsDbContext context, ICharacterStat characterStat, IItem item, IWeapon weapon, ILocation location)
+        public CharacterRepository(CryptsDbContext context, ICharacterStat characterStat, IItem item, IWeapon weapon, ILocation location, IEnemy enemy)
         {
             _context = context;
             _characterStat = characterStat;
             _item = item;
             _weapon = weapon;
             _location = location;
+            _enemy = enemy;
         }
 
         /// <summary>
@@ -44,9 +46,7 @@ namespace Crypts_And_Coders.Models.Services
                 Class = userClass,
                 Species = species,
                 WeaponId = characterDTO.WeaponId,
-                Weapon = await _weapon.GetWeapon(characterDTO.WeaponId),
                 LocationId = characterDTO.LocationId,
-
             };
             _context.Entry(character).State = EntityState.Added;
             await _context.SaveChangesAsync();
