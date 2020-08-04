@@ -1,6 +1,9 @@
 # Crypts and Coders
 API hosted at: *dummy.com*
 
+## Vision
+This app is designed to alleviate the burden of keeping track of DnD campaigns across an array of notebooks and scattered character sheets. Running a table top RPG can be very difficult work, and often requires a lot of note keeping to keep track of all the characters, enemies, locations, etc. This API brings that all to one place, where the Game Master can see and update any information in the game, and players can see and keep track of their own information. Finally, no more pain from forgotten character sheets and coffee-soiled notes, keep all the information needed in one easy and convenient API.
+
 ## Scope
 ### IN
 - This API will allow a user to create and keep track of their information throughout a DnD campaign.
