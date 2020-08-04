@@ -78,20 +78,22 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of specified location</returns>
         public async Task<LocationDTO> GetLocation(int id)
         {
-            Location location = await _context.Location.FindAsync(id);
             var result = await _context.Location.Where(x => x.Id == id)
                                             .Include(x => x.Enemies)
-                                            .ThenInclude(x => x.Enemy)
                                             .FirstOrDefaultAsync();
 
             LocationDTO dto = new LocationDTO()
             {
-                Id = location.Id,
-                Name = location.Name,
-                Description = location.Description
-                //Enemies = location.Enemies
+                Id = result.Id,
+                Name = result.Name,
+                Description = result.Description
             };
-
+            
+            dto.Enemies = new List<EnemyDTO>();
+            foreach (var enemy in result.Enemies)
+            {
+                dto.Enemies.Add(await _enemy.GetEnemy(enemy.EnemyId));
+            }
             return dto;
         }
 

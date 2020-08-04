@@ -10,6 +10,6 @@ namespace Crypts_And_Coders.Models.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<EnemyInLocation> Enemies { get; set; }
+        public List<EnemyDTO> Enemies { get; set; }
     }
 }
