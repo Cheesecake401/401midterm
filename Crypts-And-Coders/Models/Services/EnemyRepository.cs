@@ -64,15 +64,7 @@ namespace Crypts_And_Coders.Models.Services
 
             foreach (var item in enemies)
             {
-                EnemyDTO dto = new EnemyDTO()
-                {
-                    Id = item.Id,
-                    Abilities = item.Abilities,
-                    Type = item.Type,
-                    Species = item.Species
-                };
-
-                enemyDTO.Add(dto);
+                enemyDTO.Add(await GetEnemy(item.Id));
             }
 
             return enemyDTO;
