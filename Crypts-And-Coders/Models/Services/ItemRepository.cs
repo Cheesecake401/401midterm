@@ -61,12 +61,7 @@ namespace Crypts_And_Coders.Models.Services
             List<ItemDTO> resultDTO = new List<ItemDTO>();
             foreach (var item in result)
             {
-                resultDTO.Add(new ItemDTO()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Value = item.Value
-                });
+                resultDTO.Add(await GetItem(item.Id));
             }
             return resultDTO;
         }
