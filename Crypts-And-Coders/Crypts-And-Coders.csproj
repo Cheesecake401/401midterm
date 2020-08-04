@@ -20,6 +20,10 @@
     <Compile Include="Migrations\20200803213331_seeding.Designer.cs" />
     <Compile Include="Migrations\20200803224806_newSeeds.cs" />
     <Compile Include="Migrations\20200803224806_newSeeds.Designer.cs" />
+    <Compile Include="Migrations\20200804154002_addingInventorySeeds.cs" />
+    <Compile Include="Migrations\20200804154002_addingInventorySeeds.Designer.cs" />
+    <Compile Include="Migrations\20200804165441_enemyInLocationSeeds.cs" />
+    <Compile Include="Migrations\20200804165441_enemyInLocationSeeds.Designer.cs" />
     <Compile Include="Migrations\CryptsDbContextModelSnapshot.cs" />
   </ItemGroup>
 

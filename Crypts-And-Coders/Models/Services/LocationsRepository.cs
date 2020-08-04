@@ -11,10 +11,12 @@ namespace Crypts_And_Coders.Models.Services
     public class LocationsRepository : ILocation
     {
         private CryptsDbContext _context;
+        private readonly IEnemy _enemy;
 
-        public LocationsRepository(CryptsDbContext context)
+        public LocationsRepository(CryptsDbContext context, IEnemy enemy)
         {
             _context = context;
+            _enemy = enemy;
         }
 
         /// <summary>
@@ -50,7 +52,8 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result with list of locations</returns>
         public async Task<List<Location>> GetLocations()
         {
-            List<Location> result = await _context.Location.ToListAsync();
+            List<Location> result = await _context.Location.Include(x => x.EnemiesInLocation).ToListAsync();
+
             return result;
         }
 
@@ -61,7 +64,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of specified location</returns>
         public async Task<Location> GetLocation(int id)
         {
-            var result = await _context.Location.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var result = await _context.Location.Where(x => x.Id == id).Include(x  => x.EnemiesInLocation).FirstOrDefaultAsync();
             return result;
         }
 

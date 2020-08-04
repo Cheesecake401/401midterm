@@ -13,7 +13,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// </summary>
         /// <param name="character">Character information for creation</param>
         /// <returns>Successful result of character creation</returns>
-        Task<Character> Create(Character character);
+        Task<CharacterDTO> Create(CharacterDTO character);
 
         /// <summary>
         /// Get a list of all characters in the database
@@ -33,7 +33,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// </summary>
         /// <param name="character">Character information for update</param>
         /// <returns>Successful result of specified updated character</returns>
-        Task<Character> Update(Character character);
+        Task<CharacterDTO> Update(CharacterDTO character);
 
         /// <summary>
         /// Delete a character from the database

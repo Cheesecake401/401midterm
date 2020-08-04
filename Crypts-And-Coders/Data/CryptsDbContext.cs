@@ -227,7 +227,83 @@ namespace Crypts_And_Coders.Data
                    StatId = 3,
                    CharacterId = 3
                }
-           );
+               );
+
+               modelBuilder.Entity<CharacterInventory>().HasData(
+               new CharacterInventory
+               {
+                   CharacterId = 1,
+                   ItemId = 1
+               },
+
+               new CharacterInventory
+               {
+                   CharacterId = 1,
+                   ItemId = 2
+               },
+
+               new CharacterInventory
+               {
+                   CharacterId = 2,
+                   ItemId = 2
+               },
+
+               new CharacterInventory
+               {
+                   CharacterId = 2,
+                   ItemId = 3
+               },
+
+               new CharacterInventory
+               {
+                   CharacterId = 3,
+                   ItemId = 1
+               },
+
+               new CharacterInventory
+               {
+                   CharacterId = 3,
+                   ItemId = 3
+               }
+               );
+
+            modelBuilder.Entity<EnemyInLocation>().HasData(
+              new EnemyInLocation
+              {
+                  LocationId = 1,
+                  EnemyId = 1
+              },
+
+              new EnemyInLocation
+              {
+                  LocationId = 1,
+                  EnemyId = 2
+              },
+
+              new EnemyInLocation
+              {
+                  LocationId = 2,
+                  EnemyId = 3
+              },
+
+              new EnemyInLocation
+              {
+                  LocationId = 2,
+                  EnemyId = 2
+              },
+
+              new EnemyInLocation
+              {
+                  LocationId = 3,
+                  EnemyId = 1
+              },
+
+              new EnemyInLocation
+              {
+                  LocationId = 3,
+                  EnemyId = 3
+              }
+              );
         }
     }
 }

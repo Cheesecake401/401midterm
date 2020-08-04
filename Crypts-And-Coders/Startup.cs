@@ -54,10 +54,11 @@ namespace Crypts_And_Coders
 
             services.AddTransient<IEnemy, EnemyRepository>();
             services.AddTransient<ILocation, LocationsRepository>();
-            //services.AddTransient<IItem, ItemRepository>();
+            services.AddTransient<IItem, ItemRepository>();
             services.AddTransient<ICharacter, CharacterRepository>();
             services.AddTransient<IStat, StatRepository>();
             services.AddTransient<ICharacterStat, CharacterStatRepository>();
+            services.AddTransient<IWeapon, WeaponRepository>();
 
         }
 

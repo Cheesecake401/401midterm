@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.DTOs
 {
-    public class ItemDTO
+    public class InventoryDTO
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Value { get; set; }
+        public int CharacterId { get; set; }
+        public int ItemId { get; set; }
 
+        public ItemDTO Item { get; set; }
     }
 }
