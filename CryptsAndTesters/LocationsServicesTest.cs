@@ -94,7 +94,7 @@ namespace CryptsAndTesters
         {
             LocationDTO location = new LocationDTO()
             {
-                Id = 2,
+                Id = 1,
                 Name = "Whatever",
                 Description = "Your mom goes to college."
             };
