@@ -1,4 +1,5 @@
 ﻿using Crypts_And_Coders.Models;
+using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
 using System;
@@ -13,13 +14,13 @@ namespace CryptsAndTesters
     {
         private ICharacterStat BuildRepo()
         {
-            return new CharacterStatRepository(_db);
+            return new CharacterStatRepository(_db, _stat);
         }
 
         [Fact]
         public async Task CanSaveCharacterStat()
         {
-            CharacterStat newCharacterStat = new CharacterStat()
+            CharacterStatDTO newCharacterStat = new CharacterStatDTO()
             {
                 CharacterId = 1,
                 StatId = 3,
@@ -61,7 +62,7 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanUpdateCharacterStat()
         {
-            CharacterStat newCharacterStat = new CharacterStat()
+            CharacterStatDTO newCharacterStat = new CharacterStatDTO()
             {
                 CharacterId = 1,
                 StatId = 1,

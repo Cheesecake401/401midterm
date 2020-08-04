@@ -1,4 +1,5 @@
 ﻿using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,9 +23,14 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="stat">Stat information for creation</param>
         /// <returns>Successful result of stat creation</returns>
-        public async Task<Stat> Create(Stat stat)
+        public async Task<StatDTO> Create(StatDTO stat)
         {
-            _context.Entry(stat).State = EntityState.Added;
+            Stat newStat = new Stat()
+            {
+                Name = stat.Name,
+                Id = stat.Id
+            };
+            _context.Entry(newStat).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return stat;
         }
@@ -48,20 +54,35 @@ namespace Crypts_And_Coders.Models.Services
         /// Get a list of all stats in the database
         /// </summary>
         /// <returns>Successful result with list of stats</returns>
-        public async Task<Stat> GetStat(int id)
+        public async Task<StatDTO> GetStat(int id)
         {
             var result = await _context.Stat.Where(x => x.Id == id).FirstOrDefaultAsync();
-            return result;
+            StatDTO resultDTO = new StatDTO()
+            {
+                Name = result.Name,
+                Id = result.Id
+            };
+            return resultDTO;
         }
 
         /// <summary>
         /// Get a list of all stats in the database
         /// </summary>
         /// <returns>Successful result with list of stats</returns>
-        public async Task<List<Stat>> GetStats()
+        public async Task<List<StatDTO>> GetStats()
         {
             List<Stat> result = await _context.Stat.ToListAsync();
-            return result;
+            List<StatDTO> resultDTO = new List<StatDTO>();
+            foreach (var item in result)
+            {
+                StatDTO newDTO = new StatDTO()
+                {
+                    Name = item.Name,
+                    Id = item.Id
+                };
+                resultDTO.Add(newDTO);
+            }
+            return resultDTO;
         }
 
         /// <summary>
@@ -70,11 +91,16 @@ namespace Crypts_And_Coders.Models.Services
         /// <param name="id">Id of stat to be updated</param>
         /// <param name="stat">Stat information for update</param>
         /// <returns>Successful result of specified updated stat</returns>
-        public async Task<Stat> Update(Stat stat)
+        public async Task<StatDTO> Update(StatDTO statDTO)
         {
+            Stat stat = new Stat()
+            {
+                Id = statDTO.Id,
+                Name = statDTO.Name
+            };
             _context.Entry(stat).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return stat;
+            return statDTO;
         }
     }
 }

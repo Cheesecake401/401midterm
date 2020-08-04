@@ -13,6 +13,7 @@ namespace CryptsAndTesters
         private readonly SqliteConnection _connection;
         protected readonly CryptsDbContext _db;
         protected readonly ICharacterStat _characterStat;
+        protected readonly IStat _stat;
         protected readonly ILocation _location;
 
         public DatabaseTest()
@@ -26,7 +27,9 @@ namespace CryptsAndTesters
                 .Options);
             _db.Database.EnsureCreated();
 
-            _characterStat = new CharacterStatRepository(_db);
+
+            _characterStat = new CharacterStatRepository(_db, _stat);
+            _stat = new StatRepository(_db);
             _location = new LocationsRepository(_db);
         }
         public void Dispose()

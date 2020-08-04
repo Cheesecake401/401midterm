@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace Crypts_And_Coders.Models
 {
@@ -16,6 +17,6 @@ namespace Crypts_And_Coders.Models
         public string Type { get; set; }
 
         public List<EnemyInLocation> EnemyInLocation { get; set; }
-        public SpeciesAndClass.Species Species { get; set; }
+        public Species Species { get; set; }
     }
 }

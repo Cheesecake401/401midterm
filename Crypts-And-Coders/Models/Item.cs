@@ -15,8 +15,7 @@ namespace Crypts_And_Coders.Models
         public int Value { get; set; }
 
         public List<EnemyLoot> EnemyLoot { get; set; }
-
-
+        public List<CharacterInventory> CharacterInventory { get; set; }
     }
 }
 

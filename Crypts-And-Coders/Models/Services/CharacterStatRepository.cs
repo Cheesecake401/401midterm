@@ -1,4 +1,5 @@
 ﻿using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,22 +12,30 @@ namespace Crypts_And_Coders.Models.Services
     public class CharacterStatRepository : ICharacterStat
     {
         private readonly CryptsDbContext _context;
+        private readonly IStat _stat;
 
-        public CharacterStatRepository(CryptsDbContext context)
+        public CharacterStatRepository(CryptsDbContext context, IStat stat)
         {
             _context = context;
+            _stat = stat;
         }
 
         /// <summary>
         /// Creates a new characterStat in the database
         /// </summary>
-        /// <param name="characterStat">CharacterStat information for creation</param>
+        /// <param name="characterStat">CharacterStatDTO information for creation</param>
         /// <returns>Successful result of characterStat creation</returns>
-        public async Task<CharacterStat> Create(CharacterStat characterStat)
+        public async Task<CharacterStatDTO> Create(CharacterStatDTO characterStatDTO)
         {
+            CharacterStat characterStat = new CharacterStat()
+            {
+                CharacterId = characterStatDTO.CharacterId,
+                StatId = characterStatDTO.StatId,
+                Level = characterStatDTO.Level
+            };
             _context.Entry(characterStat).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return characterStat;
+            return characterStatDTO;
         }
 
         /// <summary>
@@ -49,21 +58,48 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="id">Id of characterStat to search for</param>
         /// <returns>Successful result of specified characterStat</returns>
-        public async Task<CharacterStat> GetCharacterStat(int charId, int statId)
+        public async Task<CharacterStatDTO> GetCharacterStat(int charId, int statId)
         {
-            var result = await _context.StatSheet.Where(x => x.CharacterId == charId && x.StatId == statId).Include(x => x.Stat).FirstOrDefaultAsync();
+            var result = await _context.StatSheet.Where(x => x.CharacterId == charId && x.StatId == statId).Include(x => x.Stat).Include(x => x.Character).FirstOrDefaultAsync();
+            CharacterStatDTO resultDTO = new CharacterStatDTO()
+            {
+                CharacterId = result.CharacterId,
+                StatId = result.StatId,
+                Stat = new StatDTO()
+                {
+                    Name = result.Stat.Name,
+                    Id = result.Stat.Id
+                },
+                Level = result.Level
+            };
 
-            return result;
+            return resultDTO;
         }
 
         /// <summary>
         /// Get a list of all characterStats in the database
         /// </summary>
         /// <returns>Successful result with list of characterStats</returns>
-        public async Task<List<CharacterStat>> GetCharacterStats(int id)
+        public async Task<List<CharacterStatDTO>> GetCharacterStats(int id)
         {
             List<CharacterStat> result = await _context.StatSheet.Where(x => x.CharacterId == id).Include(x => x.Stat).ToListAsync();
-            return result;
+            List<CharacterStatDTO> resultDTO = new List<CharacterStatDTO>();
+            foreach (var item in result)
+            {
+                CharacterStatDTO newDTO = new CharacterStatDTO()
+                {
+                    CharacterId = item.CharacterId,
+                    StatId = item.StatId,
+                    Stat = new StatDTO()
+                    {
+                        Name = item.Stat.Name,
+                        Id = item.Stat.Id
+                    },
+                    Level = item.Level
+                };
+                resultDTO.Add(newDTO);
+            }
+            return resultDTO;
         }
 
 
@@ -71,13 +107,19 @@ namespace Crypts_And_Coders.Models.Services
         /// Update a given characterStat in the database
         /// </summary>
         /// <param name="id">Id of characterStat to be updated</param>
-        /// <param name="characterStat">CharacterStat information for update</param>
+        /// <param name="characterStat">CharacterStatDTO information for update</param>
         /// <returns>Successful result of specified updated characterStat</returns>
-        public async Task<CharacterStat> Update(CharacterStat characterStat)
+        public async Task<CharacterStatDTO> Update(CharacterStatDTO characterStatDTO)
         {
+            CharacterStat characterStat = new CharacterStat()
+            {
+                CharacterId = characterStatDTO.CharacterId,
+                StatId = characterStatDTO.StatId,
+                Level = characterStatDTO.Level
+            };
             _context.Entry(characterStat).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return characterStat;
+            return characterStatDTO;
         }
     }
 }
