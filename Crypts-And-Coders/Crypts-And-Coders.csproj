@@ -7,27 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\**" />
-    <Content Remove="Migrations\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Migrations\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Migrations\20200803210223_initial.cs" />
-    <Compile Include="Migrations\20200803210223_initial.Designer.cs" />
-    <Compile Include="Migrations\20200803213331_seeding.cs" />
-    <Compile Include="Migrations\20200803213331_seeding.Designer.cs" />
-    <Compile Include="Migrations\20200803224806_newSeeds.cs" />
-    <Compile Include="Migrations\20200803224806_newSeeds.Designer.cs" />
-    <Compile Include="Migrations\20200804154002_addingInventorySeeds.cs" />
-    <Compile Include="Migrations\20200804154002_addingInventorySeeds.Designer.cs" />
-    <Compile Include="Migrations\20200804165441_enemyInLocationSeeds.cs" />
-    <Compile Include="Migrations\20200804165441_enemyInLocationSeeds.Designer.cs" />
-    <Compile Include="Migrations\CryptsDbContextModelSnapshot.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
 
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
 
