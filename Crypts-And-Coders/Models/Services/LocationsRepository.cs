@@ -58,11 +58,24 @@ namespace Crypts_And_Coders.Models.Services
         /// Get a list of all locations in the database
         /// </summary>
         /// <returns>Successful result with list of locations</returns>
-        public async Task<List<Location>> GetLocations()
+        public async Task<List<LocationDTO>> GetLocations()
         {
             List<Location> result = await _context.Location.Include(x => x.Enemies).ToListAsync();
+            List<LocationDTO> locationDTO = new List<LocationDTO>();
 
-            return result;
+            foreach (var item in result)
+            {
+                LocationDTO dto = new LocationDTO()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Description = item.Description
+                };
+
+                locationDTO.Add(dto);
+            }
+
+            return locationDTO;
         }
 
         /// <summary>
@@ -101,7 +114,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <param name="id">Id of location to be updated</param>
         /// <param name="location">Location information for update</param>
         /// <returns>Successful result of specified updated location</returns>
-        public async Task<Location> Update(Location location)
+        public async Task<LocationDTO> Update(LocationDTO location)
         {
             _context.Entry(location).State = EntityState.Modified;
             await _context.SaveChangesAsync();

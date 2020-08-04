@@ -19,7 +19,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// Get a list of all locations in the database
         /// </summary>
         /// <returns>Successful result with list of locations</returns>
-        Task<List<Location>> GetLocations();
+        Task<List<LocationDTO>> GetLocations();
 
         /// <summary>
         /// Get a specific location in the database by ID
@@ -33,7 +33,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// </summary>
         /// <param name="location">Location information for update</param>
         /// <returns>Successful result of specified updated location</returns>
-        Task<Location> Update(Location location);
+        Task<LocationDTO> Update(LocationDTO location);
 
         /// <summary>
         /// Delete a location from the database

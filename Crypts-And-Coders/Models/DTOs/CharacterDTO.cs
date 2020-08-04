@@ -15,7 +15,7 @@ namespace Crypts_And_Coders.Models.DTOs
         public int WeaponId { get; set; }
         public Weapon Weapon { get; set; }
         public int LocationId { get; set; }
-        public Location CurrentLocation { get; set; }
+        public LocationDTO CurrentLocation { get; set; }
         public List<InventoryDTO> Inventory { get; set; }
         public List<CharacterStatDTO> StatSheet { get; set; }
     }

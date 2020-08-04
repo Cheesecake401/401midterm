@@ -25,26 +25,32 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/Locations
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
+        public async Task<ActionResult<IEnumerable<LocationDTO>>> GetLocations()
         {
-            List<Location> locations = await _location.GetLocations();
-            return locations;
+            return await _location.GetLocations();
+
         }
 
         // GET: api/Locations/5
         [HttpGet("{id}")]
         public async Task<ActionResult<LocationDTO>> GetLocation(int id)
         {
-            LocationDTO locations = await _location.GetLocation(id);
+            var location = await _location.GetLocation(id);
 
-            return locations;
-        }
+            if (location == null)
+            {
+                return NotFound();
+            }
+
+            return location;
+        
+    }
 
         // PUT: api/Locations/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLocation(int id, Location location)
+        public async Task<IActionResult> PutLocation(int id, LocationDTO location)
         {
             if (!ModelState.IsValid)
             {
