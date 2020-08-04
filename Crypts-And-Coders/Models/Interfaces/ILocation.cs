@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crypts_And_Coders.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// </summary>
         /// <param name="location">Location information for creation</param>
         /// <returns>Successful result of location creation</returns>
-        Task<Location> Create(Location location);
+        Task<Location> Create(LocationDTO location);
 
         /// <summary>
         /// Get a list of all locations in the database
@@ -25,7 +26,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// </summary>
         /// <param name="id">Id of location to search for</param>
         /// <returns>Successful result of specified location</returns>
-        Task<Location> GetLocation(int id);
+        Task<LocationDTO> GetLocation(int id);
 
         /// <summary>
         /// Update a given location in the database

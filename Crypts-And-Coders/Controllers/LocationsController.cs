@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
+using Crypts_And_Coders.Models.DTOs;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -26,21 +27,17 @@ namespace Crypts_And_Coders.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
         {
-            return await _location.GetLocations();
+            List<Location> locations = await _location.GetLocations();
+            return locations;
         }
 
         // GET: api/Locations/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Location>> GetLocation(int id)
+        public async Task<ActionResult<LocationDTO>> GetLocation(int id)
         {
-            var location = await _location.GetLocation(id);
+            LocationDTO locations = await _location.GetLocation(id);
 
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            return location;
+            return locations;
         }
 
         // PUT: api/Locations/5
@@ -49,21 +46,25 @@ namespace Crypts_And_Coders.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLocation(int id, Location location)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             if (id != location.Id)
             {
                 return BadRequest();
             }
 
-            var result = await _location.Update(location);
+             await _location.Update(location);
 
-            return Ok(result);
+            return NoContent();
         }
 
         // POST: api/Locations
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Location>> PostLocation(Location location)
+        public async Task<ActionResult<Location>> PostLocation(LocationDTO location)
         {
             await _location.Create(location);
 

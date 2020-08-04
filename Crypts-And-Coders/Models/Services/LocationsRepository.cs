@@ -1,4 +1,5 @@
 ﻿using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,11 +25,18 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="location">Location information for creation</param>
         /// <returns>Successful result of location creation</returns>
-        public async Task<Location> Create(Location location)
+        public async Task<Location> Create(LocationDTO location)
         {
+            Location entity = new Location()
+            {
+                Id = location.Id,
+                Name = location.Name,
+                Description = location.Description
+            };
+
             _context.Entry(location).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return location;
+            return entity;
         }
 
         /// <summary>
@@ -38,7 +46,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Task of completion for location delete</returns>
         public async Task Delete(int id)
         {
-            Location location = await _context.Location.FindAsync(id);
+            LocationDTO location = await GetLocation(id);
             if (location != null)
             {
                 _context.Entry(location).State = EntityState.Deleted;
@@ -62,10 +70,29 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="id">Id of location to search for</param>
         /// <returns>Successful result of specified location</returns>
-        public async Task<Location> GetLocation(int id)
+        public async Task<LocationDTO> GetLocation(int id)
         {
-            var result = await _context.Location.Where(x => x.Id == id).Include(x  => x.Enemies).FirstOrDefaultAsync();
-            return result;
+            Location location = await _context.Location.FindAsync();
+            var result = await _context.Location.Where(x => x.Id == id)
+                                            .Include(x  => x.Enemies)
+                                            .Include(x => x.Name)
+                                            .Include(x => x.Description)
+                                            .FirstOrDefaultAsync();
+
+            List<EnemyInLocation> enemyInLocations = new List<EnemyInLocation>();
+            foreach (var item in enemyInLocations)
+            {
+                enemyInLocations.Add(new EnemyInLocation { EnemyId = item.EnemyId, LocationId = item.LocationId });
+            }
+
+            LocationDTO dto = new LocationDTO()
+            {
+                Id = location.Id,
+                Name = location.Name,
+                Description = location.Description
+            };
+
+            return dto;
         }
 
         /// <summary>
