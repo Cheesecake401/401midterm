@@ -44,8 +44,8 @@ namespace Crypts_And_Coders.Models.Services
                 Name = characterDTO.Name,
                 Class = userClass,
                 Species = species,
-                Weapon = characterDTO.Weapon != null ? characterDTO.Weapon : null,
-                CurrentLocation = characterDTO.CurrentLocation != null ? characterDTO.CurrentLocation : null
+                WeaponId = characterDTO.WeaponId,
+                LocationId = characterDTO.LocationId
             };
             _context.Entry(character).State = EntityState.Added;
             await _context.SaveChangesAsync();
@@ -91,6 +91,7 @@ namespace Crypts_And_Coders.Models.Services
             var stats = await _characterStat.GetCharacterStats(id);
             resultDTO.StatSheet = stats;
             var items = result.Inventory;
+            resultDTO.Inventory = new List<InventoryDTO>();
             foreach (var item in items)
             {
                 resultDTO.Inventory.Add(new InventoryDTO()

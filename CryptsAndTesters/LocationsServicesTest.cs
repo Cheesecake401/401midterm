@@ -14,7 +14,7 @@ namespace CryptsAndTesters
     {
         private ILocation BuildRepo()
         {
-            return new LocationsRepository(_db);
+            return new LocationsRepository(_db, _enemy);
         }
 
         /// <summary>
