@@ -24,7 +24,7 @@ namespace CryptsAndTesters
             // arrange
             Item newItem = new Item()
             {
-                Id = 5,
+                Id = 4,
                 Name = "Magic Potion",
                 Value = 125
             };
@@ -44,7 +44,7 @@ namespace CryptsAndTesters
             // assert
             Assert.NotNull(createdItem);
             Assert.NotEqual(0, createdItem.Id);
-            Assert.Equal(5, createdItem.Id);
+            Assert.Equal(4, createdItem.Id);
             Assert.Equal("Magic Potion", createdItem.Name);
         }
 
@@ -67,7 +67,7 @@ namespace CryptsAndTesters
             // arrange
             Item newItem = new Item()
             {
-                Id = 5,
+                Id = 4,
                 Name = "Magic Potion",
                 Value = 125
             };
@@ -84,11 +84,11 @@ namespace CryptsAndTesters
             repo.Create(newItemDTO);
 
             // act
-            var result = await repo.GetItem(5);
+            var result = await repo.GetItem(4);
 
             // assert
             Assert.NotNull(result);
-            Assert.Equal(5, result.Id);
+            Assert.Equal(4, result.Id);
             Assert.Equal("Magic Potion", result.Name);
         }
 
@@ -98,7 +98,7 @@ namespace CryptsAndTesters
             // arrange
             Item newItem = new Item()
             {
-                Id = 5,
+                Id = 4,
                 Name = "Magic Potion",
                 Value = 125
             };
@@ -115,7 +115,7 @@ namespace CryptsAndTesters
             repo.Update(newItemDTO);
 
             // act
-            var result = await repo.GetItem(5);
+            var result = await repo.GetItem(4);
 
             // Assert
             Assert.NotNull(result);

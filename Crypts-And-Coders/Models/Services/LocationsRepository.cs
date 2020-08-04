@@ -46,7 +46,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Task of completion for location delete</returns>
         public async Task Delete(int id)
         {
-            LocationDTO location = await GetLocation(id);
+            Location location = await _context.Location.FindAsync(id);
             if (location != null)
             {
                 _context.Entry(location).State = EntityState.Deleted;
@@ -92,7 +92,10 @@ namespace Crypts_And_Coders.Models.Services
             dto.Enemies = new List<EnemyDTO>();
             foreach (var enemy in result.Enemies)
             {
-                dto.Enemies.Add(await _enemy.GetEnemy(enemy.EnemyId));
+                if(_enemy != null)
+                {
+                    dto.Enemies.Add(await _enemy.GetEnemy(enemy.EnemyId));
+                }
             }
             return dto;
         }
@@ -103,11 +106,17 @@ namespace Crypts_And_Coders.Models.Services
         /// <param name="id">Id of location to be updated</param>
         /// <param name="location">Location information for update</param>
         /// <returns>Successful result of specified updated location</returns>
-        public async Task<LocationDTO> Update(LocationDTO location)
+        public async Task<LocationDTO> Update(LocationDTO locationDTO)
         {
+            Location location = new Location()
+            {
+                Name = locationDTO.Name,
+                Id = locationDTO.Id,
+                Description = locationDTO.Description
+            };
             _context.Entry(location).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return location;
+            return locationDTO;
         }
     }
 }
