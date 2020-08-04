@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Crypts_And_Coders.Models.DTOs;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Crypts_And_Coders.Models
         public SpeciesAndClass.Species Species { get; set; }
         public SpeciesAndClass.Class Class { get; set; }
         public Weapon Weapon { get; set; }
-        public Location CurrentLocation { get; set; }
+        public LocationDTO CurrentLocation { get; set; }
         public List<CharacterInventory> Inventory { get; set; }
         public List<CharacterStat> StatSheet { get; set; }
         public List<EnemyLoot> EnemyLoot { get; set; }
