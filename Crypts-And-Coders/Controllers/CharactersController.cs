@@ -25,7 +25,7 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/Characters
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Character>>> GetCharacters()
+        public async Task<ActionResult<IEnumerable<Character>>> GetCharacter()
         {
             return await _character.GetCharacters();
         }
@@ -50,7 +50,7 @@ namespace Crypts_And_Coders.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCharacter(int id, Character character)
         {
-            if (id != character.Id)
+            if(id != character.Id)
             {
                 return BadRequest();
             }
@@ -77,5 +77,6 @@ namespace Crypts_And_Coders.Controllers
             await _character.Delete(id);
             return NoContent();
         }
+
     }
 }

@@ -51,7 +51,8 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of specified characterStat</returns>
         public async Task<CharacterStat> GetCharacterStat(int charId, int statId)
         {
-            var result = await _context.StatSheet.Where(x => x.CharacterId == charId && x.StatId == statId).FirstOrDefaultAsync();
+            var result = await _context.StatSheet.Where(x => x.CharacterId == charId && x.StatId == statId).Include(x => x.Stat).FirstOrDefaultAsync();
+
             return result;
         }
 
