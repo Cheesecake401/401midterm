@@ -95,7 +95,7 @@ namespace Crypts_And_Coders
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -104,10 +104,13 @@ namespace Crypts_And_Coders
 
             app.UseRouting();
 
-            // TODO: serviceProvider.GetRequiredService<>();
             // TODO: Role initializer
             app.UseAuthentication();
             app.UseAuthorization();
+
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            RoleInitializer.SeedData(serviceProvider, userManager, Configuration);
 
             app.UseEndpoints(endpoints =>
             {
