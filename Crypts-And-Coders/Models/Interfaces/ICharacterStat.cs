@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crypts_And_Coders.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,30 +11,30 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <summary>
         /// Creates a new stat for a specific character in the database
         /// </summary>
-        /// <param name="characterStat">CharacterStat information for creation</param>
+        /// <param name="characterStat">CharacterStatDTO information for creation</param>
         /// <returns>Successful result of characterStat creation</returns>
-        Task<CharacterStat> Create(CharacterStat characterStat);
+        Task<CharacterStatDTO> Create(CharacterStatDTO characterStat);
 
         /// <summary>
         /// Get a list of all of a character's stats in the database
         /// </summary>
         /// <returns>Successful result with list of characterStats</returns>
-        Task<List<CharacterStat>> GetCharacterStats(int id);
+        Task<List<CharacterStatDTO>> GetCharacterStats(int id);
 
         /// <summary>
         /// Get a specific stat from a character in the database by ID
         /// </summary>
         /// <param name="id">Id of characterStat to search for</param>
         /// <returns>Successful result of specified characterStat</returns>
-        Task<CharacterStat> GetCharacterStat(int charId, int statId);
+        Task<CharacterStatDTO> GetCharacterStat(int charId, int statId);
 
         /// <summary>
         /// Update a given character's stat in the database
         /// </summary>
         /// <param name="id">Id of characterStat to be updated</param>
-        /// <param name="characterStat">CharacterStat information for update</param>
+        /// <param name="characterStat">CharacterStatDTO information for update</param>
         /// <returns>Successful result of specified updated characterStat</returns>
-        Task<CharacterStat> Update(CharacterStat characterStat);
+        Task<CharacterStatDTO> Update(CharacterStatDTO characterStat);
 
         /// <summary>
         /// Delete a character's stat from the database

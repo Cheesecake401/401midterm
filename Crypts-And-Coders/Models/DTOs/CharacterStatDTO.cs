@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.DTOs
 {
-    public class StatSheetDTO
+    public class CharacterStatDTO
     {
         public int StatId { get; set; }
         public int CharacterId { get; set; }
         public int Level { get; set; }
-        public Stat Stat { get; set; }
+        public StatDTO Stat { get; set; }
     }
 }

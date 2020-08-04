@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
+using Crypts_And_Coders.Models.DTOs;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -24,14 +25,14 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/Stats
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Stat>>> GetStat()
+        public async Task<ActionResult<IEnumerable<StatDTO>>> GetStat()
         {
             return await _stat.GetStats();
         }
 
         // GET: api/Stats/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Stat>> GetStat(int id)
+        public async Task<ActionResult<StatDTO>> GetStat(int id)
         {
             var stat = await _stat.GetStat(id);
 
@@ -47,7 +48,7 @@ namespace Crypts_And_Coders.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStat(int id, Stat stat)
+        public async Task<IActionResult> PutStat(int id, StatDTO stat)
         {
             if (id != stat.Id)
             {
@@ -63,7 +64,7 @@ namespace Crypts_And_Coders.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Stat>> PostStat(Stat stat)
+        public async Task<ActionResult<StatDTO>> PostStat(StatDTO stat)
         {
             await _stat.Create(stat);
 

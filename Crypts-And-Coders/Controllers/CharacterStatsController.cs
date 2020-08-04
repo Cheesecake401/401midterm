@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
+using Crypts_And_Coders.Models.DTOs;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -24,14 +25,14 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/CharacterStats
         [HttpGet("{charId}/Stats")]
-        public async Task<ActionResult<IEnumerable<CharacterStat>>> GetStatSheet(int charId)
+        public async Task<ActionResult<IEnumerable<CharacterStatDTO>>> GetStatSheet(int charId)
         {
             return await _characterStat.GetCharacterStats(charId);
         }
 
         // GET: api/CharacterStats/5
         [HttpGet("{charId}/Stats/{statId}")]
-        public async Task<ActionResult<CharacterStat>> GetCharacterStat(int charId, int statId)
+        public async Task<ActionResult<CharacterStatDTO>> GetCharacterStat(int charId, int statId)
         {
             var characterStat = await _characterStat.GetCharacterStat(charId, statId);
 
@@ -47,7 +48,7 @@ namespace Crypts_And_Coders.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{charId}/Stats/{statId}")]
-        public async Task<IActionResult> PutCharacterStat(int charId, int statId, CharacterStat characterStat)
+        public async Task<IActionResult> PutCharacterStat(int charId, int statId, CharacterStatDTO characterStat)
         {
             if (statId != characterStat.StatId || charId != characterStat.CharacterId)
             {
@@ -63,7 +64,7 @@ namespace Crypts_And_Coders.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost("{charId}/Stats")]
-        public async Task<ActionResult<CharacterStat>> PostCharacterStat(int charId, int statId, CharacterStat characterStat)
+        public async Task<ActionResult<CharacterStat>> PostCharacterStat(int charId, int statId, CharacterStatDTO characterStat)
         {
             await _characterStat.Create(characterStat);
 

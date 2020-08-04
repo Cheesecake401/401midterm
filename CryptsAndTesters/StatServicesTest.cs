@@ -1,4 +1,5 @@
 ﻿using Crypts_And_Coders.Models;
+using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
 using System;
@@ -20,7 +21,7 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanSaveStat()
         {
-            Stat newStat = new Stat()
+            StatDTO newStat = new StatDTO()
             {
                 Id = 4,
                 Name = "Agility",
@@ -38,7 +39,7 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanGetStat()
         {
-            Stat newStat = new Stat()
+            StatDTO newStat = new StatDTO()
             {
                 Id = 4,
                 Name = "Agility"
@@ -66,7 +67,7 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanUpdateStat()
         {
-            Stat newStat = new Stat()
+            StatDTO newStat = new StatDTO()
             {
                 Id = 1,
                 Name = "StatUpdate"
