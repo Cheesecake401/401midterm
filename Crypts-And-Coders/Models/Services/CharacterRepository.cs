@@ -1,4 +1,5 @@
 ﻿using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace Crypts_And_Coders.Models.Services
 {
@@ -40,11 +42,11 @@ namespace Crypts_And_Coders.Models.Services
         public async Task Delete(int id)
         {
             Character character = await _context.Character.FindAsync(id);
-            if(character != null)
+            if (character != null)
             {
                 _context.Entry(character).State = EntityState.Deleted;
                 await _context.SaveChangesAsync();
-            } 
+            }
         }
 
         /// <summary>
@@ -52,28 +54,46 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="id">Id of character to search for</param>
         /// <returns>Successful result of specified character</returns>
-        public async Task<Character> GetCharacter(int id)
+        public async Task<CharacterDTO> GetCharacter(int id)
         {
             var result = await _context.Character.Where(x => x.Id == id)
                                                  .FirstOrDefaultAsync();
+            CharacterDTO resultDTO = new CharacterDTO()
+            {
+                Id = result.Id,
+                Name = result.Name,
+                Species = result.Species.ToString(),
+                Class = result.Class.ToString(),
+            };
+            //result.DTO.Weapon = _weapons.GetWeapon(result.weaponId)
             var stats = await _characterStat.GetCharacterStats(id);
-            result.StatSheet = stats;
-            return result;
+            resultDTO.StatSheet = stats;
+            return resultDTO;
         }
 
         /// <summary>
         /// Get a list of all characters in the database
         /// </summary>
         /// <returns>Successful result with list of characters</returns>
-        public async Task<List<Character>> GetCharacters()
+        public async Task<List<CharacterDTO>> GetCharacters()
         {
             List<Character> result = await _context.Character.ToListAsync();
+            List<CharacterDTO> resultDTO = new List<CharacterDTO>();
             foreach (var item in result)
             {
+                CharacterDTO newDTO = new CharacterDTO()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Species = item.Species.ToString(),
+                    Class = item.Class.ToString(),
+                };
+                //result.DTO.Weapon = _weapons.GetWeapon(result.weaponId)
                 var stats = await _characterStat.GetCharacterStats(item.Id);
-                item.StatSheet = stats;
+                newDTO.StatSheet = stats;
+                resultDTO.Add(newDTO);
             }
-            return result;
+            return resultDTO;
         }
 
 
@@ -88,7 +108,7 @@ namespace Crypts_And_Coders.Models.Services
             _context.Entry(character).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return character;
-       }
+        }
 
         /// <summary>
         /// Add an item to a character's inventory
