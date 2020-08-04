@@ -119,7 +119,6 @@ namespace CryptsAndTesters
                 Type = enemy.Type
             };
 
-            repo.Create(enemyDTO);
             repo.Update(enemyDTO);
 
             var result = await repo.GetEnemy(1);
