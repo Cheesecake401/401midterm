@@ -1,4 +1,5 @@
 ﻿using Crypts_And_Coders.Models;
+using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
 using System;
@@ -22,7 +23,7 @@ namespace CryptsAndTesters
         [Fact]
         public async void CanCreateLocation()
         {
-            Location location = new Location()
+            LocationDTO location = new LocationDTO()
             {
                 Id = 4,
                 Name = "Faldor",
@@ -41,7 +42,7 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanSaveLocation()
         {
-            Location location = new Location()
+            LocationDTO location = new LocationDTO()
             {
                 Id = 4,
                 Name = "Faldor",
@@ -61,7 +62,7 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanReadLocations()
         {
-            Location location = new Location()
+            LocationDTO location = new LocationDTO()
             {
                 Id = 4,
                 Name = "Faldor",
