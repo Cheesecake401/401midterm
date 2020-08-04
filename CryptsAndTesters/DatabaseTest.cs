@@ -39,6 +39,7 @@ namespace CryptsAndTesters
             _enemy = new EnemyRepository(_db);
 
         }
+
         public void Dispose()
         {
             _db?.Dispose();

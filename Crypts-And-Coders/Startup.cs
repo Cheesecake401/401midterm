@@ -59,7 +59,6 @@ namespace Crypts_And_Coders
             services.AddTransient<IStat, StatRepository>();
             services.AddTransient<ICharacterStat, CharacterStatRepository>();
             services.AddTransient<IWeapon, WeaponRepository>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
