@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-
 namespace CryptsAndTesters
 {
     public class LocationsServicesTest : DatabaseTest
@@ -59,7 +58,6 @@ namespace CryptsAndTesters
             Assert.Equal(saved.Description, location.Description);
         }
 
-
         [Fact]
         public async Task CanReadLocations()
         {
@@ -77,7 +75,6 @@ namespace CryptsAndTesters
             var result = await repo.GetLocation(location.Id);
 
             Assert.Equal(location.Id, result.Id);
-
         }
 
         [Fact]
@@ -110,7 +107,6 @@ namespace CryptsAndTesters
             Assert.Equal(result.Id, location.Id);
             Assert.Equal(result.Name, location.Name);
             Assert.Equal(result.Description, location.Description);
-
         }
 
         [Fact]
@@ -132,7 +128,6 @@ namespace CryptsAndTesters
             {
                 returnList.Add(item.Name);
                 returnList.Add(item.Description);
-
             }
 
             Assert.NotNull(returnFromMethod);
