@@ -18,5 +18,6 @@ namespace Crypts_And_Coders.Models.DTOs
         public LocationDTO CurrentLocation { get; set; }
         public List<InventoryDTO> Inventory { get; set; }
         public List<CharacterStatDTO> StatSheet { get; set; }
+        public string UserName { get; set; }
     }
 }

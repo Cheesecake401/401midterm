@@ -78,6 +78,8 @@ namespace Crypts_And_Coders
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("GameMaster", policy => policy.RequireRole(ApplicationRoles.GameMaster));
+                options.AddPolicy("AllUsers", policy => policy.RequireRole(ApplicationRoles.GameMaster, ApplicationRoles.Player));
+
             });
 
             // TODO: AddIdentity

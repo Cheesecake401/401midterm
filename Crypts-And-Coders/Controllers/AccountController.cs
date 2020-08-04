@@ -30,7 +30,7 @@ namespace Crypts_And_Coders.Controllers
             _config = configuration;
         }
 
-        //[Authorize(Policy = "GameMaster")]
+        [Authorize(Policy = "GameMaster")]
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterDTO register)
         {
