@@ -53,30 +53,6 @@ namespace CryptsAndTesters
         }
 
         /// <summary>
-        /// save an enemy
-        /// </summary>
-        /// <returns></returns>
-        //[Fact]
-        //public async Task CanSaveEnemy()
-        //{
-        //    Enemy enemy = new Enemy()
-        //    {
-        //        Id = 4,
-        //        Abilities = "Firebreath",
-        //        Type = "Warrior",
-        //    };
-        //    var repo = BuildRepo();
-
-        //    var saved = await repo.Create(enemy);
-
-        //    Assert.NotNull(saved);
-        //    Assert.NotEqual(0, saved.Id);
-        //    Assert.Equal(saved.Id, enemy.Id);
-        //    Assert.Equal(saved.Abilities, enemy.Abilities);
-        //    Assert.Equal(saved.Type, enemy.Type);
-        //}
-
-        /// <summary>
         /// get an enemy
         /// </summary>
         /// <returns></returns>
