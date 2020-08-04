@@ -12,7 +12,7 @@ using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace Crypts_And_Coders.Data
 {
-    public class CryptsDbContext : DbContext
+    public class CryptsDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Character> Character { get; set; }
         public DbSet<CharacterInventory> CharacterInventory { get; set; }
