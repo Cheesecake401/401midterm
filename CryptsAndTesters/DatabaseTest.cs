@@ -15,6 +15,9 @@ namespace CryptsAndTesters
         protected readonly ICharacterStat _characterStat;
         protected readonly IStat _stat;
         protected readonly ILocation _location;
+        protected readonly IItem _item;
+        protected readonly IWeapon _weapon;
+        protected readonly IEnemy _enemy;
 
         public DatabaseTest()
         {
@@ -30,7 +33,11 @@ namespace CryptsAndTesters
 
             _characterStat = new CharacterStatRepository(_db, _stat);
             _stat = new StatRepository(_db);
-            _location = new LocationsRepository(_db);
+            _location = new LocationsRepository(_db, _enemy);
+            _item = new ItemRepository(_db);
+            _weapon = new WeaponRepository(_db);
+            _enemy = new EnemyRepository(_db);
+
         }
 
         public void Dispose()

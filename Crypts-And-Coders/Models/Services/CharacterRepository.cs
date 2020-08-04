@@ -15,11 +15,18 @@ namespace Crypts_And_Coders.Models.Services
     {
         private readonly CryptsDbContext _context;
         private readonly ICharacterStat _characterStat;
+        private readonly IItem _item;
+        private readonly IWeapon _weapon;
+        private readonly ILocation _location;
 
-        public CharacterRepository(CryptsDbContext context, ICharacterStat characterStat)
+
+        public CharacterRepository(CryptsDbContext context, ICharacterStat characterStat, IItem item, IWeapon weapon, ILocation location)
         {
             _context = context;
             _characterStat = characterStat;
+            _item = item;
+            _weapon = weapon;
+            _location = location;
         }
 
         /// <summary>
@@ -27,11 +34,22 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="character">Character information for creation</param>
         /// <returns>Successful result of character creation</returns>
-        public async Task<Character> Create(Character character)
+        public async Task<CharacterDTO> Create(CharacterDTO characterDTO)
         {
+            Enum.TryParse(characterDTO.Species, out Species species);
+            Enum.TryParse(characterDTO.Class, out Class userClass);
+
+            Character character = new Character()
+            {
+                Name = characterDTO.Name,
+                Class = userClass,
+                Species = species,
+                Weapon = characterDTO.Weapon != null ? characterDTO.Weapon : null,
+                CurrentLocation = characterDTO.CurrentLocation != null ? characterDTO.CurrentLocation : null
+            };
             _context.Entry(character).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return character;
+            return characterDTO;
         }
 
         /// <summary>
@@ -56,7 +74,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of specified character</returns>
         public async Task<CharacterDTO> GetCharacter(int id)
         {
-            var result = await _context.Character.Where(x => x.Id == id)
+            var result = await _context.Character.Where(x => x.Id == id).Include(x => x.Inventory).ThenInclude(x => x.Item)
                                                  .FirstOrDefaultAsync();
             CharacterDTO resultDTO = new CharacterDTO()
             {
@@ -64,10 +82,29 @@ namespace Crypts_And_Coders.Models.Services
                 Name = result.Name,
                 Species = result.Species.ToString(),
                 Class = result.Class.ToString(),
+                WeaponId = result.WeaponId,
+                Weapon = await _weapon.GetWeapon(result.WeaponId),
+                LocationId = result.LocationId,
+                CurrentLocation = await _location.GetLocation(result.LocationId),
             };
             //result.DTO.Weapon = _weapons.GetWeapon(result.weaponId)
             var stats = await _characterStat.GetCharacterStats(id);
             resultDTO.StatSheet = stats;
+            var items = result.Inventory;
+            foreach (var item in items)
+            {
+                resultDTO.Inventory.Add(new InventoryDTO()
+                {
+                    CharacterId = item.CharacterId,
+                    ItemId = item.ItemId,
+                    Item = new ItemDTO()
+                    {
+                        Id = item.Item.Id,
+                        Name = item.Item.Name,
+                        Value = item.Item.Value,
+                    }
+                });
+            }
             return resultDTO;
         }
 
@@ -87,10 +124,31 @@ namespace Crypts_And_Coders.Models.Services
                     Name = item.Name,
                     Species = item.Species.ToString(),
                     Class = item.Class.ToString(),
+                    WeaponId = item.WeaponId,
+                    Weapon = await _weapon.GetWeapon(item.WeaponId),
+                    LocationId = item.LocationId,
+                    CurrentLocation = await _location.GetLocation(item.LocationId),
                 };
                 //result.DTO.Weapon = _weapons.GetWeapon(result.weaponId)
                 var stats = await _characterStat.GetCharacterStats(item.Id);
                 newDTO.StatSheet = stats;
+                var items = await GetPlayerItems(item.Id);
+                newDTO.Inventory = new List<InventoryDTO>();
+                foreach (var inventoryItem in items)
+                {
+                    newDTO.Inventory.Add(new InventoryDTO()
+                    {
+                        CharacterId = inventoryItem.CharacterId,
+                        ItemId = inventoryItem.ItemId,
+                        Item = new ItemDTO()
+                        {
+                            Id = inventoryItem.Item.Id,
+                            Name = inventoryItem.Item.Name,
+                            Value = inventoryItem.Item.Value,
+                        }
+                    });
+                }
+
                 resultDTO.Add(newDTO);
             }
             return resultDTO;
@@ -103,11 +161,23 @@ namespace Crypts_And_Coders.Models.Services
         /// <param name="id">Id of character to be updated</param>
         /// <param name="character">Character information for update</param>
         /// <returns>Successful result of specified updated character</returns>
-        public async Task<Character> Update(Character character)
+        public async Task<CharacterDTO> Update(CharacterDTO characterDTO)
         {
+            Enum.TryParse(characterDTO.Species, out Species species);
+            Enum.TryParse(characterDTO.Class, out Class userClass);
+
+            Character character = new Character()
+            {
+                Id = characterDTO.Id,
+                Name = characterDTO.Name,
+                Class = userClass,
+                Species = species,
+                Weapon = characterDTO.Weapon,
+                CurrentLocation = characterDTO.CurrentLocation
+            };
             _context.Entry(character).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return character;
+            return characterDTO;
         }
 
         /// <summary>
@@ -143,6 +213,12 @@ namespace Crypts_And_Coders.Models.Services
                 _context.Entry(result).State = EntityState.Deleted;
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<CharacterInventory>> GetPlayerItems(int charId)
+        {
+            var result = await _context.CharacterInventory.Where(x => x.CharacterId == charId).Include(x => x.Item).ToListAsync();
+            return result;
         }
 
     }

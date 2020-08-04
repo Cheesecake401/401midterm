@@ -1,8 +1,10 @@
 ﻿using Crypts_And_Coders.Models;
+using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -14,20 +16,20 @@ namespace CryptsAndTesters
     {
         private ICharacter BuildRepo()
         {
-            return new CharacterRepository(_db, _characterStat);
+            return new CharacterRepository(_db, _characterStat, _item, _weapon, _location);
         }
 
         [Fact]
         public async Task CanSaveCharacter()
         {
-            Character newChar = new Character()
+            CharacterDTO newChar = new CharacterDTO()
             {
-                Id = 4,
+                Id = 9,
                 Name = "Redhawk",
-                Species = Species.Dragonborn,
-                Class = Class.Monk,
-                WeaponId = 1,
-                LocationId = 1
+                Species = "Dragonborn",
+                Class = "Monk",
+                Weapon = null,
+                CurrentLocation = null
             };
             var repo = BuildRepo();
 
@@ -42,18 +44,18 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanGetCharacter()
         {
-            Character newChar = new Character()
+            CharacterDTO newChar = new CharacterDTO()
             {
-                Id = 4,
+                Id = 9,
                 Name = "Redhawk",
-                Species = Species.Dragonborn,
-                Class = Class.Monk,
-                WeaponId = 1,
-                LocationId = 1
+                Species = "Dragonborn",
+                Class = "Monk",
+                Weapon = null,
+                CurrentLocation = null
             };
             var repo = BuildRepo();
 
-            repo.Create(newChar);
+            await repo.Create(newChar);
 
             var result = await repo.GetCharacter(newChar.Id);
 
@@ -74,18 +76,18 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanUpdateCharacter()
         {
-            Character newChar = new Character()
+            CharacterDTO newChar = new CharacterDTO()
             {
                 Id = 1,
                 Name = "Redhawk",
-                Species = Species.Dragonborn,
-                Class = Class.Monk,
-                WeaponId = 2,
-                LocationId = 3
+                Species = "Dragonborn",
+                Class = "Monk",
+                Weapon = null,
+                CurrentLocation = null
             };
             var repo = BuildRepo();
 
-            await repo.Update(newChar);
+            repo.Update(newChar);
 
             var result = await repo.GetCharacter(1);
 

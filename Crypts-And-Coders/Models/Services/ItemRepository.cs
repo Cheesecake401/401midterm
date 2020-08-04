@@ -1,4 +1,5 @@
 ﻿using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,11 +23,17 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="item">Item information for creation</param>
         /// <returns>Successful result of item creation</returns>
-        public async Task<Item> Create(Item item)
+        public async Task<ItemDTO> Create(ItemDTO itemDTO)
         {
+            Item item = new Item()
+            {
+                Id = itemDTO.Id,
+                Name = itemDTO.Name,
+                Value = itemDTO.Value
+            };
             _context.Entry(item).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return item;
+            return itemDTO;
         }
 
         /// <summary>
@@ -48,10 +55,20 @@ namespace Crypts_And_Coders.Models.Services
         /// Get a list of all items in the database
         /// </summary>
         /// <returns>Successful result with list of items</returns>
-        public async Task<List<Item>> GetItems()
+        public async Task<List<ItemDTO>> GetItems()
         {
             List<Item> result = await _context.Item.ToListAsync();
-            return result;
+            List<ItemDTO> resultDTO = new List<ItemDTO>();
+            foreach (var item in result)
+            {
+                resultDTO.Add(new ItemDTO()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Value = item.Value
+                });
+            }
+            return resultDTO;
         }
 
         /// <summary>
@@ -59,10 +76,16 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="id">Id of item to search for</param>
         /// <returns>Successful result of specified item</returns>
-        public async Task<Item> GetItem(int id)
+        public async Task<ItemDTO> GetItem(int id)
         {
             var result = await _context.Item.Where(x => x.Id == id).FirstOrDefaultAsync();
-            return result;
+            ItemDTO resultDTO = new ItemDTO()
+            {
+                Id = result.Id,
+                Name = result.Name,
+                Value = result.Value
+            };
+            return resultDTO;
         }
 
         /// <summary>
@@ -71,11 +94,17 @@ namespace Crypts_And_Coders.Models.Services
         /// <param name="id">Id of item to be updated</param>
         /// <param name="item">Item information for update</param>
         /// <returns>Successful result of specified updated item</returns>
-        public async Task<Item> Update(Item item)
+        public async Task<ItemDTO> Update(ItemDTO itemDTO)
         {
+            Item item = new Item()
+            {
+                Id = itemDTO.Id,
+                Name = itemDTO.Name,
+                Value = itemDTO.Value
+            };
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return item;
+            return itemDTO;
         }
     }
 }
