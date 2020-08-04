@@ -92,7 +92,10 @@ namespace Crypts_And_Coders.Models.Services
             dto.Enemies = new List<EnemyDTO>();
             foreach (var enemy in result.Enemies)
             {
-                dto.Enemies.Add(await _enemy.GetEnemy(enemy.EnemyId));
+                if(_enemy != null)
+                {
+                    dto.Enemies.Add(await _enemy.GetEnemy(enemy.EnemyId));
+                }
             }
             return dto;
         }

@@ -78,8 +78,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of specified character</returns>
         public async Task<CharacterDTO> GetCharacter(int id)
         {
-            var result = await _context.Character.Where(x => x.Id == id).Include(x => x.Inventory).ThenInclude(x => x.Item)
-                                                 .FirstOrDefaultAsync();
+            var result = await _context.Character.Where(x => x.Id == id).Include(x => x.Inventory).ThenInclude(x => x.Item).FirstOrDefaultAsync();
             CharacterDTO resultDTO = new CharacterDTO()
             {
                 Id = result.Id,
@@ -145,6 +144,8 @@ namespace Crypts_And_Coders.Models.Services
                 Name = characterDTO.Name,
                 Class = userClass,
                 Species = species,
+                WeaponId = characterDTO.WeaponId,
+                LocationId = characterDTO.LocationId,
                 Weapon = characterDTO.Weapon,
                 CurrentLocation = characterDTO.CurrentLocation
             };
