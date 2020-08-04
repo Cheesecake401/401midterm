@@ -14,6 +14,6 @@ namespace Crypts_And_Coders.Models.DTOs
         public Species Species { get; set; }
 
         // Navigation properties
-        public List<EnemyInLocation> EnemyInLocation { get; set; }
+        public List<EnemyInLocation> Locations { get; set; }
     }
 }
