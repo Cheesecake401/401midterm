@@ -123,7 +123,10 @@ namespace Crypts_And_Coders.Models.Services
             List<CharacterDTO> resultDTO = new List<CharacterDTO>();
             foreach (var item in result)
             {
+           
                 resultDTO.Add(await GetCharacter(item.Id));
+
+              
             }
             return resultDTO;
         }

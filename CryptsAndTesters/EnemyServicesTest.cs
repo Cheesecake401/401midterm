@@ -106,7 +106,7 @@ namespace CryptsAndTesters
             Enemy enemy = new Enemy()
             {
                 Id = 1,
-                Abilities = "Firebreath",
+                Abilities = "Slash",
                 Type = "Warrior",
             };
 
