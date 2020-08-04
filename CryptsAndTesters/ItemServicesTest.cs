@@ -31,13 +31,13 @@ namespace CryptsAndTesters
             var repo = BuildRepo();
 
             // act
-            var saved = await repo.Create(newItem);
+            var createdItem = await repo.Create(newItem);
 
             // assert
-            Assert.NotNull(saved);
-            Assert.NotEqual(0, saved.Id);
-            Assert.Equal(5, saved.Id);
-            Assert.Equal("Magic Potion", saved.Name);
+            Assert.NotNull(createdItem);
+            Assert.NotEqual(0, createdItem.Id);
+            Assert.Equal(5, createdItem.Id);
+            Assert.Equal("Magic Potion", createdItem.Name);
         }
 
         [Fact]
