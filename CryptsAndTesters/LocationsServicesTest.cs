@@ -92,7 +92,7 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanUpdateLocations()
         {
-            Location location = new Location()
+            LocationDTO location = new LocationDTO()
             {
                 Id = 1,
                 Name = "Whatever",
