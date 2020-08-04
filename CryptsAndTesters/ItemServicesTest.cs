@@ -7,6 +7,7 @@ using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Data;
 using System.Threading.Tasks;
+using Crypts_And_Coders.Models.DTOs;
 
 namespace CryptsAndTesters
 {
@@ -30,8 +31,15 @@ namespace CryptsAndTesters
 
             var repo = BuildRepo();
 
+            ItemDTO newItemDTO = new ItemDTO()
+            {
+                Id = newItem.Id,
+                Name = newItem.Name,
+                Value = newItem.Value
+            };
+
             // act
-            var createdItem = await repo.Create(newItem);
+            var createdItem = await repo.Create(newItemDTO);
 
             // assert
             Assert.NotNull(createdItem);
@@ -65,7 +73,15 @@ namespace CryptsAndTesters
             };
 
             var repo = BuildRepo();
-            repo.Create(newItem);
+
+            ItemDTO newItemDTO = new ItemDTO()
+            {
+                Id = newItem.Id,
+                Name = newItem.Name,
+                Value = newItem.Value
+            };
+
+            repo.Create(newItemDTO);
 
             // act
             var result = await repo.GetItem(5);
@@ -87,9 +103,16 @@ namespace CryptsAndTesters
                 Value = 125
             };
 
+            ItemDTO newItemDTO = new ItemDTO()
+            {
+                Id = newItem.Id,
+                Name = newItem.Name,
+                Value = newItem.Value
+            };
+
             var repo = BuildRepo();
-            repo.Create(newItem);
-            repo.Update(newItem);
+            repo.Create(newItemDTO);
+            repo.Update(newItemDTO);
 
             // act
             var result = await repo.GetItem(5);
