@@ -18,5 +18,7 @@ namespace Crypts_And_Coders.Models
         public Location CurrentLocation { get; set; }
         public List<CharacterInventory> Inventory { get; set; }
         public List<CharacterStat> StatSheet { get; set; }
+        public List<EnemyLoot> EnemyLoot { get; set; }
+
     }
 }
