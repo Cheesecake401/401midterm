@@ -10,8 +10,8 @@ namespace Crypts_And_Coders.Models.DTOs
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Species Species { get; set; }
-        public Class Class { get; set; }
+        public string Species { get; set; }
+        public string Class { get; set; }
         public Weapon Weapon { get; set; }
         public Location CurrentLocation { get; set; }
         public List<CharacterInventory> Inventory { get; set; }

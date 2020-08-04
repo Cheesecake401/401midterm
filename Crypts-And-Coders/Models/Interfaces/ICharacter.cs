@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crypts_And_Coders.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,14 +19,14 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// Get a list of all characters in the database
         /// </summary>
         /// <returns>Successful result with list of characters</returns>
-        Task<List<Character>> GetCharacters();
+        Task<List<CharacterDTO>> GetCharacters();
 
         /// <summary>
         /// Get a specific character in the database by ID
         /// </summary>
         /// <param name="id">Id of character to search for</param>
         /// <returns>Successful result of specified character</returns>
-        Task<Character> GetCharacter(int id);
+        Task<CharacterDTO> GetCharacter(int id);
 
         /// <summary>
         /// Update a given character in the database

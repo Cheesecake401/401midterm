@@ -87,7 +87,7 @@ namespace CryptsAndTesters
             var count = await repo.GetCharacterStats(1);
 
             // Took away one of two seeded stats
-            Assert.Equal(1, count.Count);
+            Assert.Single(count);
         }
     }
 }

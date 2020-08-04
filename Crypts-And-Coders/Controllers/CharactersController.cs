@@ -9,6 +9,7 @@ using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Crypts_And_Coders.Models.DTOs;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -25,14 +26,14 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/Characters
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Character>>> GetCharacter()
+        public async Task<ActionResult<IEnumerable<CharacterDTO>>> GetCharacter()
         {
             return await _character.GetCharacters();
         }
 
         // GET: api/Characters/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Character>> GetCharacter(int id)
+        public async Task<ActionResult<CharacterDTO>> GetCharacter(int id)
         {
             var character = await _character.GetCharacter(id);
 
