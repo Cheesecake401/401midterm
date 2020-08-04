@@ -54,11 +54,10 @@ namespace Crypts_And_Coders
 
             services.AddTransient<IEnemy, EnemyRepository>();
             services.AddTransient<ILocation, LocationsRepository>();
-            //services.AddTransient<IItem, ItemRepository>();
+            services.AddTransient<IItem, ItemRepository>();
             services.AddTransient<ICharacter, CharacterRepository>();
             services.AddTransient<IStat, StatRepository>();
             services.AddTransient<ICharacterStat, CharacterStatRepository>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

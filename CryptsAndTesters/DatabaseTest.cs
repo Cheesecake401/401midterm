@@ -32,6 +32,7 @@ namespace CryptsAndTesters
             _stat = new StatRepository(_db);
             _location = new LocationsRepository(_db);
         }
+
         public void Dispose()
         {
             _db?.Dispose();
