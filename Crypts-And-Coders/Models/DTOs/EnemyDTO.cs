@@ -12,8 +12,5 @@ namespace Crypts_And_Coders.Models.DTOs
         public string Abilities { get; set; }
         public string Type { get; set; }
         public Species Species { get; set; }
-
-        // Navigation properties
-        public List<EnemyInLocation> Locations { get; set; }
     }
 }

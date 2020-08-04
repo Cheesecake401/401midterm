@@ -1,4 +1,5 @@
 ﻿using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,13 +21,21 @@ namespace Crypts_And_Coders.Models.Services
         /// <summary>
         /// Creates a new enemy in the database
         /// </summary>
-        /// <param name="enemy">enemy information for creation</param>
+        /// <param name="enemyDTO">enemy information for creation</param>
         /// <returns>Successful result of enemy creation</returns>
-        public async Task<Enemy> Create(Enemy enemy)
+        public async Task<EnemyDTO> Create(EnemyDTO enemyDTO)
         {
+            Enemy enemy = new Enemy()
+            {
+                Id = enemyDTO.Id,
+                Abilities = enemyDTO.Abilities,
+                Type = enemyDTO.Type,
+                Species = enemyDTO.Species
+            };
+
             _context.Entry(enemy).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return enemy;
+            return enemyDTO;
         }
 
         /// <summary>
@@ -48,10 +57,25 @@ namespace Crypts_And_Coders.Models.Services
         /// Get a list of all enemies in the database
         /// </summary>
         /// <returns>Successful result with list of enemies</returns>
-        public async Task<List<Enemy>> GetEnemies()
+        public async Task<List<EnemyDTO>> GetEnemies()
         {
-            List<Enemy> enemy = await _context.Enemy.ToListAsync();
-            return enemy;
+            List<Enemy> enemies = await _context.Enemy.ToListAsync();
+            List<EnemyDTO> enemyDTO = new List<EnemyDTO>();
+
+            foreach (var item in enemies)
+            {
+                EnemyDTO dto = new EnemyDTO()
+                {
+                    Id = item.Id,
+                    Abilities = item.Abilities,
+                    Type = item.Type,
+                    Species = item.Species
+                };
+
+                enemyDTO.Add(dto);
+            }
+
+            return enemyDTO;
         }
 
         /// <summary>
@@ -59,23 +83,39 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="id">Id of enemy to search for</param>
         /// <returns>Successful result of specified enemy</returns>
-        public async Task<Enemy> GetEnemy(int id)
+        public async Task<EnemyDTO> GetEnemy(int id)
         {
             Enemy enemy = await _context.Enemy.Where(x => x.Id == id).FirstOrDefaultAsync();
-            return enemy;
+
+            EnemyDTO enemyDTO = new EnemyDTO()
+            {
+                Id = enemy.Id,
+                Abilities = enemy.Abilities,
+                Type = enemy.Type,
+                Species = enemy.Species
+            };
+
+            return enemyDTO;
         }
 
         /// <summary>
         /// Update a given enemy in the database
         /// </summary>
-        /// <param name="id">Id of enemy to be updated</param>
-        /// <param name="enemy">Enemy information for update</param>
+        /// <param name="enemyDTO">Enemy information for update</param>
         /// <returns>Successful result of specified updated enemy</returns>
-        public async Task<Enemy> Update(Enemy enemy)
+        public async Task<EnemyDTO> Update(EnemyDTO enemy)
         {
+            EnemyDTO enemyDTO = new EnemyDTO()
+            {
+                Id = enemy.Id,
+                Abilities = enemy.Abilities,
+                Type = enemy.Type,
+                Species = enemy.Species
+            };
+
             _context.Entry(enemy).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return enemy;
+            return enemyDTO;
         }
     }
 }
