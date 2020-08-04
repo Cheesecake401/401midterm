@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models
 {
+    /// <summary>
+    /// item class
+    /// </summary>
     public class Item
     {
         public int Id { get; set; }
@@ -16,3 +19,4 @@ namespace Crypts_And_Coders.Models
 
     }
 }
+
