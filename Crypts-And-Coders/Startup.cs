@@ -39,10 +39,10 @@ namespace Crypts_And_Coders
         {
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            //services.AddControllers(options =>
-            //{
-            //    options.Filters.Add(new AuthorizeFilter());
-            //});
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(new AuthorizeFilter("GameMaster"));
+            });
 
             services.AddControllers();
 
@@ -82,11 +82,6 @@ namespace Crypts_And_Coders
 
             });
 
-            // TODO: AddIdentity
-            // TODO: AddAuthentication
-            // TODO: AddJwtBearer
-            // TODO: Add authorization policies
-
             services.AddTransient<IEnemy, EnemyRepository>();
             services.AddTransient<ILocation, LocationsRepository>();
             services.AddTransient<IItem, ItemRepository>();
@@ -106,7 +101,6 @@ namespace Crypts_And_Coders
 
             app.UseRouting();
 
-            // TODO: Role initializer
             app.UseAuthentication();
             app.UseAuthorization();
 

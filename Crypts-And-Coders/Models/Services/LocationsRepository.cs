@@ -25,18 +25,18 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="location">Location information for creation</param>
         /// <returns>Successful result of location creation</returns>
-        public async Task<Location> Create(LocationDTO location)
+        public async Task<LocationDTO> Create(LocationDTO location)
         {
             Location entity = new Location()
             {
-                Id = location.Id,
                 Name = location.Name,
                 Description = location.Description
             };
 
-            _context.Entry(location).State = EntityState.Added;
+            _context.Entry(entity).State = EntityState.Added;
             await _context.SaveChangesAsync();
-            return entity;
+            location.Id = entity.Id;
+            return location;
         }
 
         /// <summary>

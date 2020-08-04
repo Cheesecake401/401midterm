@@ -27,12 +27,12 @@ namespace Crypts_And_Coders.Models.Services
         {
             Item item = new Item()
             {
-                Id = itemDTO.Id,
                 Name = itemDTO.Name,
                 Value = itemDTO.Value
             };
             _context.Entry(item).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            itemDTO.Id = item.Id;
             return itemDTO;
         }
 

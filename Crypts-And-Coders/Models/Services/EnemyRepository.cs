@@ -28,7 +28,6 @@ namespace Crypts_And_Coders.Models.Services
         {
             Enemy enemy = new Enemy()
             {
-                Id = enemyDTO.Id,
                 Abilities = enemyDTO.Abilities,
                 Type = enemyDTO.Type,
                 Species = enemyDTO.Species
@@ -36,6 +35,7 @@ namespace Crypts_And_Coders.Models.Services
 
             _context.Entry(enemy).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            enemyDTO.Id = enemy.Id;
             return enemyDTO;
         }
 

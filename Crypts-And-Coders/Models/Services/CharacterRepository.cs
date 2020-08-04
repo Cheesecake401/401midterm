@@ -44,10 +44,15 @@ namespace Crypts_And_Coders.Models.Services
                 Class = userClass,
                 Species = species,
                 WeaponId = characterDTO.WeaponId,
-                LocationId = characterDTO.LocationId
+                Weapon = await _weapon.GetWeapon(characterDTO.WeaponId),
+                LocationId = characterDTO.LocationId,
+
             };
             _context.Entry(character).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            characterDTO.Id = character.Id;
+            characterDTO.Weapon = await _weapon.GetWeapon(characterDTO.WeaponId);
+            characterDTO.CurrentLocation = await _location.GetLocation(characterDTO.LocationId);
             return characterDTO;
         }
 

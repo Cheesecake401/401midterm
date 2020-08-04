@@ -28,10 +28,10 @@ namespace Crypts_And_Coders.Models.Services
             Stat newStat = new Stat()
             {
                 Name = stat.Name,
-                Id = stat.Id
             };
             _context.Entry(newStat).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            stat.Id = newStat.Id;
             return stat;
         }
 
