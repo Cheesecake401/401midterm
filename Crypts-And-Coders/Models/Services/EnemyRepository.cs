@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.Services
@@ -95,14 +96,14 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="enemyDTO">Enemy information for update</param>
         /// <returns>Successful result of specified updated enemy</returns>
-        public async Task<EnemyDTO> Update(EnemyDTO enemy)
+        public async Task<EnemyDTO> Update(EnemyDTO enemyDTO)
         {
-            EnemyDTO enemyDTO = new EnemyDTO()
+            Enemy enemy = new Enemy()
             {
-                Id = enemy.Id,
-                Abilities = enemy.Abilities,
-                Type = enemy.Type,
-                Species = enemy.Species
+                Id = enemyDTO.Id,
+                Abilities = enemyDTO.Abilities,
+                Type = enemyDTO.Type,
+                Species = enemyDTO.Species
             };
 
             _context.Entry(enemy).State = EntityState.Modified;
