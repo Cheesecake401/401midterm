@@ -13,7 +13,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// </summary>
         /// <param name="location">Location information for creation</param>
         /// <returns>Successful result of location creation</returns>
-        Task<Location> Create(LocationDTO location);
+        Task<LocationDTO> Create(LocationDTO location);
 
         /// <summary>
         /// Get a list of all locations in the database

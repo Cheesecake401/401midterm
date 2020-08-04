@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace Crypts_And_Coders.Models.Services
 {
@@ -26,16 +27,17 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of enemy creation</returns>
         public async Task<EnemyDTO> Create(EnemyDTO enemyDTO)
         {
+            Enum.TryParse(enemyDTO.Species, out Species species);
             Enemy enemy = new Enemy()
             {
-                Id = enemyDTO.Id,
                 Abilities = enemyDTO.Abilities,
                 Type = enemyDTO.Type,
-                Species = enemyDTO.Species
+                Species = species
             };
 
             _context.Entry(enemy).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            enemyDTO.Id = enemy.Id;
             return enemyDTO;
         }
 
@@ -80,12 +82,13 @@ namespace Crypts_And_Coders.Models.Services
         {
             Enemy enemy = await _context.Enemy.Where(x => x.Id == id).FirstOrDefaultAsync();
 
+
             EnemyDTO enemyDTO = new EnemyDTO()
             {
                 Id = enemy.Id,
                 Abilities = enemy.Abilities,
                 Type = enemy.Type,
-                Species = enemy.Species
+                Species = enemy.Species.ToString()
             };
 
             return enemyDTO;
@@ -98,12 +101,14 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of specified updated enemy</returns>
         public async Task<EnemyDTO> Update(EnemyDTO enemyDTO)
         {
+            Enum.TryParse(enemyDTO.Species, out Species species);
+
             Enemy enemy = new Enemy()
             {
                 Id = enemyDTO.Id,
                 Abilities = enemyDTO.Abilities,
                 Type = enemyDTO.Type,
-                Species = enemyDTO.Species
+                Species = species
             };
 
             _context.Entry(enemy).State = EntityState.Modified;

@@ -28,10 +28,10 @@ namespace Crypts_And_Coders.Models.Services
             Stat newStat = new Stat()
             {
                 Name = stat.Name,
-                Id = stat.Id
             };
             _context.Entry(newStat).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            stat.Id = newStat.Id;
             return stat;
         }
 
@@ -75,12 +75,7 @@ namespace Crypts_And_Coders.Models.Services
             List<StatDTO> resultDTO = new List<StatDTO>();
             foreach (var item in result)
             {
-                StatDTO newDTO = new StatDTO()
-                {
-                    Name = item.Name,
-                    Id = item.Id
-                };
-                resultDTO.Add(newDTO);
+                resultDTO.Add(await GetStat(item.Id));
             }
             return resultDTO;
         }

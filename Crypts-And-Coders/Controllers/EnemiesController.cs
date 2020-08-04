@@ -9,6 +9,7 @@ using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -25,6 +26,7 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/Enemies
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<EnemyDTO>>> GetEnemies()
         {
             return await _enemy.GetEnemies();
@@ -32,6 +34,7 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/Enemies/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<EnemyDTO>> GetEnemy(int id)
         {
             var enemy = await _enemy.GetEnemy(id);

@@ -27,12 +27,12 @@ namespace Crypts_And_Coders.Models.Services
         {
             Item item = new Item()
             {
-                Id = itemDTO.Id,
                 Name = itemDTO.Name,
                 Value = itemDTO.Value
             };
             _context.Entry(item).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            itemDTO.Id = item.Id;
             return itemDTO;
         }
 
@@ -61,12 +61,7 @@ namespace Crypts_And_Coders.Models.Services
             List<ItemDTO> resultDTO = new List<ItemDTO>();
             foreach (var item in result)
             {
-                resultDTO.Add(new ItemDTO()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Value = item.Value
-                });
+                resultDTO.Add(await GetItem(item.Id));
             }
             return resultDTO;
         }

@@ -44,10 +44,15 @@ namespace Crypts_And_Coders.Models.Services
                 Class = userClass,
                 Species = species,
                 WeaponId = characterDTO.WeaponId,
-                LocationId = characterDTO.LocationId
+                Weapon = await _weapon.GetWeapon(characterDTO.WeaponId),
+                LocationId = characterDTO.LocationId,
+
             };
             _context.Entry(character).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            characterDTO.Id = character.Id;
+            characterDTO.Weapon = await _weapon.GetWeapon(characterDTO.WeaponId);
+            characterDTO.CurrentLocation = await _location.GetLocation(characterDTO.LocationId);
             return characterDTO;
         }
 
@@ -118,38 +123,7 @@ namespace Crypts_And_Coders.Models.Services
             List<CharacterDTO> resultDTO = new List<CharacterDTO>();
             foreach (var item in result)
             {
-                CharacterDTO newDTO = new CharacterDTO()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Species = item.Species.ToString(),
-                    Class = item.Class.ToString(),
-                    WeaponId = item.WeaponId,
-                    Weapon = await _weapon.GetWeapon(item.WeaponId),
-                    LocationId = item.LocationId,
-                    CurrentLocation = await _location.GetLocation(item.LocationId),
-                };
-                //result.DTO.Weapon = _weapons.GetWeapon(result.weaponId)
-                var stats = await _characterStat.GetCharacterStats(item.Id);
-                newDTO.StatSheet = stats;
-                var items = await GetPlayerItems(item.Id);
-                newDTO.Inventory = new List<InventoryDTO>();
-                foreach (var inventoryItem in items)
-                {
-                    newDTO.Inventory.Add(new InventoryDTO()
-                    {
-                        CharacterId = inventoryItem.CharacterId,
-                        ItemId = inventoryItem.ItemId,
-                        Item = new ItemDTO()
-                        {
-                            Id = inventoryItem.Item.Id,
-                            Name = inventoryItem.Item.Name,
-                            Value = inventoryItem.Item.Value,
-                        }
-                    });
-                }
-
-                resultDTO.Add(newDTO);
+                resultDTO.Add(await GetCharacter(item.Id));
             }
             return resultDTO;
         }

@@ -20,6 +20,7 @@ namespace Crypts_And_Coders.Models
         public List<CharacterInventory> Inventory { get; set; }
         public List<CharacterStat> StatSheet { get; set; }
         public List<EnemyLoot> EnemyLoot { get; set; }
+        public string UserName { get; set; }
 
     }
 }
