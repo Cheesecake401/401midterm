@@ -18,6 +18,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Crypts_And_Coders
 {
@@ -47,6 +51,35 @@ namespace Crypts_And_Coders
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<CryptsDbContext>()
+                    .AddDefaultTokenProviders();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["JWTIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWTKey"]))
+                };
+            });
+
+            //Add policies
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("GameMaster", policy => policy.RequireRole(ApplicationRoles.GameMaster));
+            });
+
             // TODO: AddIdentity
             // TODO: AddAuthentication
             // TODO: AddJwtBearer
@@ -71,10 +104,10 @@ namespace Crypts_And_Coders
 
             app.UseRouting();
 
-            //app.UseAuthorization();
-
             // TODO: serviceProvider.GetRequiredService<>();
             // TODO: Role initializer
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

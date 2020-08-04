@@ -52,7 +52,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result with list of locations</returns>
         public async Task<List<Location>> GetLocations()
         {
-            List<Location> result = await _context.Location.Include(x => x.EnemiesInLocation).ToListAsync();
+            List<Location> result = await _context.Location.Include(x => x.Enemies).ToListAsync();
 
             return result;
         }
@@ -64,7 +64,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of specified location</returns>
         public async Task<Location> GetLocation(int id)
         {
-            var result = await _context.Location.Where(x => x.Id == id).Include(x  => x.EnemiesInLocation).FirstOrDefaultAsync();
+            var result = await _context.Location.Where(x => x.Id == id).Include(x  => x.Enemies).FirstOrDefaultAsync();
             return result;
         }
 
