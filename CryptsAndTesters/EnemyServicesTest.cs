@@ -106,7 +106,7 @@ namespace CryptsAndTesters
             Enemy enemy = new Enemy()
             {
                 Id = 1,
-                Abilities = "Firebreath",
+                Abilities = "Slash",
                 Type = "Warrior",
             };
 
@@ -119,7 +119,7 @@ namespace CryptsAndTesters
                 Type = enemy.Type
             };
 
-            repo.Update(enemyDTO);
+            await repo.Update(enemyDTO);
 
             var result = await repo.GetEnemy(1);
 
@@ -152,6 +152,74 @@ namespace CryptsAndTesters
 
             Assert.NotNull(returnFromMethod);
             Assert.Equal(expected, returnList);
+        }
+
+        [Fact]
+        public async Task CanAddItemToLoot()
+        {
+            var repo = BuildRepo();
+
+
+
+            await repo.AddItemToLoot(1, 3);
+
+            EnemyDTO enemy = await repo.GetEnemy(1);
+            EnemyLootDTO expected = new EnemyLootDTO()
+            {
+                EnemyId = 1,
+                ItemId = 3,
+                Item = new ItemDTO
+                {
+                    Id = 3,
+                    Name = "Dungeon Key",
+                    Value = 100
+                }
+            };
+            bool found = false;
+            foreach (var item in enemy.Loot)
+            {
+                if (item.ItemId == expected.ItemId)
+                {
+                    Assert.Equal(expected.EnemyId, item.EnemyId);
+                    Assert.Equal(expected.Item.Name, item.Item.Name);
+                    found = true;
+                }
+            }
+            Assert.True(found);
+        }
+
+        [Fact]
+        public async Task CanRemoveItemFromLoot()
+        {
+            var repo = BuildRepo();
+
+            await repo.RemoveItemFromLoot(1, 2);
+
+            EnemyDTO enemy = await repo.GetEnemy(1);
+            EnemyLootDTO expected = new EnemyLootDTO()
+            {
+                EnemyId = 1,
+                ItemId = 2,
+                Item = new ItemDTO
+                {
+                    Id = 2,
+                    Name = "Cup",
+                    Value = 5
+                }
+            };
+            Assert.DoesNotContain(expected, enemy.Loot);
+        }
+
+        [Fact]
+        public async Task CanGetEnemyItemNumber()
+        {
+            var repo = BuildRepo();
+
+            var result = await repo.GetEnemyLoot(1);
+
+            // Should have 2 items from seed
+            Assert.NotNull(result);
+            Assert.Equal(2, result.Count);
         }
     }
 }

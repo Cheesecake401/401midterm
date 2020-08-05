@@ -65,7 +65,7 @@ namespace CryptsAndTesters
         public async Task CanGetSingleItem()
         {
             // arrange
-            Item newItem = new Item()
+            ItemDTO newItem = new ItemDTO()
             {
                 Id = 4,
                 Name = "Magic Potion",
@@ -81,7 +81,7 @@ namespace CryptsAndTesters
                 Value = newItem.Value
             };
 
-            repo.Create(newItemDTO);
+            await repo.Create(newItemDTO);
 
             // act
             var result = await repo.GetItem(4);
@@ -96,7 +96,7 @@ namespace CryptsAndTesters
         public async Task CanUpdateAnItem()
         {
             // arrange
-            Item newItem = new Item()
+            ItemDTO newItem = new ItemDTO()
             {
                 Id = 4,
                 Name = "Magic Potion",
@@ -111,8 +111,10 @@ namespace CryptsAndTesters
             };
 
             var repo = BuildRepo();
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             repo.Create(newItemDTO);
             repo.Update(newItemDTO);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
             // act
             var result = await repo.GetItem(4);
@@ -130,7 +132,7 @@ namespace CryptsAndTesters
             var repo = BuildRepo();
 
             // act
-            repo.Delete(3);
+            await repo.Delete(3);
             var result = await repo.GetItems();
 
             // assert

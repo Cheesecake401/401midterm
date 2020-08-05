@@ -94,9 +94,6 @@ namespace Crypts_And_Coders.Migrations
                     b.Property<int>("Class")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CurrentLocationId")
-                        .HasColumnType("int");
-
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
 
@@ -113,10 +110,6 @@ namespace Crypts_And_Coders.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CurrentLocationId");
-
-                    b.HasIndex("WeaponId");
 
                     b.ToTable("Character");
 
@@ -253,24 +246,6 @@ namespace Crypts_And_Coders.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Crypts_And_Coders.Models.DTOs.LocationDTO", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LocationDTO");
-                });
-
             modelBuilder.Entity("Crypts_And_Coders.Models.Enemy", b =>
                 {
                     b.Property<int>("Id")
@@ -323,14 +298,9 @@ namespace Crypts_And_Coders.Migrations
                     b.Property<int>("EnemyId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LocationDTOId")
-                        .HasColumnType("int");
-
                     b.HasKey("LocationId", "EnemyId");
 
                     b.HasIndex("EnemyId");
-
-                    b.HasIndex("LocationDTOId");
 
                     b.ToTable("EnemyInLocation");
 
@@ -369,17 +339,54 @@ namespace Crypts_And_Coders.Migrations
 
             modelBuilder.Entity("Crypts_And_Coders.Models.EnemyLoot", b =>
                 {
-                    b.Property<int>("CharacterId")
+                    b.Property<int>("EnemyId")
                         .HasColumnType("int");
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.HasKey("CharacterId", "ItemId");
+                    b.Property<int?>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EnemyId", "ItemId");
+
+                    b.HasIndex("CharacterId");
 
                     b.HasIndex("ItemId");
 
                     b.ToTable("EnemyLoot");
+
+                    b.HasData(
+                        new
+                        {
+                            EnemyId = 1,
+                            ItemId = 1
+                        },
+                        new
+                        {
+                            EnemyId = 1,
+                            ItemId = 2
+                        },
+                        new
+                        {
+                            EnemyId = 2,
+                            ItemId = 2
+                        },
+                        new
+                        {
+                            EnemyId = 2,
+                            ItemId = 3
+                        },
+                        new
+                        {
+                            EnemyId = 3,
+                            ItemId = 1
+                        },
+                        new
+                        {
+                            EnemyId = 3,
+                            ItemId = 3
+                        });
                 });
 
             modelBuilder.Entity("Crypts_And_Coders.Models.Item", b =>
@@ -456,6 +463,36 @@ namespace Crypts_And_Coders.Migrations
                             Description = "Lyderton is full of simpletons who prefer to keep war and conflict outside of their borders. It is rich farmland with dense amounts of beautiful wildlife.",
                             Name = "Lyderton"
                         });
+                });
+
+            modelBuilder.Entity("Crypts_And_Coders.Models.LogData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RequestContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RequestTimestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RequestUri")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs");
                 });
 
             modelBuilder.Entity("Crypts_And_Coders.Models.Stat", b =>
@@ -665,19 +702,6 @@ namespace Crypts_And_Coders.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Crypts_And_Coders.Models.Character", b =>
-                {
-                    b.HasOne("Crypts_And_Coders.Models.DTOs.LocationDTO", "CurrentLocation")
-                        .WithMany()
-                        .HasForeignKey("CurrentLocationId");
-
-                    b.HasOne("Crypts_And_Coders.Models.Weapon", "Weapon")
-                        .WithMany()
-                        .HasForeignKey("WeaponId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Crypts_And_Coders.Models.CharacterInventory", b =>
                 {
                     b.HasOne("Crypts_And_Coders.Models.Character", "Character")
@@ -716,10 +740,6 @@ namespace Crypts_And_Coders.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Crypts_And_Coders.Models.DTOs.LocationDTO", null)
-                        .WithMany("Enemies")
-                        .HasForeignKey("LocationDTOId");
-
                     b.HasOne("Crypts_And_Coders.Models.Location", "Location")
                         .WithMany("Enemies")
                         .HasForeignKey("LocationId")
@@ -729,9 +749,13 @@ namespace Crypts_And_Coders.Migrations
 
             modelBuilder.Entity("Crypts_And_Coders.Models.EnemyLoot", b =>
                 {
-                    b.HasOne("Crypts_And_Coders.Models.Character", "Character")
+                    b.HasOne("Crypts_And_Coders.Models.Character", null)
                         .WithMany("EnemyLoot")
-                        .HasForeignKey("CharacterId")
+                        .HasForeignKey("CharacterId");
+
+                    b.HasOne("Crypts_And_Coders.Models.Enemy", "Enemy")
+                        .WithMany("Loot")
+                        .HasForeignKey("EnemyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

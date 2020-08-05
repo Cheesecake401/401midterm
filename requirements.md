@@ -14,28 +14,81 @@ This app is designed to alleviate the burden of keeping track of DnD campaigns a
 ### OUT
 - The API will not provide all of the classes, species, items, etc. available in DnD, nor all of their attributes.
 
+---
+
 ### MVP
 The MVP for this API is a simple set up using 6 tables to represent Characters, enemies, weapons, locations, items, and stats which will all be joined together and displayed following RESTful standards. It will also utilize basic authorization to allow players to only view their own character's informaiton but allow the GM full access to all routes.
+
+---
 
 ### Stretch
 - Event log table that will store events that are posted to the API with all relevant information.
 - Sophisticated interactions to allow players to "Loot" slain enemies or "Trade" with other players.
 - Pull in items, classes and other information from DnD API to have a more robust initial data seed.
 
-## Functional Requirements
+---
+
+### Functional Requirements
 - A Game Master has full access to read, update, add and delete any and all objects in all tables.
 - A Player can view all of their own information, including Weapon, Stats, Inventory and current locaiton, and can update some parts.
 - An anonymous user can view assets not related to the ongoing game such as enemies but not their locations, items but not who has them, etc.
+
+---
 
 ### Data Flow
 A user will make any kind of request to the API, it will be processed if the information given is correct and they the user has appropriate authorization in the for of a JWT token, the data will be queried and either update or return the information supplied the user.
 The various routes and their methods are listed below.
 
+---
+
 ## Non-Functional Requirements 
 - Security: Our app will utilize ASP.NET Identity framework in order to add a layer of both security and authorizaiton to the data. The information will be primarily overseen by one user, the Game Master, and they will be the only user with all authorization. Players will only be able to view their own information after entering in their username and passwords to receive authorization. All of the authorization is being handled via JWT tokens.
 - Testability: All of the services on our app will have tests for every method to ensure that they can handle the data correctly. The services are used to handle what happens for each of the routes and the tests will ensure that any queries are being handled correctly as long as the inputs are correct. The testing is done using the XUnit testing framework.
 
+---
+
 ## Planned Endpoints
+
+### Account
+*/Account/Register*
+
+**Authorization** - GM only
+
+**Post** - Create a new account by supplying at least a UserName, Password (Must be over 8 characters and contain a upper and lowercase letters, numbers and a special symbol) and Role, JWT token returned to use for authorization.
+
+*In: *
+```
+{
+    "UserName": "TestPlayer",
+    "Password": "@Test1234!",
+    "Email": "Dummy@email.com",
+    "Role": "Player"
+}
+```
+
+
+*/Account/Login* 
+
+**Authorization** - Allow anonymous
+
+**Post** - Login to an existing account by supplying the UserName and Password, JWT token returned to use for authorization.
+*In: *
+```
+{
+    "UserName" : "TestPlayer",
+    "Password" : "@Test1234!"
+}
+```
+
+*Both Out:*
+```
+{
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJSZWRoYXdrIiwianRpIjoiYTBiNzZlYjgtMTVhZS00YWM2LWIxZDctODI1MDJjMzNlYTFmIiwiVXNlck5hbWUiOiJSZWRoYXdrIiwiVXNlcklkIjoiZTYzN2Q0NGEtYTRjMC00OWZmLWE2MWYtZjc4YzAwNWIwNDliIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiR2FtZSBNYXN0ZXIiLCJleHAiOjE1OTY3MjUzODc0RCIn0.TQgDjMP-5PrSfm5B3fYo1bU",
+    "expiration": "2020-08-06T14:49:45Z"
+}
+```
+
+
 ### Characters
 */Characters*
 
@@ -46,7 +99,7 @@ The various routes and their methods are listed below.
 **Post** - Create new character by supplying: WeaponId, Current Location ID, Name, Species, and Class
 
 
-*/Characters/{Name}* 
+*/Characters/{id}* 
 
 **Authorization** - GM can do anything, users can update and view their own character
 
@@ -54,6 +107,140 @@ The various routes and their methods are listed below.
 
 **Put** - Update character info
 
+**Delete** - Delete a character from the database
+
+**Samples**
+
+*In:*
+```json
+{
+    "id": 1,
+    "name": "Galdifor",
+    "species": "Elf",
+    "class": "Thief",
+    "weaponId": 1,
+    "locationId": 1
+}
+```
+*Out:*
+```json
+{
+    "id": 1,
+    "name": "Galdifor",
+    "species": "Elf",
+    "class": "Thief",
+    "weaponId": 1,
+    "weapon": {
+        "id": 1,
+        "name": "Put Weapon",
+        "type": "Close Range",
+        "baseDamage": 15
+    },
+    "locationId": 1,
+    "currentLocation": {
+        "id": 1,
+        "name": "FaldorPUT",
+        "description": "Occupied by the forces of evil, Faldor consists of open, hilly plains that separate it's eastern border with towering mountains.",
+        "enemies": [
+            {
+                "id": 1,
+                "abilities": "PUT",
+                "type": "Warrior",
+                "species": "Goblin"
+            },
+            {
+                "id": 2,
+                "abilities": "Smash",
+                "type": "Beast",
+                "species": "Troll"
+            }
+        ]
+    },
+    "inventory": [
+        {
+            "characterId": 1,
+            "itemId": 1,
+            "item": {
+                "id": 1,
+                "name": "Health Potion PUT",
+                "value": 25
+            }
+        },
+        {
+            "characterId": 1,
+            "itemId": 2,
+            "item": {
+                "id": 2,
+                "name": "Cup",
+                "value": 5
+            }
+        }
+    ],
+    "statSheet": [
+        {
+            "statId": 1,
+            "characterId": 1,
+            "level": 0,
+            "stat": {
+                "name": "Put Stat",
+                "id": 1
+            }
+        },
+        {
+            "statId": 3,
+            "characterId": 1,
+            "level": 8,
+            "stat": {
+                "name": "Constitution",
+                "id": 3
+            }
+        }
+    ],
+    "userName": "RedHawk"
+}
+```
+
+### Character Stats
+*Character/{{CharacterId}}/Stats* 
+
+**Authorization** - Allow anonymous for all get, DM only for post
+
+**Get** - All of a specific character's stats
+
+**Post** - Create new character by supplying: Stat, Character, and Level
+
+*Character/{{CharacterId}}/Stats/{{StatId}}* 
+
+**Authorization** - Allow anonymous for all get specific Character Stats, DM only for put
+
+**Get** - One of a specific character's stats
+
+**Put** - Update CharacterStats info
+
+**Delete** - Deletes Character stat from database
+
+**Samples**
+
+*In:*
+```json
+{
+    "statId": 1,
+    "characterId": 1,
+    "level": 8,
+}
+```
+*Out:*
+```json
+{
+    "statId": 1,
+    "characterId": 1,
+    "level": 8,
+    "stat": {
+        "name": "Stealth",
+        "id": 1
+    }
+}
+```
 
 ### Locations
 */Locations*
@@ -65,7 +252,7 @@ The various routes and their methods are listed below.
 **Post** - Create new location by supplying: Name and Description
 
 
-*/Locations/{Name}* 
+*/Locations/{{LocationId}}* 
 
 **Authorization** - Users can get their current location, only GM for other operations
 
@@ -73,23 +260,103 @@ The various routes and their methods are listed below.
 
 **Put** - Update location info
 
+**Delete** - Deletes a location from the database
+
+**Samples**
+
+*In:*
+```json
+{
+    "id": 1,
+    "name": "Falador",
+    "description": "Occupied by the forces of evil, Falador consists of open, hilly plains that separate it's eastern border with towering mountains."
+}
+```
+*Out:*
+```json
+{
+    "id": 1,
+    "name": "FaldorPUT",
+    "description": "Occupied by the forces of evil, Faldor consists of open, hilly plains that separate it's eastern border with towering mountains.",
+    "enemies": [
+        {
+            "id": 1,
+            "abilities": "PUT",
+            "type": "Warrior",
+            "species": "Goblin"
+        },
+        {
+            "id": 2,
+            "abilities": "Smash",
+            "type": "Beast",
+            "species": "Troll"
+        }
+    ]
+}
+```
+
 ### Enemies
 */Enemies*
 
-**Authorization** - GM only
+**Authorization** - Get allows anonymous, Post is GM only
 
 **Get** - All Enemies and their information
 
 **Post** - Create new enemy by supplying: Name and Description
 
 
-*/Enemies/{Name}* 
+*/Enemies/{id}* 
 
-**Authorization** - Users can get enemies in their current location, only GM for other operations
+**Authorization** - Get allows anonymous, Put & Delete are GM only
 
 **Get** - Enemy with the given name and their associated information.
 
 **Put** - Update enemy info
+
+**Delete** - Delete enemy from database
+
+
+**Samples**
+
+*In:*
+```json
+{
+    "id": 1,
+    "abilities": "Smack",
+    "type": "Warrior",
+    "species": "Goblin"
+}
+```
+*Out:*
+```json
+{
+    "id": 1,
+    "abilities": "Smack",
+    "type": "Warrior",
+    "species": "Goblin",
+    "loot": [
+        {
+            "enemyId": 1,
+            "itemId": 1,
+            "item": {
+                "id": 1,
+                "name": "Health Potion",
+                "value": 25
+            }
+        },
+        {
+            "enemyId": 1,
+            "itemId": 2,
+            "item": {
+                "id": 2,
+                "name": "Cup",
+                "value": 5
+            }
+        }
+    ]
+}
+```
+
 
 ### Items
 */Items*
@@ -109,6 +376,19 @@ The various routes and their methods are listed below.
 
 **Put** - Update item info
 
+**Delete** - Delete an item from the database
+
+**Samples**
+
+*In/Out:*
+```json
+{
+    "id": 1,
+    "name": "Health Potion",
+    "value": 25
+}
+```
+
 
 ### Weapons
 */Weapons*
@@ -127,36 +407,32 @@ The various routes and their methods are listed below.
 
 **Put** - Update weapon info
 
+**Delete** - Delete a weapon from the database
 
-##Character Stats
-*Character/CharacterId/Stats* 
+**Samples**
 
-**Authorization** - Allow anonymous for all get, DM only for post
-
-**Get** - All Characters and CharacterStats
-
-**Post** - Create new character by supplying: Stat, Character, and Level
-
-*Character/CharacterId/CharacterStats* 
-
-**Authorization** - Allow anonymous for all get specific Character Stats, DM only for put
-
-**Get** - All  Specific Character and CharacterStats
-
-**Put** - Update CharacterStats info
+*In/Out:*
+```json
+{
+    "id": 1,
+    "name": "Dagger",
+    "type": "Close Range",
+    "baseDamage": 15
+}
+```
 
 
-##Enemy Loot
+### Enemy Loot
 
-*Enemies/CharacterId/ItemId/EnemyLoot*
+*Enemies/{{EnemyId}}/Loot*
 
 **Authorization** - Allow anonymous for all get, DM only for post
 
-**Get** - All Enemies and EnemyLoot 
+**Get** - All of an enemies loot
 
 **Post** - Create new Enemy Loot by supplying: Character and Item 
 
-*Enemies/CharacterId/ItemId/EnemyLoot*
+*Enemies/{{EnemyId}}/Loot/{{ItemId}}*
 
 **Authorization** - Allow anonymous for all gets, DM only for put
 
@@ -164,10 +440,20 @@ The various routes and their methods are listed below.
 
 **Put** - Update item in Enemy Loot
 
+**Samples**
 
-##EnemyInLocation
+*In:*
+```json
 
-*Enemies/LocationId/EnemyId*
+```
+*Out:*
+```json
+
+```
+
+### EnemyInLocation
+
+*Enemies/{{LocationId}}*
 
 **Authorization** - Allow anonymous for all get, DM only for post
 
@@ -175,10 +461,21 @@ The various routes and their methods are listed below.
 
 **Post** - Create new Enemy location by supplying: LocationId and EnemyId 
 
-*Enemies/LocationId/EnemyId*
+*Enemies/{LocationId}/{EnemyId}*
 
 **Authorization** - Allow anonymous for all gets, DM only for put
 
 **Get** - Location with the given id inside Enemy
 
 **Put** - Update Location in Enemy 
+
+**Samples**
+
+*In:*
+```json
+
+```
+*Out:*
+```json
+
+```

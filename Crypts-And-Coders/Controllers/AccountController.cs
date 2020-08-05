@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.DTOs;
+using Crypts_And_Coders.Models.Interfaces;
+using Crypts_And_Coders.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,15 +22,17 @@ namespace Crypts_And_Coders.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _signInManager;
-        private IConfiguration _config;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IConfiguration _config;
+        private readonly ILog _log;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, ILog log)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _config = configuration;
+            _log = log;
         }
 
         [HttpPost("Register")]
@@ -47,12 +51,14 @@ namespace Crypts_And_Coders.Controllers
                 await _userManager.AddToRoleAsync(user, register.Role);
                 await _signInManager.SignInAsync(user, false);
                 var token = CreateToken(user, new List<string>() { register.Role });
+                await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
                 return Ok(new
                 {
                     jwt = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
                 });
             }
+
             return BadRequest("Invalid registration");
         }
 
@@ -67,6 +73,9 @@ namespace Crypts_And_Coders.Controllers
                 var user = await _userManager.FindByNameAsync(login.UserName);
                 var identityRole = await _userManager.GetRolesAsync(user);
                 var token = CreateToken(user, identityRole.ToList());
+
+                await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
 
                 return Ok(new
                 {
