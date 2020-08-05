@@ -65,7 +65,7 @@ namespace CryptsAndTesters
         public async Task CanGetSingleItem()
         {
             // arrange
-            Item newItem = new Item()
+            ItemDTO newItem = new ItemDTO()
             {
                 Id = 4,
                 Name = "Magic Potion",
@@ -96,7 +96,7 @@ namespace CryptsAndTesters
         public async Task CanUpdateAnItem()
         {
             // arrange
-            Item newItem = new Item()
+            ItemDTO newItem = new ItemDTO()
             {
                 Id = 4,
                 Name = "Magic Potion",
