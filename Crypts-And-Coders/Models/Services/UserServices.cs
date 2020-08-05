@@ -33,7 +33,7 @@ namespace Crypts_And_Coders.Models.Services
             var character = await _character.GetCharacter(id);
 
             //Only allow players to view their own character's information
-            var userName = User.FindFirst("UserName").Value;
+            string userName = User.FindFirst("UserName").Value;
 
             if (User.IsInRole("Player") && userName != character.UserName)
             {
