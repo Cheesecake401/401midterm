@@ -1,7 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
@@ -9,19 +8,17 @@
 <html>
 
 <head>
-    @*<link rel="stylesheet" href="~/Styles/StyleSheet.css" type="text/css" />*@
     <title>HOME</title>
 </head>
 
 <body>
     <header>
-        <nav>
-            <h1>Crypts & Coders</h1>
-            <span>Home</span>
-            <a href="CharactersView">Characters</a>
-            <a href="LocationsView">Locations</a>
-            <a href="EnemiesView">Enemies</a>
-        </nav>
+        <div class="dropdown show">
+            <a class="btn btn-secondary" href="#">Home</a>
+            <a class="btn btn-secondary" href="CharactersView">Characters</a>
+            <a class="btn btn-secondary" href="LocationsView">Locations</a>
+            <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
+        </div>
     </header>
     <main>
     </main>

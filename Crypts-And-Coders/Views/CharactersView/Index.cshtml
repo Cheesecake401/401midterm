@@ -13,13 +13,20 @@
 </head>
 <body>
     <header>
-        <nav>
-            <h1>Characters</h1>
-            <a href="Home">Home</a>
-            <span>Characters</span>
-            <a href="LocationsView">Locations</a>
-            <a href="EnemiesView">Enemies</a>
-        </nav>
+        <div class="dropdown show">
+            <a class="btn btn-secondary" href="Home">Home</a>
+            <a class="btn btn-secondary" href="#">Characters</a>
+            <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="CharactersView/Create">Create</a>
+                <a class="dropdown-item" href="CharactersView/Edit">Update</a>
+                <a class="dropdown-item" href="CharactersView/Delete">Delete</a>
+            </div>
+        </div>
     </header>
 
     <main>

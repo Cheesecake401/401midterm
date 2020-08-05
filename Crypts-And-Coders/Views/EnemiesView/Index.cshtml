@@ -12,27 +12,35 @@
 
 <body>
     <header>
-        <nav>
-            <h1>Enemies</h1>
-            <a href="Home">Home</a>
-            <a href="CharactersView">Characters</a>
-            <a href="LocationsView">Locations</a>
-            <span>Enemies</span>
-        </nav>
+        <div class="dropdown show">
+            <a class="btn btn-secondary" href="Home">Home</a>
+            <a class="btn btn-secondary" href="CharactersView">Characters</a>
+            <a class="btn btn-secondary" href="LocationsView">Locations</a>
+            <a class="btn btn-secondary" href="#">Enemies</a>
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="EnemiesView/Create">Create</a>
+                <a class="dropdown-item" href="EnemiesView/Edit">Update</a>
+                <a class="dropdown-item" href="EnemiesView/Delete">Delete</a>
+            </div>
+        </div>
     </header>
 
     <main>
         <div>
             @foreach (var item in Model)
             {
-                <h3>@item.Species</h3>
-                <p>Type: @item.Type</p>
-                <p>Ability: @item.Abilities</p>
-                @*<p>@item.Loot</p>*@
-                <span>Loot: </span>
-                @foreach (var lootItem in item.Loot)
+            <h3>@item.Species</h3>
+            <p>Type: @item.Type</p>
+            <p>Ability: @item.Abilities</p>
+            @*<p>@item.Loot</p>*@
+            <span>Loot: </span>
+            @foreach (var lootItem in item.Loot)
                 {
-                    <span>@lootItem.Item.Name, </span>
+            <span>@lootItem.Item.Name, </span>
                 }
             }
         </div>
