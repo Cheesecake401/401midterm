@@ -4,14 +4,16 @@ using Crypts_And_Coders.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crypts_And_Coders.Migrations
 {
     [DbContext(typeof(CryptsDbContext))]
-    partial class CryptsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200805170849_CreateLogTable")]
+    partial class CreateLogTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -487,8 +489,14 @@ namespace Crypts_And_Coders.Migrations
                     b.Property<string>("RequestUri")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("ResponseContent")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResponseContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ResponseStatusCode")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

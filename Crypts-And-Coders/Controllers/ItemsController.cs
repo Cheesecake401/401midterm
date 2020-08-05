@@ -19,10 +19,12 @@ namespace Crypts_And_Coders.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly IItem _item;
+        private readonly ILog _log;
 
-        public ItemsController(IItem item)
+        public ItemsController(IItem item, ILog log)
         {
             _item = item;
+            _log = log;
         }
 
         // GET: api/Items
@@ -61,6 +63,8 @@ namespace Crypts_And_Coders.Controllers
 
             var result = await _item.Update(item);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return Ok(result);
         }
 
@@ -72,6 +76,8 @@ namespace Crypts_And_Coders.Controllers
         {
             await _item.Create(item);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return CreatedAtAction("GetItem", new { id = item.Id }, item);
         }
 
@@ -80,6 +86,9 @@ namespace Crypts_And_Coders.Controllers
         public async Task<ActionResult<ItemDTO>> DeleteItem(int id)
         {
             await _item.Delete(id);
+
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return NoContent();
         }
     }

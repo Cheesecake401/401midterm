@@ -21,18 +21,21 @@ namespace Crypts_And_Coders.Controllers
     {
         private readonly ICharacterStat _characterStat;
         private readonly ICharacter _character;
+        private readonly ILog _log;
 
-        public CharacterStatsController(ICharacterStat characterStat, ICharacter character)
+
+        public CharacterStatsController(ICharacterStat characterStat, ICharacter character, ILog log)
         {
             _characterStat = characterStat;
             _character = character;
+            _log = log;
         }
 
         // GET: api/Characters/5/Stats
         [HttpGet("{charId}/Stats")]
         public async Task<ActionResult<IEnumerable<CharacterStatDTO>>> GetStatSheet(int charId)
         {
-            if (!await ValidateUser(User, _character, charId))
+            if (!ValidateUser(User, _character, charId))
             {
                 return BadRequest("You do not have access to this account");
             }
@@ -43,10 +46,11 @@ namespace Crypts_And_Coders.Controllers
         [HttpGet("{charId}/Stats/{statId}")]
         public async Task<ActionResult<CharacterStatDTO>> GetCharacterStat(int charId, int statId)
         {
-            if (!await ValidateUser(User, _character, charId))
+            if (!ValidateUser(User, _character, charId))
             {
                 return BadRequest("You do not have access to this account");
             }
+
             var characterStat = await _characterStat.GetCharacterStat(charId, statId);
 
             if (characterStat == null)
@@ -63,7 +67,7 @@ namespace Crypts_And_Coders.Controllers
         [HttpPut("{charId}/Stats/{statId}")]
         public async Task<IActionResult> PutCharacterStat(int charId, int statId, CharacterStatDTO characterStat)
         {
-            if (!await ValidateUser(User, _character, charId))
+            if (!ValidateUser(User, _character, charId))
             {
                 return BadRequest("You do not have access to this account");
             }
@@ -75,6 +79,8 @@ namespace Crypts_And_Coders.Controllers
 
             await _characterStat.Update(characterStat);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return NoContent();
         }
 
@@ -84,12 +90,15 @@ namespace Crypts_And_Coders.Controllers
         [HttpPost("{charId}/Stats")]
         public async Task<ActionResult<CharacterStat>> PostCharacterStat(int charId, CharacterStatDTO characterStat)
         {
-            if (!await ValidateUser(User, _character, charId))
+
+            if (!ValidateUser(User, _character, charId))
             {
                 return BadRequest("You do not have access to this account");
             }
 
             await _characterStat.Create(characterStat);
+
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
             return CreatedAtAction("GetCharacterStat", new { id = characterStat.StatId }, characterStat);
         }
@@ -98,12 +107,16 @@ namespace Crypts_And_Coders.Controllers
         [HttpDelete("{charId}/Stats/{statId}")]
         public async Task<ActionResult<CharacterStat>> DeleteCharacterStat(int charId, int statId)
         {
-            if (!await ValidateUser(User, _character, charId))
+
+            if (!ValidateUser(User, _character, charId))
             {
                 return BadRequest("You do not have access to this account");
             }
 
             await _characterStat.Delete(charId, statId);
+
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return NoContent();
         }
     }

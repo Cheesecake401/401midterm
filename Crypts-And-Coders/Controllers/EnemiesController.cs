@@ -19,10 +19,12 @@ namespace Crypts_And_Coders.Controllers
     public class EnemiesController : ControllerBase
     {
         private readonly IEnemy _enemy;
+        private readonly ILog _log;
 
-        public EnemiesController(IEnemy enemy)
+        public EnemiesController(IEnemy enemy, ILog log)
         {
             _enemy = enemy;
+            _log = log;
         }
 
         // GET: api/Enemies
@@ -60,6 +62,8 @@ namespace Crypts_And_Coders.Controllers
             }
             var result = await _enemy.Update(enemy);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return Ok(result);
         }
 
@@ -71,6 +75,9 @@ namespace Crypts_And_Coders.Controllers
         {
             await _enemy.Create(enemy);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
+
             return CreatedAtAction("GetEnemy", new { id = enemy.Id }, enemy);
         }
 
@@ -79,6 +86,10 @@ namespace Crypts_And_Coders.Controllers
         public async Task<ActionResult<Enemy>> DeleteEnemy(int id)
         {
             await _enemy.Delete(id);
+
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
+
             return NoContent();
         }
 
@@ -86,16 +97,18 @@ namespace Crypts_And_Coders.Controllers
         [HttpPost("{enemyId}/Loot/{itemId}")]
         public async Task AddItemToLoot(int enemyId, int itemId)
         {
-            await _enemy.AddItemToLoot(enemyId, itemId);
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
+            await _enemy.AddItemToLoot(enemyId, itemId);
         }
 
         // DELETE: api/Characters/5/Items/1
         [HttpDelete("{enemyId}/Loot/{itemId}")]
         public async Task DeleteItemFromInventory(int enemyId, int itemId)
         {
-            await _enemy.RemoveItemFromLoot(enemyId, itemId);
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
+            await _enemy.RemoveItemFromLoot(enemyId, itemId);
         }
     }
 }

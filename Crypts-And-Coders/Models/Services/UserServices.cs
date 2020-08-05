@@ -18,19 +18,17 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="claims"></param>
         /// <returns></returns>
-        public static async Task<bool> ValidateUser(ClaimsPrincipal User, ICharacter _character, int id)
+        public static bool ValidateUser(ClaimsPrincipal User, ICharacter _character, int id)
         {
-
-            CharacterDTO character = await _character.GetCharacter(id);
+            string userNameInDB = _character.GetCharacterSync(id);
             //Only allow players to view their own character's information
             string userName = User.FindFirst("UserName").Value;
 
-            if (User.IsInRole("Player") && userName != character.UserName)
+            if (User.IsInRole("Player") && userName != userNameInDB)
             {
                 return false;
             }
             return true;
-            
         }
     }
 }

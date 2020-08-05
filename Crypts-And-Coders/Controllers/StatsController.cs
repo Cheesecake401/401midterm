@@ -10,6 +10,7 @@ using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using SQLitePCL;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -19,10 +20,12 @@ namespace Crypts_And_Coders.Controllers
     public class StatsController : ControllerBase
     {
         private readonly IStat _stat;
+        private readonly ILog _log;
 
-        public StatsController(IStat stat)
+        public StatsController(IStat stat, ILog log)
         {
             _stat = stat;
+            _log = log;
         }
 
         // GET: api/Stats
@@ -61,6 +64,8 @@ namespace Crypts_And_Coders.Controllers
 
             var result = await _stat.Update(stat);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return Ok(result);
         }
 
@@ -72,6 +77,8 @@ namespace Crypts_And_Coders.Controllers
         {
             await _stat.Create(stat);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return CreatedAtAction("GetStat", new { id = stat.Id }, stat);
         }
 
@@ -80,6 +87,8 @@ namespace Crypts_And_Coders.Controllers
         public async Task<ActionResult<Stat>> DeleteStat(int id)
         {
             await _stat.Delete(id);
+
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
             return NoContent();
         }
