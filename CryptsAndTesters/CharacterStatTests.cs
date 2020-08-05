@@ -83,7 +83,7 @@ namespace CryptsAndTesters
         {
             var repo = BuildRepo();
 
-            repo.Delete(1, 1);
+            await repo.Delete(1, 1);
 
             var count = await repo.GetCharacterStats(1);
 

@@ -24,7 +24,6 @@ namespace Crypts_And_Coders.Controllers
 
         public CharacterStatsController(ICharacterStat characterStat, ICharacter character)
         {
-
             _characterStat = characterStat;
             _character = character;
         }

@@ -35,6 +35,7 @@ namespace Crypts_And_Coders.Models.Services
             };
             _context.Entry(characterStat).State = EntityState.Added;
             await _context.SaveChangesAsync();
+            characterStatDTO.Stat = await _stat.GetStat(characterStatDTO.StatId);
             return characterStatDTO;
         }
 
