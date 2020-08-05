@@ -22,6 +22,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Swashbuckle.Swagger;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Crypts_And_Coders
 {
@@ -80,6 +82,9 @@ namespace Crypts_And_Coders
                 options.AddPolicy("AllUsers", policy => policy.RequireRole(ApplicationRoles.GameMaster, ApplicationRoles.Player));
             });
 
+            //Swagger//
+            services.AddSwaggerGen();
+
             services.AddTransient<IEnemy, EnemyRepository>();
             services.AddTransient<ILocation, LocationsRepository>();
             services.AddTransient<IItem, ItemRepository>();
@@ -96,6 +101,16 @@ namespace Crypts_And_Coders
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Crypts and Coders");
+            });
 
             app.UseRouting();
 
