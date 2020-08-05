@@ -106,9 +106,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Successful result of specified character</returns>
         public string GetCharacterSync(int id)
         {
-
             string result = _context.Character.Where(x => x.Id == id).Select(x => x.UserName != null ? x.UserName : "null").FirstOrDefault().ToString();
-
             return result;
         }
 

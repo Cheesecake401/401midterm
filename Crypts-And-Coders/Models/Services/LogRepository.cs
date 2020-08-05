@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Http;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc.WebApiCompatShim;
+using System.IO;
 
 namespace Crypts_And_Coders.Models.Services
 {
@@ -52,13 +53,15 @@ namespace Crypts_And_Coders.Models.Services
             // Get message from context
             HttpRequestMessageFeature hreqmf = new HttpRequestMessageFeature(context);
             HttpRequestMessage req = hreqmf.HttpRequestMessage;
+            string requestBody = await req.Content.ReadAsStringAsync();
+
             LogData log = new LogData()
             {
                 RequestMethod = req.Method.Method,
                 RequestTimestamp = DateTime.Now,
                 RequestUri = req.RequestUri.ToString(),
-                RequestContent = await req.Content.ReadAsStringAsync(),
-                RequestContentType = req.Content.Headers.ContentType.ToString(),
+                RequestContent = requestBody,
+                RequestContentType = req.Content.Headers.ContentType != null? req.Content.Headers.ContentType.ToString() : "No body content",
                 UserName = userName
             };
             _context.Entry(log).State = EntityState.Added;

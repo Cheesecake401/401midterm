@@ -96,6 +96,7 @@ namespace Crypts_And_Coders.Controllers
 
             character.UserName = User.FindFirst("UserName").Value;
 
+
             await _character.Create(character);
 
             await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
