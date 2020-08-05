@@ -51,7 +51,6 @@ namespace Crypts_And_Coders
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<CryptsDbContext>()
                     .AddDefaultTokenProviders();
