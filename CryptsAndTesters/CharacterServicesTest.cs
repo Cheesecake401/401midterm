@@ -16,7 +16,7 @@ namespace CryptsAndTesters
     {
         private ICharacter BuildRepo()
         {
-            return new CharacterRepository(_db, _characterStat, _item, _weapon, _location, _enemy);
+            return new CharacterRepository(_db, _characterStat, _weapon, _location);
         }
 
         [Fact]
@@ -24,7 +24,6 @@ namespace CryptsAndTesters
         {
             CharacterDTO newChar = new CharacterDTO()
             {
-                Id = 9,
                 Name = "Redhawk",
                 Species = "Dragonborn",
                 Class = "Monk",
@@ -76,7 +75,7 @@ namespace CryptsAndTesters
             };
             var repo = BuildRepo();
 
-            repo.Update(newChar);
+            await repo.Update(newChar);
 
             var result = await repo.GetCharacter(1);
 
@@ -90,11 +89,78 @@ namespace CryptsAndTesters
         {
             var repo = BuildRepo();
 
-            repo.Delete(1);
+            await repo.Delete(1);
 
             var count = await repo.GetCharacters();
 
             Assert.Equal(2, count.Count);
+        }
+
+        [Fact]
+        public async Task CanAddItemToInventory()
+        {
+            var repo = BuildRepo();
+
+            await repo.AddItemToInventory(1, 3);
+
+            CharacterDTO character = await repo.GetCharacter(1);
+
+            InventoryDTO expected = new InventoryDTO()
+            {
+                CharacterId = 1,
+                ItemId = 3,
+                Item = new ItemDTO
+                {
+                    Id = 3,
+                    Name = "Dungeon Key",
+                    Value = 100
+                }
+            };
+            bool found = false;
+            foreach (var item in character.Inventory)
+            {
+                if (item.ItemId == expected.ItemId)
+                {
+                    Assert.Equal(expected.CharacterId, item.CharacterId);
+                    Assert.Equal(expected.Item.Name, item.Item.Name);
+                    found = true;
+                }
+            }
+            Assert.True(found);
+        }
+
+        [Fact]
+        public async Task CanRemoveItemFromInventory()
+        {
+            var repo = BuildRepo();
+
+            await repo.RemoveItemFromInventory(1, 2);
+
+            CharacterDTO character = await repo.GetCharacter(1);
+            InventoryDTO expected = new InventoryDTO()
+            {
+                CharacterId = 1,
+                ItemId = 2,
+                Item = new ItemDTO
+                {
+                    Id = 2,
+                    Name = "Cup",
+                    Value = 5
+                }
+            };
+            Assert.DoesNotContain(expected, character.Inventory);
+        }
+
+        [Fact]
+        public async Task CanGetPlayerItemNumber()
+        {
+            var repo = BuildRepo();
+
+            var result = await repo.GetPlayerItems(1);
+
+            // Should have 2 items from seed
+            Assert.NotNull(result);
+            Assert.Equal(2, result.Count);
         }
     }
 }

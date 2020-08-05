@@ -17,6 +17,7 @@ namespace Crypts_And_Coders.Models
         public string Type { get; set; }
 
         public List<EnemyInLocation> EnemyInLocation { get; set; }
+        public List<EnemyLoot> Loot { get; set; }
         public Species Species { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Crypts_And_Coders.Models.Services
 {
     public class EnemyRepository : IEnemy
     {
-        private CryptsDbContext _context;
+        private readonly CryptsDbContext _context;
 
         public EnemyRepository(CryptsDbContext context)
         {
@@ -38,6 +38,7 @@ namespace Crypts_And_Coders.Models.Services
             _context.Entry(enemy).State = EntityState.Added;
             await _context.SaveChangesAsync();
             enemyDTO.Id = enemy.Id;
+            enemyDTO.Loot = new List<EnemyLootDTO>();
             return enemyDTO;
         }
 
@@ -90,7 +91,7 @@ namespace Crypts_And_Coders.Models.Services
                 Type = enemy.Type,
                 Species = enemy.Species.ToString()
             };
-
+            enemyDTO.Loot = await GetEnemyLoot(enemyDTO.Id);
             return enemyDTO;
         }
 
@@ -113,7 +114,70 @@ namespace Crypts_And_Coders.Models.Services
 
             _context.Entry(enemy).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            enemyDTO.Loot = await GetEnemyLoot(enemyDTO.Id);
+
             return enemyDTO;
+        }
+
+        /// <summary>
+        /// Add an item to a enemy's loot
+        /// </summary>
+        /// <param name="enemyId">Id of enemy</param>
+        /// <param name="itemId">Id of item</param>
+        /// <returns>Successful result of item addition</returns>
+        public async Task AddItemToLoot(int enemyId, int itemId)
+        {
+            EnemyLoot loot = new EnemyLoot()
+            {
+                EnemyId = enemyId,
+                ItemId = itemId
+            };
+
+            _context.Entry(loot).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Remove an item from a enemy's loot
+        /// </summary>
+        /// <param name="enemyId">Id of enemy</param>
+        /// <param name="itemId">Id of item</param>
+        /// <returns>Successful result of item removal</returns>
+        public async Task RemoveItemFromLoot(int enemyId, int itemId)
+        {
+            EnemyLoot result = await _context.EnemyLoot.FindAsync(enemyId, itemId);
+
+            if (result != null)
+            {
+                _context.Entry(result).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        /// <summary>
+        /// Get a list of a enemy's loot
+        /// </summary>
+        /// <param name="enemyId">Unique enemy ID</param>
+        /// <returns>Successful result of list of items in loot</returns>
+        public async Task<List<EnemyLootDTO>> GetEnemyLoot(int enemyId)
+        {
+            var result = await _context.EnemyLoot.Where(x => x.EnemyId == enemyId).Include(x => x.Item).ToListAsync();
+            List<EnemyLootDTO> resultDTO = new List<EnemyLootDTO>();
+            foreach (var item in result)
+            {
+                resultDTO.Add(new EnemyLootDTO()
+                {
+                    EnemyId = item.EnemyId,
+                    Item = new ItemDTO()
+                    {
+                        Name = item.Item.Name,
+                        Value = item.Item.Value,
+                        Id = item.Item.Id
+                    },
+                    ItemId = item.ItemId
+                });
+            }
+            return resultDTO;
         }
     }
 }

@@ -66,7 +66,7 @@ namespace CryptsAndTesters
             };
 
             var repo = BuildRepo();
-            repo.Create(newWeapon);
+            await repo.Create(newWeapon);
 
             // act
             var result = await repo.GetWeapon(4);
@@ -90,8 +90,8 @@ namespace CryptsAndTesters
             };
 
             var repo = BuildRepo();
-            repo.Create(newWeapon);
-            repo.Update(newWeapon);
+            await repo.Create(newWeapon);
+            await repo.Update(newWeapon);
 
             // act
             var result = await repo.GetWeapon(4);
@@ -109,7 +109,7 @@ namespace CryptsAndTesters
             var repo = BuildRepo();
 
             // act
-            repo.Delete(1);
+            await repo.Delete(1);
             var result = await repo.GetWeapons();
 
             // assert

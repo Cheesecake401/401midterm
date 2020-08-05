@@ -41,5 +41,28 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <param name="id">Id of character to be deleted</param>
         /// <returns>Task of completion for character delete</returns>
         Task Delete(int id);
+
+        /// <summary>
+        /// Add an item to a enemy's loot
+        /// </summary>
+        /// <param name="enemyId">Id of enemy</param>
+        /// <param name="itemId">Id of item</param>
+        /// <returns>Successful result of item addition</returns>
+        Task AddItemToLoot(int enemyId, int itemId);
+
+        /// <summary>
+        /// Remove an item from a enemy's loot
+        /// </summary>
+        /// <param name="enemyId">Id of enemy</param>
+        /// <param name="itemId">Id of item</param>
+        /// <returns>Successful result of item removal</returns>
+        Task RemoveItemFromLoot(int enemyId, int itemId);
+
+        /// <summary>
+        /// Get a list of a enemy's loot
+        /// </summary>
+        /// <param name="enemyId">Unique enemy ID</param>
+        /// <returns>Successful result of list of items in loot</returns>
+        Task<List<EnemyLootDTO>> GetEnemyLoot(int enemyId);
     }
 }
