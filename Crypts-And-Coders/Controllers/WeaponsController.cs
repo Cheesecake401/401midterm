@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Crypts_And_Coders.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "GameMaster")]
     public class WeaponsController : ControllerBase
     {
         private readonly IWeapon _weapon;
@@ -24,6 +26,7 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/Weapons
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Weapon>>> GetWeapons()
         {
             return await _weapon.GetWeapons();
@@ -31,6 +34,7 @@ namespace Crypts_And_Coders.Controllers
 
         // GET: api/Weapons/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Weapon>> GetWeapon(int id)
         {
             var weapon = await _weapon.GetWeapon(id);

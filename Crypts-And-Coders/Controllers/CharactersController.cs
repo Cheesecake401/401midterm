@@ -81,10 +81,8 @@ namespace Crypts_And_Coders.Controllers
         [HttpPost]
         public async Task<ActionResult<Character>> PostCharacter(CharacterDTO character)
         {
-            if (User.IsInRole("Player"))
-            { 
-                character.UserName = User.FindFirst("UserName").Value;
-            }
+            character.UserName = User.FindFirst("UserName").Value;
+
             await _character.Create(character);
 
             return CreatedAtAction("GetCharacter", new { id = character.Id }, character);

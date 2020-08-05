@@ -15,8 +15,6 @@ namespace Crypts_And_Coders.Models
         public int LocationId { get; set; }
         public SpeciesAndClass.Species Species { get; set; }
         public SpeciesAndClass.Class Class { get; set; }
-        public Weapon Weapon { get; set; }
-        public LocationDTO CurrentLocation { get; set; }
         public List<CharacterInventory> Inventory { get; set; }
         public List<CharacterStat> StatSheet { get; set; }
         public List<EnemyLoot> EnemyLoot { get; set; }

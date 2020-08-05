@@ -41,7 +41,7 @@ namespace Crypts_And_Coders
 
             services.AddControllers(options =>
             {
-                options.Filters.Add(new AuthorizeFilter("GameMaster"));
+                options.Filters.Add(new AuthorizeFilter());
             });
 
             services.AddControllers();
@@ -79,7 +79,6 @@ namespace Crypts_And_Coders
             {
                 options.AddPolicy("GameMaster", policy => policy.RequireRole(ApplicationRoles.GameMaster));
                 options.AddPolicy("AllUsers", policy => policy.RequireRole(ApplicationRoles.GameMaster, ApplicationRoles.Player));
-
             });
 
             services.AddTransient<IEnemy, EnemyRepository>();
