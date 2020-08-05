@@ -4,14 +4,16 @@ using Crypts_And_Coders.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crypts_And_Coders.Migrations
 {
     [DbContext(typeof(CryptsDbContext))]
-    partial class CryptsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200805063648_updatingEnemyLoot")]
+    partial class updatingEnemyLoot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -355,38 +357,6 @@ namespace Crypts_And_Coders.Migrations
                     b.HasIndex("ItemId");
 
                     b.ToTable("EnemyLoot");
-
-                    b.HasData(
-                        new
-                        {
-                            EnemyId = 1,
-                            ItemId = 1
-                        },
-                        new
-                        {
-                            EnemyId = 1,
-                            ItemId = 2
-                        },
-                        new
-                        {
-                            EnemyId = 2,
-                            ItemId = 2
-                        },
-                        new
-                        {
-                            EnemyId = 2,
-                            ItemId = 3
-                        },
-                        new
-                        {
-                            EnemyId = 3,
-                            ItemId = 1
-                        },
-                        new
-                        {
-                            EnemyId = 3,
-                            ItemId = 3
-                        });
                 });
 
             modelBuilder.Entity("Crypts_And_Coders.Models.Item", b =>
