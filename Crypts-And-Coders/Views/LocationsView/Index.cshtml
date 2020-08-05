@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
@@ -24,16 +25,18 @@
     </header>
 
     <main>
-        <div>
+        <div class="row">
             @foreach (var item in Model)
             {
-                <h3>@item.Name</h3>
-                <p>Description: @item.Description</p>
-                <span>Enemies: </span>
-                @foreach (var enemy in item.Enemies)
-                {
-                    <span>@enemy.Species, </span>
-                }
+                <div class="col-sm-3">
+                    <h3>@item.Name</h3>
+                    <p>Description: @item.Description</p>
+                    <span>Enemies: </span>
+                    @foreach (var enemy in item.Enemies)
+                    {
+                        <span>@enemy.Species, </span>
+                    }
+                </div>
             }
         </div>
     </main>
