@@ -7,7 +7,7 @@
 - [ItemsController Routes]()
 - [LocationsController Routes]()
 - [StatsController Routes]()
-- [WeaponsController Routes](#WeaponsContoller)
+- [WeaponsController Routes](####WeaponsContoller)
 
 
 There are two levels of privelages, or 'roles'; GameMaster and Player. A GameMaster has no limitations
