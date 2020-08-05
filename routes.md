@@ -1,20 +1,20 @@
-### Routes
+# Routes
 
-- [AccountController Routes](#AccountContoller)
+- [AccountController Routes](###-AccountContoller)
 - [CharactersController Routes]()
 - [CharacterStatsController Routes]() 
 - [EnemiesController Routes]()
 - [ItemsController Routes]()
 - [LocationsController Routes]()
 - [StatsController Routes]()
-- [WeaponsController Routes](####WeaponsContoller)
+- [WeaponsController Routes](###-WeaponsContoller)
 
 
 There are two levels of privelages, or 'roles'; GameMaster and Player. A GameMaster has no limitations
 when requesting data through the routes. A Player, however, is limited in what they have 
 access to.
 
-#### AccountController
+### AccountController
 
 **Register()** - POST
 
@@ -48,7 +48,7 @@ api/account/login
 
 ```
 
-#### CharactersController
+### CharactersController
 
 **GetCharacters()** - GET
 
@@ -166,14 +166,14 @@ api/characters/
 }
 ```
 
-#### CharacterStatsController
+### CharacterStatsController
 
-#### EnemiesController
+### EnemiesController
 
-#### ItemsController
+### ItemsController
 
-#### LocationsController
+### LocationsController
 
-#### StatsController
+### StatsController
 
-##### WeaponsController
+### WeaponsController
