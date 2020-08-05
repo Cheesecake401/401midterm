@@ -13,7 +13,7 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 
 ### Database ERD
 ![Database ERD](assets/DatabaseERD.png)
-[ERD Explanantions](https://docs.google.com/document/d/18l6eFtC1B1aWomSokPo2aEY6dHkXdq_5J7Jy7JMoAOw/edit?usp=sharing)
+[ERD Explanations](https://docs.google.com/document/d/18l6eFtC1B1aWomSokPo2aEY6dHkXdq_5J7Jy7JMoAOw/edit?usp=sharing)
 
 ---
 
@@ -21,5 +21,12 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 ![Domain Model](assets/DomainModel.png)
 
 ---
+
+### Change Log
+
+- 1.3 Authorization & authentication added - 04 Aug 2020
+- 1.2 DTOs configured - 04 Aug 2020
+- 1.1 Unit tests for all controllers - 04 Aug 2020
+- 1.0 Services, models and controllers setup - 03 Aug 2020
 
 
