@@ -9,6 +9,7 @@ using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using SQLitePCL;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -18,10 +19,12 @@ namespace Crypts_And_Coders.Controllers
     public class WeaponsController : ControllerBase
     {
         private readonly IWeapon _weapon;
+        private readonly ILog _log;
 
-        public WeaponsController(IWeapon weapon)
+        public WeaponsController(IWeapon weapon, ILog log)
         {
             _weapon = weapon;
+            _log = log;
         }
 
         // GET: api/Weapons
@@ -60,6 +63,8 @@ namespace Crypts_And_Coders.Controllers
             }
             var result = await _weapon.Update(weapon);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return Ok(result);
         }
 
@@ -71,6 +76,7 @@ namespace Crypts_And_Coders.Controllers
         {
             await _weapon.Create(weapon);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
             return CreatedAtAction("GetWeapon", new { id = weapon.Id }, weapon);
         }
@@ -80,6 +86,9 @@ namespace Crypts_And_Coders.Controllers
         public async Task<ActionResult<Weapon>> DeleteWeapon(int id)
         {
             await _weapon.Delete(id);
+
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return NoContent();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -97,6 +98,18 @@ namespace Crypts_And_Coders.Models.Services
             resultDTO.Inventory = await GetPlayerItems(resultDTO.Id);
             return resultDTO;
         }
+
+        /// <summary>
+        /// Get a specific character in the database by ID synchronously (Needed for user validation)
+        /// </summary>
+        /// <param name="id">Id of character to search for</param>
+        /// <returns>Successful result of specified character</returns>
+        public string GetCharacterSync(int id)
+        {
+            string result = _context.Character.Where(x => x.Id == id).Select(x => x.UserName != null ? x.UserName : "null").FirstOrDefault().ToString();
+            return result;
+        }
+
 
         /// <summary>
         /// Get a list of all characters in the database
