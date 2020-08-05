@@ -1,16 +1,16 @@
 # Routes
 
 - [AccountController Routes](#account)
-- [CharactersController Routes]()
-- [CharacterStatsController Routes]() 
-- [EnemiesController Routes]()
-- [ItemsController Routes]()
-- [LocationsController Routes]()
-- [StatsController Routes]()
+- [CharactersController Routes](#characters)
+- [CharacterStatsController Routes](#character-stats) 
+- [EnemiesController Routes](#enemies)
+- [ItemsController Routes](#items)
+- [LocationsController Routes](#locations)
+- [StatsController Routes](#stats)
 - [WeaponsController Routes](#weapons)
 
 
-There are two levels of privelages, or 'roles'; GameMaster and Player. A GameMaster has no limitations
+There are two levels of privileges, or 'roles'; GameMaster and Player. A GameMaster has no limitations
 when requesting data through the routes. A Player, however, is limited in what they have 
 access to.
 
@@ -23,7 +23,7 @@ The GameMaster role has the ability to register new GameMaster roles as well as 
 roles.
 
 ```JSON
-Access level -> All users
+Access level -> Game master
 api/account/register
 
 {
@@ -41,6 +41,7 @@ their username and password. Once entered, a JWT token will be returned.
 
 ```JSON
 api/account/login
+Access level -> All users
 
 {
     "userName": "NoobMaster69",
@@ -50,6 +51,8 @@ api/account/login
 ```
 
 ### CharactersController
+# <a name="characters"></a>
+
 
 **GetCharacters()** - GET
 
@@ -144,10 +147,7 @@ Retrieves a single characters based on the Id. Players can only access their own
 ```JSON
 Access level -> All users
 api/characters/{id}
-
-
-
-
+// output is same as GetCharacters(), only singular
 ```
 
 **PostCharacter()** - POST
@@ -158,6 +158,7 @@ Creates a new character. Once entered, it will return the JSON data in the same 
 Access level -> All users
 api/characters/
 
+// INPUT
 {
     "name": "Noobie4Life",
     "Species": "Human",
@@ -165,17 +166,126 @@ api/characters/
     "WeaponId": 1,
     "LocationId": 1
 }
+
+// OUTPUT
+{
+    "id": 4,
+    "name": "Noobie4Life",
+    "species": "Human",
+    "class": "Thief",
+    "weaponId": 1,
+    "weapon": {
+        "id": 1,
+        "name": "Claymore",
+        "type": "Close Range",
+        "baseDamage": 15
+    },
+    "locationId": 1,
+    "currentLocation": {
+        "id": 1,
+        "name": "Faldor",
+        "description": "Occupied by the forces of evil, Faldor consists of open, hilly plains that separate it's eastern border with towering mountains.",
+        "enemies": [
+            {
+                "id": 1,
+                "abilities": "Slash",
+                "type": "Warrior",
+                "species": "Goblin"
+            },
+            {
+                "id": 2,
+                "abilities": "Smash",
+                "type": "Beast",
+                "species": "Troll"
+            }
+        ]
+    },
+    "inventory": null,
+    "statSheet": null,
+    "userName": "NoobMaster69"
+}
 ```
 
+**DeleteCharacter()** - DELETE
+
+**AddItemTOInventory()** - POST
+
+**DeleteItemFrom Inventory()** - DELETE
+
 ### CharacterStatsController
+# <a name="#character-stats"></a>
+
+**GetStatSheet()** - GET
+
+**GetCharacterStat()** - GET
+
+**PutCharacterStat**() - PUT
+
+**PostCharacterStat**() - POST
+
+**DeleteCharacterStat**() - DELETE
 
 ### EnemiesController
+# <a name="enemies"></a>
+
+**GetEnemies()** - GET
+
+**GetEnemy()** - GET
+
+**PutEnemy()** - PUT
+
+**PostEnemy() ** - POST
+
+**DeleteEnemy()** - DELETE
 
 ### ItemsController
+# <a name="items"></a>
+
+**GetItem()** - GET
+
+**GetItems()** - GET
+
+**PutItem()** - PUT
+
+**PostItem()** - POST
+
+**DeleteItem()** - DELETE
 
 ### LocationsController
+# <a name="locations"></a>
+
+**GetLocations()** - GET
+
+**GetLocation()** - GET
+
+**PutLocation()** - PUT
+
+**PostLocation()** - POST
+
+**DeleteLocation()** - DELETE
 
 ### StatsController
+# <a name="stats"></a>
+
+**GetStats()** - GET
+
+**GetStat()** - GET
+
+**PutStat()** - PUT
+
+**PostStat()** - POST
+
+**DeleteStat()** - DELETE
 
 ### WeaponsController
 # <a name="weapons"></a>
+
+**GetWeapons()** - GET
+
+**GetWeapon()** - GET
+
+**PutWeapon()** - PUT
+
+**PostWeapon()** - POST
+
+**DeleteWeapon()** - DELETE
