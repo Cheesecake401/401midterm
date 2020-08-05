@@ -20,8 +20,8 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns></returns>
         public static async Task<bool> ValidateUser(ClaimsPrincipal User, ICharacter _character, int id)
         {
-            CharacterDTO character = await _character.GetCharacter(id);
 
+            CharacterDTO character = await _character.GetCharacter(id);
             //Only allow players to view their own character's information
             string userName = User.FindFirst("UserName").Value;
 
@@ -30,6 +30,7 @@ namespace Crypts_And_Coders.Models.Services
                 return false;
             }
             return true;
+            
         }
     }
 }

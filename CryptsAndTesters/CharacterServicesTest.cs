@@ -104,6 +104,7 @@ namespace CryptsAndTesters
             await repo.AddItemToInventory(1, 3);
 
             CharacterDTO character = await repo.GetCharacter(1);
+
             InventoryDTO expected = new InventoryDTO()
             {
                 CharacterId = 1,
@@ -115,7 +116,17 @@ namespace CryptsAndTesters
                     Value = 100
                 }
             };
-            Assert.Contains(expected, character.Inventory);
+            bool found = false;
+            foreach (var item in character.Inventory)
+            {
+                if (item.ItemId == expected.ItemId)
+                {
+                    Assert.Equal(expected.CharacterId, item.CharacterId);
+                    Assert.Equal(expected.Item.Name, item.Item.Name);
+                    found = true;
+                }
+            }
+            Assert.True(found);
         }
 
         [Fact]
@@ -138,6 +149,18 @@ namespace CryptsAndTesters
                 }
             };
             Assert.DoesNotContain(expected, character.Inventory);
+        }
+
+        [Fact]
+        public async Task CanGetPlayerItemNumber()
+        {
+            var repo = BuildRepo();
+
+            var result = await repo.GetPlayerItems(1);
+
+            // Should have 2 items from seed
+            Assert.NotNull(result);
+            Assert.Equal(2, result.Count);
         }
     }
 }

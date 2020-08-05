@@ -42,7 +42,8 @@ namespace Crypts_And_Coders.Models.Services
                 Class = userClass,
                 Species = species,
                 WeaponId = characterDTO.WeaponId,
-                LocationId = characterDTO.LocationId
+                LocationId = characterDTO.LocationId,
+                UserName = characterDTO.UserName
             };
             _context.Entry(character).State = EntityState.Added;
             await _context.SaveChangesAsync();
@@ -87,6 +88,7 @@ namespace Crypts_And_Coders.Models.Services
                 Weapon = await _weapon.GetWeapon(result.WeaponId),
                 LocationId = result.LocationId,
                 CurrentLocation = await _location.GetLocation(result.LocationId),
+                UserName = result.UserName
             };
             //result.DTO.Weapon = _weapons.GetWeapon(result.weaponId)
             var stats = await _characterStat.GetCharacterStats(id);
@@ -130,7 +132,8 @@ namespace Crypts_And_Coders.Models.Services
                 Species = species,
                 WeaponId = characterDTO.WeaponId,
                 LocationId = characterDTO.LocationId,
-            };
+                UserName = characterDTO.UserName
+        };
 
             _context.Entry(character).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -138,7 +141,6 @@ namespace Crypts_And_Coders.Models.Services
             characterDTO.CurrentLocation = await _location.GetLocation(characterDTO.LocationId);
             characterDTO.Inventory = await GetPlayerItems(characterDTO.Id);
             characterDTO.StatSheet = await _characterStat.GetCharacterStats(characterDTO.Id);
-            characterDTO.UserName = character.UserName;
             return characterDTO;
         }
 

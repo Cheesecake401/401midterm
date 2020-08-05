@@ -36,6 +36,47 @@ The various routes and their methods are listed below.
 - Testability: All of the services on our app will have tests for every method to ensure that they can handle the data correctly. The services are used to handle what happens for each of the routes and the tests will ensure that any queries are being handled correctly as long as the inputs are correct. The testing is done using the XUnit testing framework.
 
 ## Planned Endpoints
+
+### Account
+*/Account/Register*
+
+**Authorization** - GM only
+
+**Post** - Create a new account by supplying at least a UserName, Password (Must be over 8 characters and contain a upper and lowercase letters, numbers and a special symbol) and Role, JWT token returned to use for authorization.
+
+*In: *
+```
+{
+    "UserName": "TestPlayer",
+    "Password": "@Test1234!",
+    "Email": "Dummy@email.com",
+    "Role": "Player"
+}
+```
+
+
+*/Account/Login* 
+
+**Authorization** - Allow anonymous
+
+**Post** - Login to an existing account by supplying the UserName and Password, JWT token returned to use for authorization.
+*In: *
+```
+{
+    "UserName" : "TestPlayer",
+    "Password" : "@Test1234!"
+}
+```
+
+*Both Out:*
+```
+{
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJSZWRoYXdrIiwianRpIjoiYTBiNzZlYjgtMTVhZS00YWM2LWIxZDctODI1MDJjMzNlYTFmIiwiVXNlck5hbWUiOiJSZWRoYXdrIiwiVXNlcklkIjoiZTYzN2Q0NGEtYTRjMC00OWZmLWE2MWYtZjc4YzAwNWIwNDliIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiR2FtZSBNYXN0ZXIiLCJleHAiOjE1OTY3MjUzODc0RCIn0.TQgDjMP-5PrSfm5B3fYo1bU",
+    "expiration": "2020-08-06T14:49:45Z"
+}
+```
+
+
 ### Characters
 */Characters*
 
@@ -270,7 +311,32 @@ The various routes and their methods are listed below.
 ```
 *Out:*
 ```
-
+{
+    "id": 1,
+    "abilities": "Smack",
+    "type": "Warrior",
+    "species": "Goblin",
+    "loot": [
+        {
+            "enemyId": 1,
+            "itemId": 1,
+            "item": {
+                "id": 1,
+                "name": "Health Potion",
+                "value": 25
+            }
+        },
+        {
+            "enemyId": 1,
+            "itemId": 2,
+            "item": {
+                "id": 2,
+                "name": "Cup",
+                "value": 5
+            }
+        }
+    ]
+}
 ```
 
 
@@ -327,7 +393,7 @@ The various routes and their methods are listed below.
 ```
 {
     "id": 1,
-    "name": "Put Weapon",
+    "name": "Dagger",
     "type": "Close Range",
     "baseDamage": 15
 }
@@ -336,15 +402,15 @@ The various routes and their methods are listed below.
 
 ### Enemy Loot
 
-*Enemies/{EnemyId}/ItemId/EnemyLoot*
+*Enemies/{{EnemyId}}/Loot*
 
 **Authorization** - Allow anonymous for all get, DM only for post
 
-**Get** - All Enemies and EnemyLoot 
+**Get** - All of an enemies loot
 
 **Post** - Create new Enemy Loot by supplying: Character and Item 
 
-*Enemies/{CharacterId}/ItemId/EnemyLoot*
+*Enemies/{{EnemyId}}/Loot/{{ItemId}}*
 
 **Authorization** - Allow anonymous for all gets, DM only for put
 
@@ -365,7 +431,7 @@ The various routes and their methods are listed below.
 
 ### EnemyInLocation
 
-*Enemies/{LocationId}/{EnemyId}*
+*Enemies/{{LocationId}}*
 
 **Authorization** - Allow anonymous for all get, DM only for post
 

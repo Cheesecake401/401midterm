@@ -159,6 +159,8 @@ namespace CryptsAndTesters
         {
             var repo = BuildRepo();
 
+
+
             await repo.AddItemToLoot(1, 3);
 
             EnemyDTO enemy = await repo.GetEnemy(1);
@@ -173,7 +175,17 @@ namespace CryptsAndTesters
                     Value = 100
                 }
             };
-            Assert.Contains(expected, enemy.Loot);
+            bool found = false;
+            foreach (var item in enemy.Loot)
+            {
+                if (item.ItemId == expected.ItemId)
+                {
+                    Assert.Equal(expected.EnemyId, item.EnemyId);
+                    Assert.Equal(expected.Item.Name, item.Item.Name);
+                    found = true;
+                }
+            }
+            Assert.True(found);
         }
 
         [Fact]
@@ -196,6 +208,18 @@ namespace CryptsAndTesters
                 }
             };
             Assert.DoesNotContain(expected, enemy.Loot);
+        }
+
+        [Fact]
+        public async Task CanGetEnemyItemNumber()
+        {
+            var repo = BuildRepo();
+
+            var result = await repo.GetEnemyLoot(1);
+
+            // Should have 2 items from seed
+            Assert.NotNull(result);
+            Assert.Equal(2, result.Count);
         }
     }
 }

@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Crypts_And_Coders.Controllers
 {
     [Route("api/Characters")]
-    [Authorize(Policy = "GameMaster")]
+    [Authorize(Policy = "AllUsers")]
     [ApiController]
     public class CharacterStatsController : ControllerBase
     {

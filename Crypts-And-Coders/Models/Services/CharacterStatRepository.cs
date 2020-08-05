@@ -40,6 +40,26 @@ namespace Crypts_And_Coders.Models.Services
         }
 
         /// <summary>
+        /// Update a given characterStat in the database
+        /// </summary>
+        /// <param name="id">Id of characterStat to be updated</param>
+        /// <param name="characterStat">CharacterStatDTO information for update</param>
+        /// <returns>Successful result of specified updated characterStat</returns>
+        public async Task<CharacterStatDTO> Update(CharacterStatDTO characterStatDTO)
+        {
+            CharacterStat characterStat = new CharacterStat()
+            {
+                CharacterId = characterStatDTO.CharacterId,
+                StatId = characterStatDTO.StatId,
+                Level = characterStatDTO.Level
+            };
+            _context.Entry(characterStat).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            characterStatDTO.Stat = await _stat.GetStat(characterStatDTO.StatId);
+            return characterStatDTO;
+        }
+
+        /// <summary>
         /// Delete a characterStat from the database
         /// </summary>
         /// <param name="id">Id of characterStat to be deleted</param>
@@ -104,23 +124,5 @@ namespace Crypts_And_Coders.Models.Services
         }
 
 
-        /// <summary>
-        /// Update a given characterStat in the database
-        /// </summary>
-        /// <param name="id">Id of characterStat to be updated</param>
-        /// <param name="characterStat">CharacterStatDTO information for update</param>
-        /// <returns>Successful result of specified updated characterStat</returns>
-        public async Task<CharacterStatDTO> Update(CharacterStatDTO characterStatDTO)
-        {
-            CharacterStat characterStat = new CharacterStat()
-            {
-                CharacterId = characterStatDTO.CharacterId,
-                StatId = characterStatDTO.StatId,
-                Level = characterStatDTO.Level
-            };
-            _context.Entry(characterStat).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return characterStatDTO;
-        }
     }
 }

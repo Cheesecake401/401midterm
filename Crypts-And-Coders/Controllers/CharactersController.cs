@@ -61,7 +61,7 @@ namespace Crypts_And_Coders.Controllers
         [HttpPut("{charId}")]
         public async Task<IActionResult> PutCharacter(int charId, CharacterDTO character)
         {
-
+            character.UserName = User.FindFirst("UserName").Value;
 
             if (charId != character.Id)
             {
