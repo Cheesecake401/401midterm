@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Crypts_And_Coders.Models.DTOs;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,31 +9,16 @@ namespace Crypts_And_Coders.Models
 {
     public class Character
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public Species Species { get; set; }
-        public Class Class { get; set;}
-    }
+        public int WeaponId { get; set; }
+        public int LocationId { get; set; }
+        public SpeciesAndClass.Species Species { get; set; }
+        public SpeciesAndClass.Class Class { get; set; }
+        public List<CharacterInventory> Inventory { get; set; }
+        public List<CharacterStat> StatSheet { get; set; }
+        public List<EnemyLoot> EnemyLoot { get; set; }
+        public string UserName { get; set; }
 
-    public enum Species
-    {
-        Human,
-        Elf,
-        Gnome,
-        Dwarf,
-        HalfOrc,
-        Dragonborn
-    }
-
-    public enum Class
-    {
-        Paladin,
-        Wizard,
-        Ranger,
-        Thief,
-        Bard,
-        Cleric,
-        Monk,
-        Fighter,
-        Druid
     }
 }
