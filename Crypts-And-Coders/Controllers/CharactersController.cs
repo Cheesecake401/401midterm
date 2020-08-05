@@ -137,7 +137,6 @@ namespace Crypts_And_Coders.Controllers
         [HttpDelete("{charId}/Items/{itemId}")]
         public async Task DeleteItemFromInventory(int charId, int itemId)
         {
-
             if (ValidateUser(User, _character, charId))
             {
                 await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
