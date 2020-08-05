@@ -41,7 +41,7 @@ namespace Crypts_And_Coders
         {
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddControllers(options =>
+            services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AuthorizeFilter());
             });
@@ -105,7 +105,7 @@ namespace Crypts_And_Coders
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
@@ -116,6 +116,7 @@ namespace Crypts_And_Coders
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseStaticFiles();
 
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
