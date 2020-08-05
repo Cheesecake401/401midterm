@@ -51,7 +51,6 @@ namespace Crypts_And_Coders
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<CryptsDbContext>()
                     .AddDefaultTokenProviders();
@@ -79,7 +78,6 @@ namespace Crypts_And_Coders
             {
                 options.AddPolicy("GameMaster", policy => policy.RequireRole(ApplicationRoles.GameMaster));
                 options.AddPolicy("AllUsers", policy => policy.RequireRole(ApplicationRoles.GameMaster, ApplicationRoles.Player));
-
             });
 
             services.AddTransient<IEnemy, EnemyRepository>();

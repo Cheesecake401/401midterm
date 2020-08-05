@@ -82,7 +82,7 @@ namespace Crypts_And_Coders.Controllers
         public async Task<ActionResult<Character>> PostCharacter(CharacterDTO character)
         {
             if (User.IsInRole("Player"))
-            { 
+            {
                 character.UserName = User.FindFirst("UserName").Value;
             }
             await _character.Create(character);

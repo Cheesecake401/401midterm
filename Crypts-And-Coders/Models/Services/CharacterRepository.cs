@@ -46,7 +46,7 @@ namespace Crypts_And_Coders.Models.Services
                 Class = userClass,
                 Species = species,
                 WeaponId = characterDTO.WeaponId,
-                LocationId = characterDTO.LocationId,
+                LocationId = characterDTO.LocationId
             };
             _context.Entry(character).State = EntityState.Added;
             await _context.SaveChangesAsync();
