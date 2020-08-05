@@ -109,6 +109,7 @@ namespace Crypts_And_Coders
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("DNDApi", "https://www.dnd5eapi.co/api/{controller=Home}/{action=Index}/{Id?}");
             });
         }
     }

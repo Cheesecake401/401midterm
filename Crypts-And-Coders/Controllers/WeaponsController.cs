@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Crypts_And_Coders.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[DNDApi]")]
     [ApiController]
     [Authorize(Policy = "GameMaster")]
     public class WeaponsController : ControllerBase
@@ -51,7 +51,7 @@ namespace Crypts_And_Coders.Controllers
         // PUT: api/Weapons/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> PutWeapon(int id, Weapon weapon)
         {
             if (id != weapon.Id)
