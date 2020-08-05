@@ -10,6 +10,7 @@ using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using SQLitePCL;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -19,10 +20,12 @@ namespace Crypts_And_Coders.Controllers
     public class LocationsController : ControllerBase
     {
         private readonly ILocation _location;
+        private readonly ILog _log;
 
-        public LocationsController(ILocation location)
+        public LocationsController(ILocation location, ILog log)
         {
             _location = location;
+            _log = log;
         }
 
         // GET: api/Locations
@@ -65,6 +68,8 @@ namespace Crypts_And_Coders.Controllers
 
              await _location.Update(location);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return NoContent();
         }
 
@@ -76,6 +81,8 @@ namespace Crypts_And_Coders.Controllers
         {
             await _location.Create(location);
 
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return CreatedAtAction("GetLocation", new { id = location.Id }, location);
         }
 
@@ -84,6 +91,9 @@ namespace Crypts_And_Coders.Controllers
         public async Task<ActionResult<Location>> DeleteLocation(int id)
         {
             await _location.Delete(id);
+
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return NoContent();
         }
     }

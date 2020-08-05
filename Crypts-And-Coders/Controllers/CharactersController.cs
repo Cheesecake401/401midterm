@@ -11,8 +11,11 @@ using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Crypts_And_Coders.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Http;
 using System.Security.Claims;
 using static Crypts_And_Coders.Models.Services.UserServices;
+using Crypts_And_Coders.Models.Services;
+using Microsoft.AspNetCore.Mvc.WebApiCompatShim;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -22,10 +25,12 @@ namespace Crypts_And_Coders.Controllers
     public class CharactersController : ControllerBase
     {
         private readonly ICharacter _character;
+        private readonly ILog _log;
 
-        public CharactersController(ICharacter character)
+        public CharactersController(ICharacter character, ILog log)
         {
             _character = character;
+            _log = log;
         }
 
         // GET: api/Characters
@@ -42,7 +47,7 @@ namespace Crypts_And_Coders.Controllers
         {
             var character = await _character.GetCharacter(id);
 
-            if (!await ValidateUser(User, _character, id))
+            if (!ValidateUser(User, _character, id))
             {
                 return BadRequest("You do not have access to this account");
             }
@@ -61,6 +66,13 @@ namespace Crypts_And_Coders.Controllers
         [HttpPut("{charId}")]
         public async Task<IActionResult> PutCharacter(int charId, CharacterDTO character)
         {
+
+
+            if (!ValidateUser(User, _character, charId))
+            {
+                return BadRequest("You do not have access to this account");
+            }
+
             character.UserName = User.FindFirst("UserName").Value;
 
             if (charId != character.Id)
@@ -69,6 +81,8 @@ namespace Crypts_And_Coders.Controllers
             }
 
             var result = await _character.Update(character);
+
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
             return Ok(result);
         }
@@ -79,9 +93,12 @@ namespace Crypts_And_Coders.Controllers
         [HttpPost]
         public async Task<ActionResult<Character>> PostCharacter(CharacterDTO character)
         {
+
             character.UserName = User.FindFirst("UserName").Value;
 
             await _character.Create(character);
+
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
             return CreatedAtAction("GetCharacter", new { id = character.Id }, character);
         }
@@ -90,12 +107,16 @@ namespace Crypts_And_Coders.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Character>> DeleteCharacter(int id)
         {
-            if (!await ValidateUser(User, _character, id))
+
+            if (!ValidateUser(User, _character, id))
             {
                 return BadRequest("You do not have access to this account");
             }
 
             await _character.Delete(id);
+
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
             return NoContent();
         }
 
@@ -103,8 +124,10 @@ namespace Crypts_And_Coders.Controllers
         [HttpPost("{charId}/Items/{itemId}")]
         public async Task AddItemToInventory(int charId, int itemId)
         {
-            if (await ValidateUser(User, _character, charId))
+
+            if (ValidateUser(User, _character, charId))
             {
+                await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
                 await _character.AddItemToInventory(charId, itemId);
             }
         }
@@ -113,8 +136,10 @@ namespace Crypts_And_Coders.Controllers
         [HttpDelete("{charId}/Items/{itemId}")]
         public async Task DeleteItemFromInventory(int charId, int itemId)
         {
-            if (await ValidateUser(User, _character, charId))
+
+            if (ValidateUser(User, _character, charId))
             {
+                await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
                 await _character.RemoveItemFromInventory(charId, itemId);
             }
         }

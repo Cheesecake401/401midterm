@@ -64,5 +64,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <param name="charId">Unique character ID</param>
         /// <returns>Successful result of list of items in inventory</returns>
         Task<List<InventoryDTO>> GetPlayerItems(int charId);
+
+        public string GetCharacterSync(int id);
     }
 }

@@ -24,6 +24,7 @@ namespace Crypts_And_Coders.Data
         public DbSet<Stat> Stat { get; set; }
         public DbSet<CharacterStat> StatSheet { get; set; }
         public DbSet<EnemyLoot> EnemyLoot { get; set; }
+        public DbSet<LogData> Logs { get; set; }
 
 
         public CryptsDbContext(DbContextOptions<CryptsDbContext> options) : base(options)
