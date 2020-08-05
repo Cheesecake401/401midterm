@@ -15,8 +15,8 @@ namespace Crypts_And_Coders.Controllers
     [AllowAnonymous]
     public class CharactersViewController : Controller
     {
-        private readonly ICharacter _character;
-        private readonly CryptsDbContext _context;
+        private ICharacter _character;
+        private CryptsDbContext _context;
 
         public CharactersViewController(CryptsDbContext context, ICharacter character)
         {

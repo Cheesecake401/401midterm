@@ -1,39 +1,37 @@
-﻿@model Crypts_And_Coders.
+﻿@model Crypts_And_Coders.Models.DTOs.CharacterDTO
 
 @{
     ViewData["Title"] = "Create";
     Layout = "_Layout";
 }
 
-<h1>Create</h1>
-
-<h4>Character</h4>
+<h4>Character Creation</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CharacterDTO.Name" class="control-label"></label>
-                <input asp-for="CharacterDTO.Name" class="form-control" />
-                <span asp-validation-for="CharacterDTO.Name" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CharacterDTO.WeaponId" class="control-label"></label>
-                <input asp-for="CharacterDTO.WeaponId" class="form-control" />
-                <span asp-validation-for="CharacterDTO.WeaponId" class="text-danger"></span>
+                <label asp-for="WeaponId" class="control-label"></label>
+                <input asp-for="WeaponId" class="form-control" />
+                <span asp-validation-for="WeaponId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CharacterDTO.LocationId" class="control-label"></label>
-                <input asp-for="CharacterDTO.LocationId" class="form-control" />
-                <span asp-validation-for="CharacterDTO.LocationId" class="text-danger"></span>
+                <label asp-for="LocationId" class="control-label"></label>
+                <input asp-for="LocationId" class="form-control" />
+                <span asp-validation-for="LocationId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Species</label>
                 <select class="form-control">
-                    @foreach(string speciesName in Enum.GetNames(typeof(Model.SpeciesAndClass.Species)))
+                    @foreach (var speciesName in Enum.GetValues(typeof(Crypts_And_Coders.Models.SpeciesAndClass.Species)))
                     {
-                    <option>@speciesName</option>
+                        <option> @speciesName.ToString() </option>
                     }
                 </select>
                 <span class="text-danger"></span>
@@ -44,9 +42,9 @@
                 <span class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CharacterDTO.UserName" class="control-label"></label>
-                <input asp-for="CharacterDTO.UserName" class="form-control" />
-                <span asp-validation-for="CharacterDTO.UserName" class="text-danger"></span>
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -60,5 +58,5 @@
 </div>
 
 @*@section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial@Model.SpeciesAndClass.Species);}
     }*@
