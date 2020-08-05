@@ -58,18 +58,16 @@ namespace Crypts_And_Coders.Controllers
         // PUT: api/Characters/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCharacter(int id, CharacterDTO character)
+        [HttpPut("{charId}")]
+        public async Task<IActionResult> PutCharacter(int charId, CharacterDTO character)
         {
-            if (!await ValidateUser(User, _character, id))
-            {
-                return BadRequest("You do not have access to this account");
-            }
+            character.UserName = User.FindFirst("UserName").Value;
 
-            if (id != character.Id)
+            if (charId != character.Id)
             {
                 return BadRequest();
             }
+
             var result = await _character.Update(character);
 
             return Ok(result);

@@ -15,19 +15,15 @@ namespace Crypts_And_Coders.Models.Services
     {
         private readonly CryptsDbContext _context;
         private readonly ICharacterStat _characterStat;
-        private readonly IItem _item;
         private readonly IWeapon _weapon;
         private readonly ILocation _location;
-        private readonly IEnemy _enemy;
 
-        public CharacterRepository(CryptsDbContext context, ICharacterStat characterStat, IItem item, IWeapon weapon, ILocation location, IEnemy enemy)
+        public CharacterRepository(CryptsDbContext context, ICharacterStat characterStat, IWeapon weapon, ILocation location)
         {
             _context = context;
             _characterStat = characterStat;
-            _item = item;
             _weapon = weapon;
             _location = location;
-            _enemy = enemy;
         }
 
         /// <summary>
@@ -46,13 +42,16 @@ namespace Crypts_And_Coders.Models.Services
                 Class = userClass,
                 Species = species,
                 WeaponId = characterDTO.WeaponId,
-                LocationId = characterDTO.LocationId
+                LocationId = characterDTO.LocationId,
+                UserName = characterDTO.UserName
             };
             _context.Entry(character).State = EntityState.Added;
             await _context.SaveChangesAsync();
             characterDTO.Id = character.Id;
             characterDTO.Weapon = await _weapon.GetWeapon(characterDTO.WeaponId);
             characterDTO.CurrentLocation = await _location.GetLocation(characterDTO.LocationId);
+            characterDTO.Inventory = new List<InventoryDTO>();
+            characterDTO.StatSheet = new List<CharacterStatDTO>();
             return characterDTO;
         }
 
@@ -89,26 +88,13 @@ namespace Crypts_And_Coders.Models.Services
                 Weapon = await _weapon.GetWeapon(result.WeaponId),
                 LocationId = result.LocationId,
                 CurrentLocation = await _location.GetLocation(result.LocationId),
+                UserName = result.UserName
             };
             //result.DTO.Weapon = _weapons.GetWeapon(result.weaponId)
             var stats = await _characterStat.GetCharacterStats(id);
             resultDTO.StatSheet = stats;
             var items = result.Inventory;
-            resultDTO.Inventory = new List<InventoryDTO>();
-            foreach (var item in items)
-            {
-                resultDTO.Inventory.Add(new InventoryDTO()
-                {
-                    CharacterId = item.CharacterId,
-                    ItemId = item.ItemId,
-                    Item = new ItemDTO()
-                    {
-                        Id = item.Item.Id,
-                        Name = item.Item.Name,
-                        Value = item.Item.Value,
-                    }
-                });
-            }
+            resultDTO.Inventory = await GetPlayerItems(resultDTO.Id);
             return resultDTO;
         }
 
@@ -149,9 +135,15 @@ namespace Crypts_And_Coders.Models.Services
                 Species = species,
                 WeaponId = characterDTO.WeaponId,
                 LocationId = characterDTO.LocationId,
-            };
+                UserName = characterDTO.UserName
+        };
+
             _context.Entry(character).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            characterDTO.Weapon = await _weapon.GetWeapon(characterDTO.WeaponId);
+            characterDTO.CurrentLocation = await _location.GetLocation(characterDTO.LocationId);
+            characterDTO.Inventory = await GetPlayerItems(characterDTO.Id);
+            characterDTO.StatSheet = await _characterStat.GetCharacterStats(characterDTO.Id);
             return characterDTO;
         }
 
@@ -190,10 +182,30 @@ namespace Crypts_And_Coders.Models.Services
             }
         }
 
-        public async Task<List<CharacterInventory>> GetPlayerItems(int charId)
+        /// <summary>
+        /// Get a list of a character's items
+        /// </summary>
+        /// <param name="charId">Unique character ID</param>
+        /// <returns>Successful result of list of items in inventory</returns>
+        public async Task<List<InventoryDTO>> GetPlayerItems(int charId)
         {
             var result = await _context.CharacterInventory.Where(x => x.CharacterId == charId).Include(x => x.Item).ToListAsync();
-            return result;
+            List<InventoryDTO> resultDTO = new List<InventoryDTO>();
+            foreach (var item in result)
+            {
+                resultDTO.Add(new InventoryDTO()
+                {
+                    CharacterId = item.CharacterId,
+                    Item = new ItemDTO() 
+                    { 
+                        Name = item.Item.Name,
+                        Value = item.Item.Value,
+                        Id = item.Item.Id
+                    },
+                    ItemId = item.ItemId
+                });
+            }
+            return resultDTO;
         }
     }
 }

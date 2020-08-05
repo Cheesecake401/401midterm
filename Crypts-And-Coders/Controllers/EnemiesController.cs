@@ -81,5 +81,21 @@ namespace Crypts_And_Coders.Controllers
             await _enemy.Delete(id);
             return NoContent();
         }
+
+        // POST: api/Characters/5/Items/1
+        [HttpPost("{enemyId}/Loot/{itemId}")]
+        public async Task AddItemToLoot(int enemyId, int itemId)
+        {
+            await _enemy.AddItemToLoot(enemyId, itemId);
+
+        }
+
+        // DELETE: api/Characters/5/Items/1
+        [HttpDelete("{enemyId}/Loot/{itemId}")]
+        public async Task DeleteItemFromInventory(int enemyId, int itemId)
+        {
+            await _enemy.RemoveItemFromLoot(enemyId, itemId);
+
+        }
     }
 }

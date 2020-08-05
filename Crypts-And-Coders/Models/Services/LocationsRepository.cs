@@ -89,12 +89,21 @@ namespace Crypts_And_Coders.Models.Services
                 Description = result.Description
             };
             
-            dto.Enemies = new List<EnemyDTO>();
+            dto.Enemies = new List<LocationEnemyInfoDTO>();
             foreach (var enemy in result.Enemies)
             {
                 if(_enemy != null)
                 {
-                    dto.Enemies.Add(await _enemy.GetEnemy(enemy.EnemyId));
+                    var rawEnemy = await _enemy.GetEnemy(enemy.EnemyId);
+
+                    dto.Enemies.Add(new LocationEnemyInfoDTO()
+                    {
+                        Id = rawEnemy.Id,
+                        Abilities = rawEnemy.Abilities,
+                        Species = rawEnemy.Species,
+                        Type = rawEnemy.Type
+                    });
+                       
                 }
             }
             return dto;
