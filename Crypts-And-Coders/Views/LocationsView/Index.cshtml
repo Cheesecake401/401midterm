@@ -12,29 +12,31 @@
     <title>Locations</title>
 </head>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<body>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
 
-<header>
-    <h1>Locations</h1>
-</header>
+    <header>
+        <h1>Locations</h1>
+    </header>
 
-<main>
-    <div>
-        @foreach (var item in Model)
-        {
-            <h3>@item.Name</h3>
-            <p>Description: @item.Description</p>
-            <span>Enemies: </span>
-            @foreach (var enemy in item.Enemies)
+    <main>
+        <div>
+            @foreach (var item in Model)
             {
-                <span>@enemy.Species, </span>
+                <h3>@item.Name</h3>
+                <p>Description: @item.Description</p>
+                <span>Enemies: </span>
+                @foreach (var enemy in item.Enemies)
+                {
+                    <span>@enemy.Species, </span>
+                }
             }
-        }
-    </div>
-</main>
+        </div>
+    </main>
 
-<footer>
-</footer>
+    <footer>
+    </footer>
+</body>
 </html>

@@ -11,28 +11,30 @@
 <head>
     <title>Characters</title>
 </head>
+<body>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
 
-<header>
-    <h1>Characters</h1>
-</header>
+    <header>
+        <h1>Characters</h1>
+    </header>
 
-<main>
-    <div>
-        @foreach (var item in Model)
-        {
-            <h3>@item.Name</h3>
-            <p>Species: @item.Species</p>
-            <p>Class: @item.Class</p>
-            <p>Weapon: @item.Weapon.Name</p>
-            <p>Weapon Base Damage: @item.Weapon.BaseDamage</p>
-        }
-    </div>
-</main>
+    <main>
+        <div>
+            @foreach (var item in Model)
+            {
+                <h3>@item.Name</h3>
+                <p>Species: @item.Species</p>
+                <p>Class: @item.Class</p>
+                <p>Weapon: @item.Weapon.Name</p>
+                <p>Weapon Base Damage: @item.Weapon.BaseDamage</p>
+            }
+        </div>
+    </main>
 
-<footer>
-</footer>
+    <footer>
+    </footer>
+</body>
 </html>

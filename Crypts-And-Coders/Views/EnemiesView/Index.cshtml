@@ -1,0 +1,41 @@
+﻿@model List<Crypts_And_Coders.Models.DTOs.EnemyDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enemies</title>
+</head>
+
+<body>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <header>
+        <h1>Enemies</h1>
+    </header>
+
+    <main>
+        <div>
+            @foreach (var item in Model)
+            {
+                <h3>@item.Species</h3>
+                <p>Type: @item.Type</p>
+                <p>Ability: @item.Abilities</p>
+                @*<p>@item.Loot</p>*@
+                <span>Loot: </span>
+                @foreach (var lootItem in item.Loot)
+                {
+                    <span>@lootItem.Item.Name </span>
+                }
+            }
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+</body>
+</html>
