@@ -11,11 +11,14 @@
 </head>
 
 <body>
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
     <header>
-        <h1>Enemies</h1>
+        <nav>
+            <h1>Enemies</h1>
+            <a href="Home">Home</a>
+            <a href="CharactersView">Characters</a>
+            <a href="LocationsView">Locations</a>
+            <span>Enemies</span>
+        </nav>
     </header>
 
     <main>
@@ -29,7 +32,7 @@
                 <span>Loot: </span>
                 @foreach (var lootItem in item.Loot)
                 {
-                    <span>@lootItem.Item.Name </span>
+                    <span>@lootItem.Item.Name, </span>
                 }
             }
         </div>
