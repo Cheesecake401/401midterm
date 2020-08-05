@@ -15,6 +15,7 @@ namespace Crypts_And_Coders.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "GameMaster")]
     public class ItemsController : ControllerBase
     {
         private readonly IItem _item;

@@ -41,7 +41,7 @@ namespace Crypts_And_Coders
 
             services.AddControllers(options =>
             {
-                options.Filters.Add(new AuthorizeFilter("GameMaster"));
+                options.Filters.Add(new AuthorizeFilter());
             });
 
             services.AddControllers();

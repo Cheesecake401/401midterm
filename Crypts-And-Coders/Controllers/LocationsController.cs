@@ -9,11 +9,13 @@ using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Crypts_And_Coders.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "GameMaster")]
     public class LocationsController : ControllerBase
     {
         private readonly ILocation _location;

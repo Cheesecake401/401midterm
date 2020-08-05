@@ -10,10 +10,12 @@ using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.DTOs;
 using static Crypts_And_Coders.Models.Services.UserServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Crypts_And_Coders.Controllers
 {
     [Route("api/Characters")]
+    [Authorize(Policy = "GameMaster")]
     [ApiController]
     public class CharacterStatsController : ControllerBase
     {

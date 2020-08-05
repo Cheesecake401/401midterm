@@ -149,8 +149,6 @@ namespace Crypts_And_Coders.Models.Services
                 Species = species,
                 WeaponId = characterDTO.WeaponId,
                 LocationId = characterDTO.LocationId,
-                Weapon = characterDTO.Weapon,
-                CurrentLocation = characterDTO.CurrentLocation
             };
             _context.Entry(character).State = EntityState.Modified;
             await _context.SaveChangesAsync();

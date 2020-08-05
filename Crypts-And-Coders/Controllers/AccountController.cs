@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace Crypts_And_Coders.Controllers
 {
     [Route("api/[Controller]")]
+    [Authorize(Policy = "GameMaster")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -30,7 +31,6 @@ namespace Crypts_And_Coders.Controllers
             _config = configuration;
         }
 
-        [Authorize(Policy = "GameMaster")]
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterDTO register)
         {
