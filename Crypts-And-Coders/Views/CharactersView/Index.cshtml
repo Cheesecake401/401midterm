@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
@@ -14,8 +15,10 @@
 <body>
     <header>
         <div class="dropdown show">
+            <span class="lead">CRYPTS & CODERS</span>
             <a class="btn btn-secondary" href="Home">Home</a>
             <a class="btn btn-secondary" href="#">Characters</a>
+            <a class="btn btn-secondary" href="LocationsView">Locations</a>
             <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Actions
@@ -30,14 +33,16 @@
     </header>
 
     <main>
-        <div>
+        <div class="row">
             @foreach (var item in Model)
             {
-                <h3>@item.Name</h3>
-                <p>Species: @item.Species</p>
-                <p>Class: @item.Class</p>
-                <p>Weapon: @item.Weapon.Name</p>
-                <p>Weapon Base Damage: @item.Weapon.BaseDamage</p>
+                <div class="col-sm-3">
+                    <h3>@item.Name</h3>
+                    <p>Species: @item.Species</p>
+                    <p>Class: @item.Class</p>
+                    <p>Weapon: @item.Weapon.Name</p>
+                    <p>Weapon Base Damage: @item.Weapon.BaseDamage</p>
+                </div>
             }
         </div>
     </main>
