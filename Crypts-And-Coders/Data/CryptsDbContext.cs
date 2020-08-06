@@ -1,6 +1,7 @@
 using Crypts_And_Coders.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace Crypts_And_Coders.Data
@@ -50,8 +51,8 @@ namespace Crypts_And_Coders.Data
                     Name = "Dragorn",
                     Species = Species.Dwarf,
                     Class = Class.Paladin,
-                    WeaponId = 1,
-                    LocationId = 1
+                    WeaponId = 2,
+                    LocationId = 2
                 },
 
                 new Character
@@ -60,8 +61,8 @@ namespace Crypts_And_Coders.Data
                     Name = "Glen",
                     Species = Species.Human,
                     Class = Class.Bard,
-                    WeaponId = 1,
-                    LocationId = 1
+                    WeaponId = 3,
+                    LocationId = 3
                 }
             );
 
@@ -153,85 +154,172 @@ namespace Crypts_And_Coders.Data
            );
 
             modelBuilder.Entity<CharacterStat>().HasData(
-               new CharacterStat
-               {
-                   StatId = 1,
-                   CharacterId = 1,
-                   Level = 5
-               },
+                new CharacterStat
+                {
+                    StatId = 1,
+                    CharacterId = 1,
+                    Level = 5
+                },
 
-               new CharacterStat
-               {
-                   StatId = 6,
-                   CharacterId = 1,
-                   Level = 8
-               },
+                new CharacterStat
+                {
+                    StatId = 6,
+                    CharacterId = 1,
+                    Level = 8
+                },
 
-               new CharacterStat
-               {
-                   StatId = 2,
-                   CharacterId = 2,
-                   Level = 2
-               },
+                new CharacterStat
+                {
+                    StatId = 2,
+                    CharacterId = 2,
+                    Level = 2
+                },
 
-               new CharacterStat
-               {
-                   StatId = 3,
-                   CharacterId = 2,
-                   Level = 10
-               },
+                new CharacterStat
+                {
+                    StatId = 3,
+                    CharacterId = 2,
+                    Level = 10
+                },
 
-               new CharacterStat
-               {
-                   StatId = 4,
-                   CharacterId = 3,
-                   Level = 4
-               },
+                new CharacterStat
+                {
+                    StatId = 4,
+                    CharacterId = 3,
+                    Level = 4
+                },
 
-               new CharacterStat
-               {
-                   StatId = 5,
-                   CharacterId = 3,
-                   Level = 7
-               }
+                new CharacterStat
+                {
+                    StatId = 5,
+                    CharacterId = 3,
+                    Level = 7
+                }
                );
 
+            modelBuilder.Entity<EnemyInLocation>().HasData(
+                  new EnemyInLocation
+                  {
+                      LocationId = 1,
+                      EnemyId = 1
+                  },
+
+                  new EnemyInLocation
+                  {
+                      LocationId = 1,
+                      EnemyId = 2
+                  },
+
+                  new EnemyInLocation
+                  {
+                      LocationId = 2,
+                      EnemyId = 3
+                  },
+
+                  new EnemyInLocation
+                  {
+                      LocationId = 2,
+                      EnemyId = 2
+                  },
+
+                  new EnemyInLocation
+                  {
+                      LocationId = 3,
+                      EnemyId = 1
+                  },
+
+                  new EnemyInLocation
+                  {
+                      LocationId = 3,
+                      EnemyId = 3
+                  }
+              );
+
+            modelBuilder.Entity<Weapon>().HasData(
+                new Weapon
+                {
+                    Id = 1,
+                    Name = "Claymore",
+                    Type = "Close Range",
+                    BaseDamage = "1d4"
+                },
+
+                new Weapon
+                {
+                    Id = 2,
+                    Name = "Wizard Staff",
+                    Type = "Magical",
+                    BaseDamage = "1d8"
+                },
+
+                new Weapon
+                {
+                    Id = 3,
+                    Name = "Longbow",
+                    Type = "Long Range",
+                    BaseDamage = "1d6"
+                }
+            );
+
+            modelBuilder.Entity<Item>().HasData(
+                new Item
+                {
+                    Id = 1,
+                    Name = "Health Potion",
+                    Value = "25 gp"
+                },
+
+                new Item
+                {
+                    Id = 2,
+                    Name = "Cup",
+                    Value = "5 gp"
+                },
+
+                new Item
+                {
+                    Id = 3,
+                    Name = "Dungeon Key",
+                    Value = "100 gp"
+                }
+            );
+
             modelBuilder.Entity<CharacterInventory>().HasData(
-            new CharacterInventory
-            {
-                CharacterId = 1,
-                ItemId = 1
-            },
+                new CharacterInventory
+                {
+                    CharacterId = 1,
+                    ItemId = 1
+                },
 
-            new CharacterInventory
-            {
-                CharacterId = 1,
-                ItemId = 2
-            },
+                new CharacterInventory
+                {
+                    CharacterId = 1,
+                    ItemId = 2
+                },
 
-            new CharacterInventory
-            {
-                CharacterId = 2,
-                ItemId = 2
-            },
+                new CharacterInventory
+                {
+                    CharacterId = 2,
+                    ItemId = 2
+                },
 
-            new CharacterInventory
-            {
-                CharacterId = 2,
-                ItemId = 3
-            },
+                new CharacterInventory
+                {
+                    CharacterId = 2,
+                    ItemId = 3
+                },
 
-            new CharacterInventory
-            {
-                CharacterId = 3,
-                ItemId = 1
-            },
+                new CharacterInventory
+                {
+                    CharacterId = 3,
+                    ItemId = 1
+                },
 
-            new CharacterInventory
-            {
-                CharacterId = 3,
-                ItemId = 3
-            }
+                new CharacterInventory
+                {
+                    CharacterId = 3,
+                    ItemId = 3
+                }
             );
 
             modelBuilder.Entity<EnemyLoot>().HasData(
@@ -270,45 +358,7 @@ namespace Crypts_And_Coders.Data
                     EnemyId = 3,
                     ItemId = 3
                 }
-                );
-
-            modelBuilder.Entity<EnemyInLocation>().HasData(
-              new EnemyInLocation
-              {
-                  LocationId = 1,
-                  EnemyId = 1
-              },
-
-              new EnemyInLocation
-              {
-                  LocationId = 1,
-                  EnemyId = 2
-              },
-
-              new EnemyInLocation
-              {
-                  LocationId = 2,
-                  EnemyId = 3
-              },
-
-              new EnemyInLocation
-              {
-                  LocationId = 2,
-                  EnemyId = 2
-              },
-
-              new EnemyInLocation
-              {
-                  LocationId = 3,
-                  EnemyId = 1
-              },
-
-              new EnemyInLocation
-              {
-                  LocationId = 3,
-                  EnemyId = 3
-              }
-              );
+            );
         }
     }
 }
