@@ -26,8 +26,6 @@
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="CharactersView/Create">Create</a>
-                <a class="dropdown-item" href="CharactersView/Edit">Update</a>
-                <a class="dropdown-item" href="CharactersView/Delete">Delete</a>
             </div>
         </div>
     </header>
@@ -42,6 +40,10 @@
                     <p>Class: @item.Class</p>
                     <p>Weapon: @item.Weapon.Name</p>
                     <p>Weapon Base Damage: @item.Weapon.BaseDamage</p>
+                    <p>
+                        <a asp-action="Delete" asp-route-ID="@item.Id"
+                           class="btn btn-danger m-1">Delete</a>
+                    </p>
                 </div>
             }
         </div>

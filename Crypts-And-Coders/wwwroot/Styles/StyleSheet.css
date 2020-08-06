@@ -24,3 +24,10 @@ main {
     background-color: #30475e;
     padding: 15px;
 }
+
+.delete-container {
+    width: 50%;
+    margin: 30px 0px;
+    background-color: #30475e;
+    border-radius: 5px;
+}

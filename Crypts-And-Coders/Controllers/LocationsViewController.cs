@@ -126,18 +126,21 @@ namespace Crypts_And_Coders.Controllers
         }
 
         // GET: LocationsView/Delete/5
-        [BindProperty]
-        public LocationDTO Location { get; set; }
-
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            Location = await _location.GetLocation(id);
-            if (Location == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            return View(Location);
+            var location = await _context.Location.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (location == null)
+            {
+                return NotFound();
+            }
+
+            return View(location);
         }
 
         // POST: LocationsView/Delete/5
