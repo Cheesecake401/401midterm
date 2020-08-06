@@ -1,4 +1,4 @@
-﻿@model List<Crypts_And_Coders.Models.DTOs.CharacterDTO>
+﻿@model List<Crypts_And_Coders.Models.DTOs.ItemDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,27 +10,27 @@
 <html>
 
 <head>
-    <title>Characters</title>
+    <title>Items</title>
 </head>
+
 <body>
     <header>
         <div class="dropdown show">
             <span class="lead">CRYPTS & CODERS</span>
             <a class="btn btn-secondary" href="Home">Home</a>
-            <a class="btn btn-secondary" href="#">Characters</a>
+            <a class="btn btn-secondary" href="CharactersView">Characters</a>
             <a class="btn btn-secondary" href="LocationsView">Locations</a>
             <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
-            <a class="btn btn-secondary" href="ItemsView">Items</a>
+            <a class="btn btn-secondary" href="#">Items</a>
             <a class="btn btn-secondary" href="LogView">Logs</a>
-            <a class="btn btn-secondary" href="AboutUs">About Us</a>
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Actions
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="CharactersView/Create">Create</a>
-                <a class="dropdown-item" href="CharactersView/Edit">Update</a>
-                <a class="dropdown-item" href="CharactersView/Delete">Delete</a>
+                <a class="dropdown-item" href="LocationsView/Create">Create</a>
+                <a class="dropdown-item" href="LocationsView/Edit">Update</a>
+                <a class="dropdown-item" href="LocationsView/Delete">Delete</a>
             </div>
         </div>
     </header>
@@ -41,10 +41,8 @@
             {
                 <div class="col-sm-3">
                     <h3>@item.Name</h3>
-                    <p>Species: @item.Species</p>
-                    <p>Class: @item.Class</p>
-                    <p>Weapon: @item.Weapon.Name</p>
-                    <p>Weapon Base Damage: @item.Weapon.BaseDamage</p>
+                    <p>Value: @item.Value</p>
+                    <p>ID: @item.Id</p>
                 </div>
             }
         </div>
