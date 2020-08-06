@@ -19,6 +19,9 @@ namespace Crypts_And_Coders.Models.EquipmentSeeding
             using (var context = new CryptsDbContext(serviceProvider.GetRequiredService<DbContextOptions<CryptsDbContext>>()))
             {
                 context.Database.EnsureCreated();
+                //if (context.Item.Any())
+                //{
+                //}
                 if (context.Item.ToList().Count > 20 && context.Weapon.ToList().Count > 20) return;
                 GetAndDeserializeEquipment(context);
             }
