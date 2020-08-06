@@ -11,31 +11,34 @@ using Microsoft.AspNetCore.Authorization;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.DTOs;
 
-namespace Crypts_And_Coders.Controllers
+namespace Crypts_And_Coders.Views.ItemsView
 {
     [AllowAnonymous]
     public class ItemsViewController : Controller
     {
         private readonly IItem _item;
-        private readonly CryptsDbContext _context;
 
-        public ItemsViewController(CryptsDbContext context, IItem item)
+        public ItemsViewController(IItem item)
         {
             _item = item;
-            _context = context;
         }
 
         // GET: ItemsView
         public async Task<IActionResult> Index()
         {
-            var allItems = await _item.GetItems();
-            return View(allItems);
+            var result = await _item.GetItems();
+            return View(result);
         }
 
         // GET: ItemsView/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            var item = await _item.GetItem(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var item = await _item.GetItem((int)id);
             if (item == null)
             {
                 return NotFound();
@@ -51,24 +54,29 @@ namespace Crypts_And_Coders.Controllers
         }
 
         // POST: ItemsView/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<ActionResult<Item>> Create([Bind("Id,Name,Description")] ItemDTO item)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] ItemDTO item)
         {
             if (ModelState.IsValid)
             {
                 await _item.Create(item);
-                return CreatedAtAction("GetItem", new { id = item.Id }, item);
+                return RedirectToAction(nameof(Index));
             }
             return View(item);
         }
 
         // GET: ItemsView/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            var item = await _item.GetItem(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var item = await _item.GetItem((int)id);
             if (item == null)
             {
                 return NotFound();
@@ -77,11 +85,11 @@ namespace Crypts_And_Coders.Controllers
         }
 
         // POST: ItemsView/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] ItemDTO item)
         {
             if (id != item.Id)
             {
@@ -92,19 +100,12 @@ namespace Crypts_And_Coders.Controllers
             {
                 try
                 {
-                    _context.Update(item);
-                    await _context.SaveChangesAsync();
+                    await _item.Update(item);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
+
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -119,8 +120,7 @@ namespace Crypts_And_Coders.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Item
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var item = await _item.GetItem((int)id);
             if (item == null)
             {
                 return NotFound();
@@ -134,15 +134,8 @@ namespace Crypts_And_Coders.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var item = await _context.Item.FindAsync(id);
-            _context.Item.Remove(item);
-            await _context.SaveChangesAsync();
+            await _item.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool ItemExists(int id)
-        {
-            return _context.Item.Any(e => e.Id == id);
         }
     }
 }

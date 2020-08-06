@@ -1,4 +1,5 @@
-﻿@model List<Crypts_And_Coders.Models.DTOs.LocationDTO>
+﻿@model IEnumerable<Crypts_And_Coders.Models.DTOs.LocationDTO>
+
 
 @{
     ViewData["Title"] = "Index";
@@ -12,7 +13,6 @@
 <head>
     <title>Locations</title>
 </head>
-
 <body>
     <header>
         <div class="dropdown show">
@@ -24,33 +24,44 @@
             <a class="btn btn-secondary" href="ItemsView">Items</a>
             <a class="btn btn-secondary" href="LogView">Logs</a>
             <a class="btn btn-secondary" href="AboutUs">About Us</a>
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Actions
-            </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="LocationsView/Create">Create</a>
-                <a class="dropdown-item" href="LocationsView/Edit">Update</a>
-                <a class="dropdown-item" href="LocationsView/Delete">Delete</a>
-            </div>
         </div>
     </header>
 
     <main>
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-sm-3">
-                    <h3>@item.Name</h3>
-                    <p>Description: @item.Description</p>
-                    <span>Enemies: </span>
-                    @foreach (var enemy in item.Enemies)
-                    {
-                        <span>@enemy.Species, </span>
-                    }
-                </div>
-            }
-        </div>
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+}
+            </tbody>
+        </table>
     </main>
 
     <footer>
