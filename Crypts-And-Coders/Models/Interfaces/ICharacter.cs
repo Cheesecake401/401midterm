@@ -40,7 +40,7 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// </summary>
         /// <param name="id">Id of character to be deleted</param>
         /// <returns>Task of completion for character delete</returns>
-        Task Delete(int id);
+        Task<bool> Delete(int id);
 
         /// <summary>
         /// Add an item to a character's inventory
@@ -70,6 +70,6 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// </summary>
         /// <param name="id">Id of character to search for</param>
         /// <returns>String of character's name or string "null" if not found</returns>
-        string GetCharacterSync(int id);
+        string GetCharacterUserNameSync(int id);
     }
 }
