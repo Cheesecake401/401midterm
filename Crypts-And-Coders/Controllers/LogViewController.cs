@@ -36,15 +36,13 @@ namespace Crypts_And_Coders.Controllers
             return View(logData);
         }
 
-        //// POST: LogView/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var logData = await _context.Logs.FindAsync(id);
-        //    _context.Logs.Remove(logData);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        // POST: LogView/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _log.DeleteLog(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

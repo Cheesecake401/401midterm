@@ -7,29 +7,45 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.DTOs;
 
-namespace Crypts_And_Coders.Controllers
+namespace Crypts_And_Coders.Views.EnemiesView
 {
     [AllowAnonymous]
+
     public class EnemiesViewController : Controller
     {
         private readonly IEnemy _enemy;
-        private readonly CryptsDbContext _context;
 
-        public EnemiesViewController(CryptsDbContext context, IEnemy enemy)
+        public EnemiesViewController(IEnemy enemy)
         {
             _enemy = enemy;
-            _context = context;
         }
 
         // GET: EnemiesView
         public async Task<IActionResult> Index()
         {
-            var allEnemies = await _enemy.GetEnemies();
-            return View(allEnemies);
+            var result = await _enemy.GetEnemies();
+            return View(result);
+        }
+
+        // GET: EnemiesView/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var enemy = await _enemy.GetEnemy((int)id);
+            if (enemy == null)
+            {
+                return NotFound();
+            }
+
+            return View(enemy);
         }
 
         // GET: EnemiesView/Create
@@ -39,16 +55,15 @@ namespace Crypts_And_Coders.Controllers
         }
 
         // POST: EnemiesView/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Abilities,Type,Species")] Enemy enemy)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] EnemyDTO enemy)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(enemy);
-                await _context.SaveChangesAsync();
+                await _enemy.Create(enemy);
                 return RedirectToAction(nameof(Index));
             }
             return View(enemy);
@@ -62,7 +77,7 @@ namespace Crypts_And_Coders.Controllers
                 return NotFound();
             }
 
-            var enemy = await _context.Enemy.FindAsync(id);
+            var enemy = await _enemy.GetEnemy((int)id);
             if (enemy == null)
             {
                 return NotFound();
@@ -71,9 +86,11 @@ namespace Crypts_And_Coders.Controllers
         }
 
         // POST: EnemiesView/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Abilities,Type,Species")] Enemy enemy)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] EnemyDTO enemy)
         {
             if (id != enemy.Id)
             {
@@ -84,19 +101,11 @@ namespace Crypts_And_Coders.Controllers
             {
                 try
                 {
-                    _context.Update(enemy);
-                    await _context.SaveChangesAsync();
+                    await _enemy.Update(enemy);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EnemyExists(enemy.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -111,8 +120,7 @@ namespace Crypts_And_Coders.Controllers
                 return NotFound();
             }
 
-            var enemy = await _context.Enemy
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var enemy = await _enemy.GetEnemy((int)id);
             if (enemy == null)
             {
                 return NotFound();
@@ -126,15 +134,8 @@ namespace Crypts_And_Coders.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var enemy = await _context.Enemy.FindAsync(id);
-            _context.Enemy.Remove(enemy);
-            await _context.SaveChangesAsync();
+            await _enemy.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool EnemyExists(int id)
-        {
-            return _context.Enemy.Any(e => e.Id == id);
         }
     }
 }

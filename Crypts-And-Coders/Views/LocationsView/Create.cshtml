@@ -1,8 +1,7 @@
-﻿@model Crypts_And_Coders.Models.DTOs.LocationDTO
+﻿@model Crypts_And_Coders.Models.Location
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "_Layout";
 }
 
 <h4>Location Creation</h4>
@@ -32,6 +31,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@*@section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }*@
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

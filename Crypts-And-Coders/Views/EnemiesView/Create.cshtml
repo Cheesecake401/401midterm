@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "_Layout";
 }
 
 <h4>Enemy Creation</h4>
@@ -42,6 +41,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@*@section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }*@
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
