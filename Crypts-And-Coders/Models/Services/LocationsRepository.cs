@@ -127,5 +127,41 @@ namespace Crypts_And_Coders.Models.Services
             await _context.SaveChangesAsync();
             return locationDTO;
         }
+
+
+        /// <summary>
+        /// Add an enemy to a location
+        /// </summary>
+        /// <param name="locationId">Id of location</param>
+        /// <param name="enemyId">Id of enemy</param>
+        /// <returns>Successful result of enemy addition</returns>
+        public async Task AddEnemyToLocation(int locationId, int enemyId)
+        {
+            EnemyInLocation enemiesInLoc = new EnemyInLocation()
+            {
+                LocationId = locationId,
+                EnemyId = enemyId
+            };
+
+            _context.Entry(enemiesInLoc).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Remove an enemy from a location
+        /// </summary>
+        /// <param name="locationId">Id of location</param>
+        /// <param name="enemyId">Id of enemy</param>
+        /// <returns>Successful result of enemy removal</returns>
+        public async Task RemoveEnemyFromLocation(int locationId, int enemyId)
+        {
+            EnemyInLocation result = await _context.EnemyInLocation.FindAsync(locationId, enemyId);
+
+            if (result != null)
+            {
+                _context.Entry(result).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

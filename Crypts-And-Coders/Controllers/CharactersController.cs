@@ -114,7 +114,9 @@ namespace Crypts_And_Coders.Controllers
                 return BadRequest("You do not have access to this account");
             }
 
-            await _character.Delete(id);
+            bool result = await _character.Delete(id);
+
+            if (!result) return NotFound();
 
             await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 

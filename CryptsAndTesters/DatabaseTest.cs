@@ -13,6 +13,8 @@ namespace CryptsAndTesters
         private readonly SqliteConnection _connection;
         protected readonly CryptsDbContext _db;
         protected readonly ICharacterStat _characterStat;
+        protected readonly ICharacter _character;
+
         protected readonly IStat _stat;
         protected readonly ILocation _location;
         protected readonly IItem _item;
@@ -30,13 +32,14 @@ namespace CryptsAndTesters
                 .Options);
             _db.Database.EnsureCreated();
 
-
+            _character = new CharacterRepository(_db, _characterStat, _weapon, _location);
             _characterStat = new CharacterStatRepository(_db, _stat);
             _stat = new StatRepository(_db);
             _location = new LocationsRepository(_db, _enemy);
             _item = new ItemRepository(_db);
             _weapon = new WeaponRepository(_db);
             _enemy = new EnemyRepository(_db);
+
 
         }
 

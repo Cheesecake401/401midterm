@@ -88,6 +88,9 @@ namespace CryptsAndTesters
             Assert.Equal(newChar.Name, result.Name);
         }
 
+
+
+
         [Fact]
         public async Task CanDeleteCharacter()
         {
@@ -98,6 +101,16 @@ namespace CryptsAndTesters
             var count = await repo.GetCharacters();
 
             Assert.Equal(2, count.Count);
+        }
+
+        [Fact]
+        public async Task CanReturnFalseOnUnavailableDelete()
+        {
+            var repo = BuildRepo();
+
+            bool result = await repo.Delete(4);
+
+            Assert.False(result);
         }
 
         [Fact]

@@ -96,5 +96,24 @@ namespace Crypts_And_Coders.Controllers
 
             return NoContent();
         }
+
+
+        // POST: api/Characters/5/Enemys/1
+        [HttpPost("{locationId}/Locations/{enemyId}")]
+        public async Task AddEnemyToLocation(int locationId, int enemyId)
+        {
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
+            await _location.AddEnemyToLocation(locationId, enemyId);
+        }
+
+        // DELETE: api/Characters/5/Enemys/1
+        [HttpDelete("{locationId}/Locations/{enemyId}")]
+        public async Task DeleteEnemyFromInventory(int locationId, int enemyId)
+        {
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
+            await _location.RemoveEnemyFromLocation(locationId, enemyId);
+        }
     }
 }
