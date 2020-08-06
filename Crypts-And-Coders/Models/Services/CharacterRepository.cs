@@ -103,7 +103,7 @@ namespace Crypts_And_Coders.Models.Services
         /// Get a specific character in the database by ID synchronously (Needed for user validation)
         /// </summary>
         /// <param name="id">Id of character to search for</param>
-        /// <returns>Successful result of specified character</returns>
+        /// <returns>String of character's name or string "null" if not found</returns>
         public string GetCharacterSync(int id)
         {
             string result = _context.Character.Where(x => x.Id == id).Select(x => x.UserName != null ? x.UserName : "null").FirstOrDefault().ToString();

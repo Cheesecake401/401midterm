@@ -61,7 +61,7 @@ namespace CryptsAndTesters
             var result = await repo.GetStats();
 
             // Three from seeded data
-            Assert.Equal(3, result.Count);
+            Assert.Equal(6, result.Count);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace CryptsAndTesters
 
             var count = await repo.GetStats();
 
-            Assert.Equal(2, count.Count);
+            Assert.Equal(5, count.Count);
         }
     }
 }

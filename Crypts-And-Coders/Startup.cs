@@ -1,29 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models;
+using Crypts_And_Coders.Models.EquipmentSeeding;
+using Crypts_And_Coders.Models.Interfaces;
+using Crypts_And_Coders.Models.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.EntityFrameworkCore;
-using Crypts_And_Coders.Data;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Crypts_And_Coders.Models.Interfaces;
-using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Text;
-using Swashbuckle.Swagger;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Crypts_And_Coders
 {
@@ -124,6 +115,7 @@ namespace Crypts_And_Coders
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             RoleInitializer.SeedData(serviceProvider, userManager, Configuration);
+            SeedEquipment.SeedEquipmentToDB(serviceProvider);
 
             app.UseEndpoints(endpoints =>
             {

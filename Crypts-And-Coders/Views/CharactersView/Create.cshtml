@@ -32,6 +32,7 @@
                     @foreach (var speciesName in Enum.GetValues(typeof(Crypts_And_Coders.Models.SpeciesAndClass.Species)))
                     {
                         <option> @speciesName.ToString() </option>
+                        if (speciesName.ToString() == "Tiefling") break;
                     }
                 </select>
                 <span class="text-danger"></span>
