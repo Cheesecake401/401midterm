@@ -4,14 +4,16 @@ using Crypts_And_Coders.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crypts_And_Coders.Migrations
 {
     [DbContext(typeof(CryptsDbContext))]
-    partial class CryptsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200806032030_RemovingInventorySeeds")]
+    partial class RemovingInventorySeeds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,19 +129,19 @@ namespace Crypts_And_Coders.Migrations
                         {
                             Id = 2,
                             Class = 0,
-                            LocationId = 2,
+                            LocationId = 1,
                             Name = "Dragorn",
                             Species = 3,
-                            WeaponId = 2
+                            WeaponId = 1
                         },
                         new
                         {
                             Id = 3,
                             Class = 4,
-                            LocationId = 3,
+                            LocationId = 1,
                             Name = "Glen",
                             Species = 0,
-                            WeaponId = 3
+                            WeaponId = 1
                         });
                 });
 
@@ -156,38 +158,6 @@ namespace Crypts_And_Coders.Migrations
                     b.HasIndex("ItemId");
 
                     b.ToTable("CharacterInventory");
-
-                    b.HasData(
-                        new
-                        {
-                            CharacterId = 1,
-                            ItemId = 1
-                        },
-                        new
-                        {
-                            CharacterId = 1,
-                            ItemId = 2
-                        },
-                        new
-                        {
-                            CharacterId = 2,
-                            ItemId = 2
-                        },
-                        new
-                        {
-                            CharacterId = 2,
-                            ItemId = 3
-                        },
-                        new
-                        {
-                            CharacterId = 3,
-                            ItemId = 1
-                        },
-                        new
-                        {
-                            CharacterId = 3,
-                            ItemId = 3
-                        });
                 });
 
             modelBuilder.Entity("Crypts_And_Coders.Models.CharacterStat", b =>
@@ -355,38 +325,6 @@ namespace Crypts_And_Coders.Migrations
                     b.HasIndex("ItemId");
 
                     b.ToTable("EnemyLoot");
-
-                    b.HasData(
-                        new
-                        {
-                            EnemyId = 1,
-                            ItemId = 1
-                        },
-                        new
-                        {
-                            EnemyId = 1,
-                            ItemId = 2
-                        },
-                        new
-                        {
-                            EnemyId = 2,
-                            ItemId = 2
-                        },
-                        new
-                        {
-                            EnemyId = 2,
-                            ItemId = 3
-                        },
-                        new
-                        {
-                            EnemyId = 3,
-                            ItemId = 1
-                        },
-                        new
-                        {
-                            EnemyId = 3,
-                            ItemId = 3
-                        });
                 });
 
             modelBuilder.Entity("Crypts_And_Coders.Models.Item", b =>
@@ -405,26 +343,6 @@ namespace Crypts_And_Coders.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Item");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Health Potion",
-                            Value = "25 gp"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Cup",
-                            Value = "5 gp"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Dungeon Key",
-                            Value = "100 gp"
-                        });
                 });
 
             modelBuilder.Entity("Crypts_And_Coders.Models.Location", b =>
@@ -472,7 +390,22 @@ namespace Crypts_And_Coders.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Message")
+                    b.Property<string>("RequestContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RequestTimestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RequestUri")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -546,29 +479,6 @@ namespace Crypts_And_Coders.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Weapon");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BaseDamage = "1d4",
-                            Name = "Claymore",
-                            Type = "Close Range"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BaseDamage = "1d8",
-                            Name = "Wizard Staff",
-                            Type = "Magical"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BaseDamage = "1d6",
-                            Name = "Longbow",
-                            Type = "Long Range"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

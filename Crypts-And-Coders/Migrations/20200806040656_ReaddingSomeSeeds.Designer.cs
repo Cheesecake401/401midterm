@@ -4,14 +4,16 @@ using Crypts_And_Coders.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crypts_And_Coders.Migrations
 {
     [DbContext(typeof(CryptsDbContext))]
-    partial class CryptsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200806040656_ReaddingSomeSeeds")]
+    partial class ReaddingSomeSeeds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -472,7 +474,22 @@ namespace Crypts_And_Coders.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Message")
+                    b.Property<string>("RequestContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RequestTimestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RequestUri")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

@@ -172,7 +172,7 @@ namespace CryptsAndTesters
                 {
                     Id = 3,
                     Name = "Dungeon Key",
-                    Value = 100
+                    Value = "100 cp"
                 }
             };
             bool found = false;
@@ -204,7 +204,7 @@ namespace CryptsAndTesters
                 {
                     Id = 2,
                     Name = "Cup",
-                    Value = 5
+                    Value = "100 cp"
                 }
             };
             Assert.DoesNotContain(expected, enemy.Loot);
