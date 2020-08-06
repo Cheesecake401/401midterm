@@ -17,6 +17,12 @@ main {
     text-align: center;
 }
 
+.col-md-4 {
+    background-color: #30475e;
+    border-radius: 5px;
+    margin: 10px auto;
+}
+
 .col-sm-3 {
     width: auto;
     margin: 25px;
