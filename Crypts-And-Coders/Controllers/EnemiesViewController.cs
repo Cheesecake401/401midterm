@@ -9,6 +9,7 @@ using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Crypts_And_Coders.Models.DTOs;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -90,8 +91,6 @@ namespace Crypts_And_Coders.Controllers
         // POST: EnemiesView/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Abilities,Type,Species")] Enemy enemy)
         {
             if (id != enemy.Id)

@@ -83,7 +83,6 @@ namespace Crypts_And_Coders.Models.Services
         {
             Enemy enemy = await _context.Enemy.Where(x => x.Id == id).FirstOrDefaultAsync();
 
-
             EnemyDTO enemyDTO = new EnemyDTO()
             {
                 Id = enemy.Id,

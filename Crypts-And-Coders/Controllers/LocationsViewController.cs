@@ -60,13 +60,14 @@ namespace Crypts_And_Coders.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<ActionResult<Location>> Create([Bind("Id,Name,Description")] LocationDTO location)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult<Location>> Create([Bind("Id,Name,Description")] Location location)
         {
             if (ModelState.IsValid)
             {
-                await _location.Create(location);
-                return CreatedAtAction("GetLocation", new { id = location.Id }, location);
+                _context.Add(location);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(location);
         }
