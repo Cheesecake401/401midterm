@@ -61,13 +61,18 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="id">Id of character to be deleted</param>
         /// <returns>Task of completion for character delete</returns>
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             Character character = await _context.Character.FindAsync(id);
             if (character != null)
             {
                 _context.Entry(character).State = EntityState.Deleted;
                 await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -104,7 +109,7 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="id">Id of character to search for</param>
         /// <returns>String of character's name or string "null" if not found</returns>
-        public string GetCharacterSync(int id)
+        public string GetCharacterUserNameSync(int id)
         {
             string result = _context.Character.Where(x => x.Id == id).Select(x => x.UserName != null ? x.UserName : "null").FirstOrDefault().ToString();
             return result;

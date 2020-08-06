@@ -36,6 +36,7 @@ namespace Crypts_And_Coders.Models.EquipmentSeeding
             using (WebClient wc = new WebClient())
             {
                 var client = new WebClient();
+
                 // 1st API call to get list of all items
                 var response = client.DownloadString("https://www.dnd5eapi.co/api/equipment");
 
@@ -62,7 +63,7 @@ namespace Crypts_And_Coders.Models.EquipmentSeeding
         {
             if (deserialized.weapon_category == "" || deserialized.weapon_category == null)
             {
-                Item newItem = new Item()
+                Item newItem = new Item
                 {
                     Name = deserialized.name,
                     Value = $"{deserialized.cost.quantity} {deserialized.cost.unit}",
@@ -72,7 +73,7 @@ namespace Crypts_And_Coders.Models.EquipmentSeeding
             }
             else
             {
-                Weapon newWeapon = new Weapon()
+                Weapon newWeapon = new Weapon
                 {
                     BaseDamage = deserialized.damage != null ? deserialized.damage.damage_dice : "1d6",
                     Name = deserialized.name,

@@ -43,7 +43,8 @@ namespace Crypts_And_Coders.Data
                     Species = Species.Elf,
                     Class = Class.Rogue,
                     WeaponId = 1,
-                    LocationId = 1
+                    LocationId = 1,
+                    UserName = "Seed"
                 },
 
                 new Character
@@ -53,7 +54,8 @@ namespace Crypts_And_Coders.Data
                     Species = Species.Dwarf,
                     Class = Class.Paladin,
                     WeaponId = 2,
-                    LocationId = 2
+                    LocationId = 2,
+                    UserName = "Seed"
                 },
 
                 new Character
@@ -63,7 +65,8 @@ namespace Crypts_And_Coders.Data
                     Species = Species.Human,
                     Class = Class.Bard,
                     WeaponId = 3,
-                    LocationId = 3
+                    LocationId = 3,
+                    UserName = "Seed"
                 }
             );
 
@@ -105,7 +108,7 @@ namespace Crypts_And_Coders.Data
                 {
                     Id = 2,
                     Name = "Murkden",
-                    Description = "Plagued by the great war, Murkden remains uninhibited from all intelligent life forms, although various beasts still dwell in the deep marshes."
+                    Description = "Plagued by the great war, Murkden remains uninhabited from all intelligent life forms, although various beasts still dwell in the deep marshes."
                 },
 
                 new Location
