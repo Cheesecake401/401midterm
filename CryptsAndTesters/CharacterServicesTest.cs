@@ -34,7 +34,6 @@ namespace CryptsAndTesters
             Assert.Equal(saved.Name, newChar.Name);
         }
 
-
         [Fact]
         public async Task CanGetCharacter()
         {
@@ -98,6 +97,16 @@ namespace CryptsAndTesters
             var count = await repo.GetCharacters();
 
             Assert.Equal(2, count.Count);
+        }
+
+        [Fact]
+        public async Task CanReturnFalseOnUnavailableDelete()
+        {
+            var repo = BuildRepo();
+
+            bool result = await repo.Delete(4);
+
+            Assert.False(result);
         }
 
         [Fact]

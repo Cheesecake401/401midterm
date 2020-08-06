@@ -1,13 +1,8 @@
-﻿using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.DTOs;
+﻿using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace CryptsAndTesters
 {
@@ -80,7 +75,6 @@ namespace CryptsAndTesters
 
             Assert.Equal(1, result.Id);
             Assert.Equal(newStat.Name, result.Name);
-
         }
 
         [Fact]
