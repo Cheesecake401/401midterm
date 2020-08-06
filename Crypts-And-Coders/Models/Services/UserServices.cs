@@ -22,7 +22,7 @@ namespace Crypts_And_Coders.Models.Services
         /// <returns>Bool representing if user passed validation</returns>
         public static bool ValidateUser(ClaimsPrincipal User, ICharacter _character, int id)
         {
-            string userNameInDB = _character.GetCharacterSync(id);
+            string userNameInDB = _character.GetCharacterUserNameSync(id);
             //Only allow players to view their own character's information
             string userName = User.FindFirst("UserName").Value;
 
