@@ -53,16 +53,10 @@ namespace Crypts_And_Coders.Models.Services
             // Get message from context
             HttpRequestMessageFeature hreqmf = new HttpRequestMessageFeature(context);
             HttpRequestMessage req = hreqmf.HttpRequestMessage;
-            string requestBody = await req.Content.ReadAsStringAsync();
-
+            DateTime dt = DateTime.Now;
             LogData log = new LogData()
             {
-                RequestMethod = req.Method.Method,
-                RequestTimestamp = DateTime.Now,
-                RequestUri = req.RequestUri.ToString(),
-                RequestContent = requestBody,
-                RequestContentType = req.Content.Headers.ContentType != null? req.Content.Headers.ContentType.ToString() : "No body content",
-                UserName = userName
+                Message = $"{req.Method.Method} call made by {userName} to {req.RequestUri.ToString()} on {String.Format("{0:ddd, MMM d, yyyy}", dt)} at {String.Format("{0:t}", dt)}."
             };
             _context.Entry(log).State = EntityState.Added;
             await _context.SaveChangesAsync();

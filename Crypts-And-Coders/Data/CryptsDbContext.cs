@@ -33,6 +33,7 @@ namespace Crypts_And_Coders.Data
             modelBuilder.Entity<CharacterStat>().HasKey(x => new { x.StatId, x.CharacterId });
             modelBuilder.Entity<EnemyLoot>().HasKey(x => new { x.EnemyId, x.ItemId });
 
+            #region DataSeeding
             // seed data
             modelBuilder.Entity<Character>().HasData(
                 new Character
@@ -40,7 +41,7 @@ namespace Crypts_And_Coders.Data
                     Id = 1,
                     Name = "Galdifor",
                     Species = Species.Elf,
-                    Class = Class.Thief,
+                    Class = Class.Rogue,
                     WeaponId = 1,
                     LocationId = 1
                 },
@@ -359,6 +360,7 @@ namespace Crypts_And_Coders.Data
                     ItemId = 3
                 }
             );
+            #endregion
         }
     }
 }

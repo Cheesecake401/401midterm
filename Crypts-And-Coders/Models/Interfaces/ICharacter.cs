@@ -65,6 +65,11 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <returns>Successful result of list of items in inventory</returns>
         Task<List<InventoryDTO>> GetPlayerItems(int charId);
 
-        public string GetCharacterSync(int id);
+        /// <summary>
+        /// Get a specific character in the database by ID synchronously (Needed for user validation)
+        /// </summary>
+        /// <param name="id">Id of character to search for</param>
+        /// <returns>String of character's name or string "null" if not found</returns>
+        string GetCharacterSync(int id);
     }
 }

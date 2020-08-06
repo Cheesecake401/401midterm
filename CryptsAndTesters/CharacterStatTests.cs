@@ -45,7 +45,7 @@ namespace CryptsAndTesters
             var result = await repo.GetCharacterStat(1, 1);
 
             Assert.NotNull(result);
-            Assert.Equal("Strength", result.Stat.Name);
+            Assert.Equal("Charisma", result.Stat.Name);
         }
 
         [Fact]
