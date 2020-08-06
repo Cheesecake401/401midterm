@@ -8,23 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
 using Microsoft.AspNetCore.Authorization;
+using Crypts_And_Coders.Models.Interfaces;
 
 namespace Crypts_And_Coders.Views.WeaponsView
 {
     [AllowAnonymous]
     public class WeaponsViewController : Controller
     {
-        private readonly CryptsDbContext _context;
+         private readonly IWeapon _weapon;
 
-        public WeaponsViewController(CryptsDbContext context)
+
+        public WeaponsViewController(IWeapon weapon)
         {
-            _context = context;
+            _weapon = weapon;
         }
 
         // GET: WeaponsView
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Weapon.ToListAsync());
+            return View(await _weapon.GetWeapons());
         }
 
         // GET: WeaponsView/Details/5
@@ -35,8 +37,7 @@ namespace Crypts_And_Coders.Views.WeaponsView
                 return NotFound();
             }
 
-            var weapon = await _context.Weapon
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var weapon = await _weapon.GetWeapon((int)id);
             if (weapon == null)
             {
                 return NotFound();
@@ -60,8 +61,7 @@ namespace Crypts_And_Coders.Views.WeaponsView
         {
             if (ModelState.IsValid)
             {
-                _context.Add(weapon);
-                await _context.SaveChangesAsync();
+                await _weapon.Create(weapon);
                 return RedirectToAction(nameof(Index));
             }
             return View(weapon);
@@ -75,7 +75,7 @@ namespace Crypts_And_Coders.Views.WeaponsView
                 return NotFound();
             }
 
-            var weapon = await _context.Weapon.FindAsync(id);
+            var weapon = await _weapon.GetWeapon((int)id);
             if (weapon == null)
             {
                 return NotFound();
@@ -99,19 +99,11 @@ namespace Crypts_And_Coders.Views.WeaponsView
             {
                 try
                 {
-                    _context.Update(weapon);
-                    await _context.SaveChangesAsync();
+                    await _weapon.Update(weapon);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!WeaponExists(weapon.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+        
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -126,12 +118,8 @@ namespace Crypts_And_Coders.Views.WeaponsView
                 return NotFound();
             }
 
-            var weapon = await _context.Weapon
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (weapon == null)
-            {
-                return NotFound();
-            }
+           var weapon = await _weapon.GetWeapon((int)id);
+ 
 
             return View(weapon);
         }
@@ -141,15 +129,11 @@ namespace Crypts_And_Coders.Views.WeaponsView
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var weapon = await _context.Weapon.FindAsync(id);
-            _context.Weapon.Remove(weapon);
-            await _context.SaveChangesAsync();
+
+            await _weapon.Delete(id);
+           
             return RedirectToAction(nameof(Index));
         }
 
-        private bool WeaponExists(int id)
-        {
-            return _context.Weapon.Any(e => e.Id == id);
-        }
     }
 }
