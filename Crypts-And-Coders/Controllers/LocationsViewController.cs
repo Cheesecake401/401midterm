@@ -10,6 +10,8 @@ using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Crypts_And_Coders.Models.DTOs;
+using Crypts_And_Coders.Models.Services;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -124,21 +126,39 @@ namespace Crypts_And_Coders.Controllers
         }
 
         // GET: LocationsView/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        //[BindProperty]
+        //public LocationDTO Location { get; set; }
+
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    Location = await _location.GetLocation(id);
+        //    if (Location == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    //var location = await _context.Location
+        //    //    .FirstOrDefaultAsync(m => m.Id == id);
+        //    return View(Location);
+        //}
+        [BindProperty]
+        public LocationDTO Location { get; set; }
+
+        public async Task<IActionResult> OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            Location = await _location.GetLocation(id);
 
-            var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (location == null)
+            if (Location == null)
             {
-                return NotFound();
+                return RedirectToPage("/NotFound");
             }
+            return View(Location);
+        }
 
-            return View(location);
+        public async Task<IActionResult> OnPost()
+        {
+            await _location.Delete(Location.Id);
+            return RedirectToPage("Index");
         }
 
         // POST: LocationsView/Delete/5
