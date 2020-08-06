@@ -20,7 +20,11 @@ main {
 .col-md-4 {
     background-color: #30475e;
     border-radius: 5px;
-    margin: 10px auto;
+    margin: 10% auto 5%;
+}
+
+.create-title {
+    padding: 15px;
 }
 
 .col-sm-3 {
