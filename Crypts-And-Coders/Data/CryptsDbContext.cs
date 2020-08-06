@@ -1,13 +1,6 @@
 using Crypts_And_Coders.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace Crypts_And_Coders.Data
@@ -26,7 +19,6 @@ namespace Crypts_And_Coders.Data
         public DbSet<EnemyLoot> EnemyLoot { get; set; }
         public DbSet<LogData> Logs { get; set; }
 
-
         public CryptsDbContext(DbContextOptions<CryptsDbContext> options) : base(options)
         {
         }
@@ -39,7 +31,6 @@ namespace Crypts_And_Coders.Data
             modelBuilder.Entity<EnemyInLocation>().HasKey(x => new { x.LocationId, x.EnemyId });
             modelBuilder.Entity<CharacterStat>().HasKey(x => new { x.StatId, x.CharacterId });
             modelBuilder.Entity<EnemyLoot>().HasKey(x => new { x.EnemyId, x.ItemId });
-
 
             // seed data
             modelBuilder.Entity<Character>().HasData(
@@ -100,29 +91,6 @@ namespace Crypts_And_Coders.Data
                 }
             );
 
-            modelBuilder.Entity<Item>().HasData(
-                new Item
-                {
-                    Id = 1,
-                    Name = "Health Potion",
-                    Value = 25
-                },
-
-                new Item
-                {
-                    Id = 2,
-                    Name = "Cup",
-                    Value = 5
-                },
-
-                new Item
-                {
-                    Id = 3,
-                    Name = "Dungeon Key",
-                    Value = 100
-                }
-            );
-
             modelBuilder.Entity<Location>().HasData(
                 new Location
                 {
@@ -146,129 +114,127 @@ namespace Crypts_And_Coders.Data
                 }
             );
 
-            modelBuilder.Entity<Weapon>().HasData(
-                new Weapon
-                {
-                    Id = 1,
-                    Name = "Claymore",
-                    Type = "Close Range",
-                    BaseDamage = 15
-                },
-
-                new Weapon
-                {
-                    Id = 2,
-                    Name = "Wizard Staff",
-                    Type = "Magical",
-                    BaseDamage = 18
-                },
-
-                new Weapon
-                {
-                    Id = 3,
-                    Name = "Longbow",
-                    Type = "Long Range",
-                    BaseDamage = 10
-                }
-            );
-
             modelBuilder.Entity<Stat>().HasData(
                new Stat
                {
                    Id = 1,
-                   Name = "Strength"
+                   Name = "Charisma"
                },
 
                new Stat
                {
                    Id = 2,
-                   Name = "Cunning"
+                   Name = "Constitution"
                },
 
                new Stat
                {
                    Id = 3,
-                   Name = "Constitution"
-               }
+                   Name = "Dexterity"
+               },
+
+                new Stat
+                {
+                    Id = 4,
+                    Name = "Intelligence"
+                },
+
+                 new Stat
+                 {
+                     Id = 5,
+                     Name = "Strength"
+                 },
+
+                  new Stat
+                  {
+                      Id = 6,
+                      Name = "Wisdom"
+                  }
            );
 
             modelBuilder.Entity<CharacterStat>().HasData(
                new CharacterStat
                {
                    StatId = 1,
-                   CharacterId = 1
+                   CharacterId = 1,
+                   Level = 5
+               },
+
+               new CharacterStat
+               {
+                   StatId = 6,
+                   CharacterId = 1,
+                   Level = 8
                },
 
                new CharacterStat
                {
                    StatId = 2,
-                   CharacterId = 1
-               },
-
-               new CharacterStat
-               {
-                   StatId = 2,
-                   CharacterId = 2
+                   CharacterId = 2,
+                   Level = 2
                },
 
                new CharacterStat
                {
                    StatId = 3,
-                   CharacterId = 2
+                   CharacterId = 2,
+                   Level = 10
                },
 
                new CharacterStat
                {
-                   StatId = 1,
-                   CharacterId = 3
+                   StatId = 4,
+                   CharacterId = 3,
+                   Level = 4
                },
 
                new CharacterStat
                {
-                   StatId = 3,
-                   CharacterId = 3
+                   StatId = 5,
+                   CharacterId = 3,
+                   Level = 7
                }
                );
 
-               modelBuilder.Entity<CharacterInventory>().HasData(
-               new CharacterInventory
-               {
-                   CharacterId = 1,
-                   ItemId = 1
-               },
+            modelBuilder.Entity<CharacterInventory>().HasData(
+            new CharacterInventory
+            {
+                CharacterId = 1,
+                ItemId = 1
+            },
 
-               new CharacterInventory
-               {
-                   CharacterId = 1,
-                   ItemId = 2
-               },
+            new CharacterInventory
+            {
+                CharacterId = 1,
+                ItemId = 2
+            },
 
-               new CharacterInventory
-               {
-                   CharacterId = 2,
-                   ItemId = 2
-               },
+            new CharacterInventory
+            {
+                CharacterId = 2,
+                ItemId = 2
+            },
 
-               new CharacterInventory
-               {
-                   CharacterId = 2,
-                   ItemId = 3
-               },
+            new CharacterInventory
+            {
+                CharacterId = 2,
+                ItemId = 3
+            },
 
-               new CharacterInventory
-               {
-                   CharacterId = 3,
-                   ItemId = 1
-               },
+            new CharacterInventory
+            {
+                CharacterId = 3,
+                ItemId = 1
+            },
 
-               new CharacterInventory
-               {
-                   CharacterId = 3,
-                   ItemId = 3
-               }
-               );
+            new CharacterInventory
+            {
+                CharacterId = 3,
+                ItemId = 3
+            }
+            );
 
-                modelBuilder.Entity<EnemyLoot>().HasData(
+            modelBuilder.Entity<EnemyLoot>().HasData(
                 new EnemyLoot
                 {
                     EnemyId = 1,

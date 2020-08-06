@@ -4,14 +4,16 @@ using Crypts_And_Coders.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crypts_And_Coders.Migrations
 {
     [DbContext(typeof(CryptsDbContext))]
-    partial class CryptsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200806011957_SeedingFromApi")]
+    partial class SeedingFromApi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,6 +158,38 @@ namespace Crypts_And_Coders.Migrations
                     b.HasIndex("ItemId");
 
                     b.ToTable("CharacterInventory");
+
+                    b.HasData(
+                        new
+                        {
+                            CharacterId = 1,
+                            ItemId = 1
+                        },
+                        new
+                        {
+                            CharacterId = 1,
+                            ItemId = 2
+                        },
+                        new
+                        {
+                            CharacterId = 2,
+                            ItemId = 2
+                        },
+                        new
+                        {
+                            CharacterId = 2,
+                            ItemId = 3
+                        },
+                        new
+                        {
+                            CharacterId = 3,
+                            ItemId = 1
+                        },
+                        new
+                        {
+                            CharacterId = 3,
+                            ItemId = 3
+                        });
                 });
 
             modelBuilder.Entity("Crypts_And_Coders.Models.CharacterStat", b =>

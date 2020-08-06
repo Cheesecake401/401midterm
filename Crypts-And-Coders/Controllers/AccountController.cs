@@ -74,8 +74,6 @@ namespace Crypts_And_Coders.Controllers
                 var identityRole = await _userManager.GetRolesAsync(user);
                 var token = CreateToken(user, identityRole.ToList());
 
-                await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
-
 
                 return Ok(new
                 {

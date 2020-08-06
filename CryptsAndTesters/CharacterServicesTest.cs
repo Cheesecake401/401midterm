@@ -1,14 +1,8 @@
-﻿using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.DTOs;
+﻿using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace CryptsAndTesters
 {
@@ -81,7 +75,6 @@ namespace CryptsAndTesters
 
             Assert.Equal(1, result.Id);
             Assert.Equal(newChar.Name, result.Name);
-
         }
 
         [Fact]
@@ -113,7 +106,7 @@ namespace CryptsAndTesters
                 {
                     Id = 3,
                     Name = "Dungeon Key",
-                    Value = 100
+                    Value = "100 cp"
                 }
             };
             bool found = false;
@@ -145,7 +138,7 @@ namespace CryptsAndTesters
                 {
                     Id = 2,
                     Name = "Cup",
-                    Value = 5
+                    Value = "100 cp"
                 }
             };
             Assert.DoesNotContain(expected, character.Inventory);
