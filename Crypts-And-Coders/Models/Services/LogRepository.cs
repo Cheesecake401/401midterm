@@ -60,5 +60,17 @@ namespace Crypts_And_Coders.Models.Services
             await _context.SaveChangesAsync();
             return log;
         }
+
+        public async Task<LogData> DeleteLog(int id)
+        {
+            LogData log = await _context.Logs.FindAsync(id);
+            if (log != null)
+            {
+                _context.Entry(log).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+                return log;
+            }
+            return null;
+        }
     }
 }

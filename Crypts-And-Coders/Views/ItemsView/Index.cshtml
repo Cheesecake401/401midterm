@@ -1,4 +1,4 @@
-﻿@model List<Crypts_And_Coders.Models.DTOs.LocationDTO>
+﻿@model List<Crypts_And_Coders.Models.DTOs.ItemDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,7 +10,7 @@
 <html>
 
 <head>
-    <title>Locations</title>
+    <title>Items</title>
 </head>
 
 <body>
@@ -19,9 +19,9 @@
             <span class="lead">CRYPTS & CODERS</span>
             <a class="btn btn-secondary" href="Home">Home</a>
             <a class="btn btn-secondary" href="CharactersView">Characters</a>
-            <a class="btn btn-secondary" href="#">Locations</a>
+            <a class="btn btn-secondary" href="LocationsView">Locations</a>
             <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
-            <a class="btn btn-secondary" href="ItemsView">Items</a>
+            <a class="btn btn-secondary" href="#">Items</a>
             <a class="btn btn-secondary" href="LogView">Logs</a>
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Actions
@@ -41,12 +41,8 @@
             {
                 <div class="col-sm-3">
                     <h3>@item.Name</h3>
-                    <p>Description: @item.Description</p>
-                    <span>Enemies: </span>
-                    @foreach (var enemy in item.Enemies)
-                    {
-                        <span>@enemy.Species, </span>
-                    }
+                    <p>Value: @item.Value</p>
+                    <p>ID: @item.Id</p>
                 </div>
             }
         </div>

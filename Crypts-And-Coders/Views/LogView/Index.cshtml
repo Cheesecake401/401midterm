@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Crypts_And_Coders.Models.LogData>
+
+@{
     ViewData["Title"] = "Index";
     Layout = "_Layout";
 }
@@ -8,24 +10,36 @@
 <html>
 
 <head>
-    <title>HOME</title>
+    <title>Logs</title>
 </head>
 
 <body>
     <header>
         <div class="dropdown show">
             <span class="lead">CRYPTS & CODERS</span>
-            <a class="btn btn-secondary" href="#">Home</a>
+            <a class="btn btn-secondary" href="Home">Home</a>
             <a class="btn btn-secondary" href="CharactersView">Characters</a>
             <a class="btn btn-secondary" href="LocationsView">Locations</a>
             <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
             <a class="btn btn-secondary" href="ItemsView">Items</a>
-            <a class="btn btn-secondary" href="LogView">Logs</a>
+            <a class="btn btn-secondary" href="#">Logs</a>
 
+            <a class="dropdown-item" href="LocationsView/Delete">Delete a Log</a>
         </div>
     </header>
+
     <main>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-3">
+                    <p>ID: @item.Id</p>
+                    <p>Message: @item.Message</p>
+                </div>
+            }
+        </div>
     </main>
+
     <footer>
     </footer>
 </body>
