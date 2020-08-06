@@ -4,14 +4,16 @@ using Crypts_And_Coders.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crypts_And_Coders.Migrations
 {
     [DbContext(typeof(CryptsDbContext))]
-    partial class CryptsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200806171019_SeedingUserNameToCharacters")]
+    partial class SeedingUserNameToCharacters
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -457,7 +459,7 @@ namespace Crypts_And_Coders.Migrations
                         new
                         {
                             Id = 2,
-                            Description = "Plagued by the great war, Murkden remains uninhabited from all intelligent life forms, although various beasts still dwell in the deep marshes.",
+                            Description = "Plagued by the great war, Murkden remains uninhibited from all intelligent life forms, although various beasts still dwell in the deep marshes.",
                             Name = "Murkden"
                         },
                         new
