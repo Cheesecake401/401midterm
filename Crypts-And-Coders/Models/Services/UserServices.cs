@@ -1,13 +1,5 @@
-﻿using Crypts_And_Coders.Data;
-using Crypts_And_Coders.Models.DTOs;
-using Crypts_And_Coders.Models.Interfaces;
-using Microsoft.AspNetCore.Identity;
-using SQLitePCL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Crypts_And_Coders.Models.Interfaces;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.Services
 {

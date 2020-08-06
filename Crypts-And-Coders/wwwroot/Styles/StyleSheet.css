@@ -31,3 +31,50 @@ main {
     background-color: #30475e;
     border-radius: 5px;
 }
+    background-color: aquamarine;
+}
+
+#lami{
+    max-width: 200px;
+    float: left;
+    margin-top: 5%;
+}
+
+#lami-p {
+    max-width: 250px;
+    float: left;
+    margin-top: 5%;
+    margin-left: 10px;
+    margin-right: 60%;
+    font: bold;
+}
+
+#andrew {
+    max-width: 200px;
+    margin-top: 10%;
+    float: left;
+ 
+}
+
+#andrew-p {
+    float: left;
+    max-width: 350px;
+    margin-top: 10%;
+    margin-left: 20px;
+    margin-right: 50%;
+    font: bold;
+}
+
+#nicco {
+    max-width: 250px;
+    margin-top: 10%;
+    float: left;
+}
+
+#nicco-p {
+    float: left;
+    max-width: 400px;
+    margin-top: 10%;
+    margin-left: 20px;
+    font: bold;
+}

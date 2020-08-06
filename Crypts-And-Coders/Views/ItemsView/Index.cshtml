@@ -1,0 +1,54 @@
+﻿@model List<Crypts_And_Coders.Models.DTOs.ItemDTO>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Items</title>
+</head>
+
+<body>
+    <header>
+        <div class="dropdown show">
+            <span class="lead">CRYPTS & CODERS</span>
+            <a class="btn btn-secondary" href="Home">Home</a>
+            <a class="btn btn-secondary" href="CharactersView">Characters</a>
+            <a class="btn btn-secondary" href="LocationsView">Locations</a>
+            <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
+            <a class="btn btn-secondary" href="#">Items</a>
+            <a class="btn btn-secondary" href="LogView">Logs</a>
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="LocationsView/Create">Create</a>
+                <a class="dropdown-item" href="LocationsView/Edit">Update</a>
+                <a class="dropdown-item" href="LocationsView/Delete">Delete</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-3">
+                    <h3>@item.Name</h3>
+                    <p>Value: @item.Value</p>
+                    <p>ID: @item.Id</p>
+                </div>
+            }
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+</body>
+</html>
