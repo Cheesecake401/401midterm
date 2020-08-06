@@ -11,15 +11,17 @@
 
 <head>
     <title>Characters</title>
+    <link rel="stylesheet" href="~/Styles/StyleSheet.css" type="text/css" />
 </head>
 <body>
     <header>
         <div class="dropdown show">
-            <span class="lead">CRYPTS & CODERS</span>
             <a class="btn btn-secondary" href="Home">Home</a>
             <a class="btn btn-secondary" href="#">Characters</a>
             <a class="btn btn-secondary" href="LocationsView">Locations</a>
             <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
+            <a class="btn btn-secondary" href="ItemsView">Items</a>
+            <a class="btn btn-secondary" href="LogView">Logs</a>
             <a class="btn btn-secondary" href="WeaponsView">Weapons</a>
             <a class="btn btn-secondary" href="AboutUs">About Us</a>
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -28,8 +30,6 @@
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="CharactersView/Create">Create</a>
-                <a class="dropdown-item" href="CharactersView/Edit">Update</a>
-                <a class="dropdown-item" href="CharactersView/Delete">Delete</a>
             </div>
         </div>
     </header>
@@ -42,8 +42,19 @@
                     <h3>@item.Name</h3>
                     <p>Species: @item.Species</p>
                     <p>Class: @item.Class</p>
+                    <p>UserName: @item.UserName</p>
+                    <p>Current Location: @item.CurrentLocation.Name</p>
                     <p>Weapon: @item.Weapon.Name</p>
                     <p>Weapon Base Damage: @item.Weapon.BaseDamage</p>
+                    <p>Stats:</p>
+                    @foreach (var stat in item.StatSheet)
+                    {
+                        <p>@stat.Stat.Name: @stat.Level</p>
+                    }
+                    <p>
+                        <a asp-action="Delete" asp-route-ID="@item.Id"
+                           class="btn btn-danger m-1">Delete</a>
+                    </p>
                 </div>
             }
         </div>

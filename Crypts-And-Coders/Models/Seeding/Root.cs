@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Crypts_And_Coders.Models.EquipmentSeeding
+﻿namespace Crypts_And_Coders.Models.EquipmentSeeding
 {
     public class Root
     {
@@ -9,6 +7,5 @@ namespace Crypts_And_Coders.Models.EquipmentSeeding
         public string weapon_category { get; set; }
         public Cost cost { get; set; }
         public Damage damage { get; set; }
- 
     }
 }

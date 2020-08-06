@@ -109,7 +109,6 @@ namespace Crypts_And_Coders.Migrations
                 nullable: true,
                 oldClrType: typeof(int),
                 oldType: "int");
-
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

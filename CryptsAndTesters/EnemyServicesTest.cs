@@ -2,12 +2,9 @@
 using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace CryptsAndTesters
 {
@@ -158,8 +155,6 @@ namespace CryptsAndTesters
         public async Task CanAddItemToLoot()
         {
             var repo = BuildRepo();
-
-
 
             await repo.AddItemToLoot(1, 3);
 

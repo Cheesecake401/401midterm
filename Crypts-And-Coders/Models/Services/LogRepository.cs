@@ -1,15 +1,13 @@
 ﻿using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.WebApiCompatShim;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore.Http;
 using System.Net.Http;
-using Crypts_And_Coders.Models.Interfaces;
-using Microsoft.AspNetCore.Mvc.WebApiCompatShim;
-using System.IO;
+using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.Services
 {
@@ -61,6 +59,18 @@ namespace Crypts_And_Coders.Models.Services
             _context.Entry(log).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return log;
+        }
+
+        public async Task<LogData> DeleteLog(int id)
+        {
+            LogData log = await _context.Logs.FindAsync(id);
+            if (log != null)
+            {
+                _context.Entry(log).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+                return log;
+            }
+            return null;
         }
     }
 }

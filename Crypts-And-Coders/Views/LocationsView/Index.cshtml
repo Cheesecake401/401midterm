@@ -11,16 +11,18 @@
 
 <head>
     <title>Locations</title>
+    <link rel="stylesheet" href="~/Styles/StyleSheet.css" type="text/css" />
 </head>
 
 <body>
     <header>
         <div class="dropdown show">
-            <span class="lead">CRYPTS & CODERS</span>
             <a class="btn btn-secondary" href="Home">Home</a>
             <a class="btn btn-secondary" href="CharactersView">Characters</a>
             <a class="btn btn-secondary" href="#">Locations</a>
             <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
+            <a class="btn btn-secondary" href="ItemsView">Items</a>
+            <a class="btn btn-secondary" href="LogView">Logs</a>
             <a class="btn btn-secondary" href="WeaponsView">Weapons</a>
             <a class="btn btn-secondary" href="AboutUs">About Us</a>
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,8 +31,6 @@
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="LocationsView/Create">Create</a>
-                <a class="dropdown-item" href="LocationsView/Edit">Update</a>
-                <a class="dropdown-item" href="LocationsView/Delete">Delete</a>
             </div>
         </div>
     </header>
@@ -47,6 +47,10 @@
                     {
                         <span>@enemy.Species, </span>
                     }
+                    <p>
+                        <a asp-action="Delete" asp-route-ID="@item.Id"
+                           class="btn btn-danger m-1">Delete</a>
+                    </p>
                 </div>
             }
         </div>
