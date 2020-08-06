@@ -34,6 +34,7 @@ namespace CryptsAndTesters
             Assert.Equal(saved.Name, newChar.Name);
         }
 
+
         [Fact]
         public async Task CanGetCharacter()
         {
@@ -42,6 +43,16 @@ namespace CryptsAndTesters
             var result = await repo.GetCharacter(1);
 
             Assert.Equal("Galdifor", result.Name);
+        }
+
+        [Fact]
+        public void CanGetCharacterSync()
+        {
+            var repo = BuildRepo();
+
+            string result = repo.GetCharacterUserNameSync(1);
+
+            Assert.Equal("Seed", result);
         }
 
         [Fact]
