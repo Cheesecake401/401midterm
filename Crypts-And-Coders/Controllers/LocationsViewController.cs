@@ -34,24 +34,6 @@ namespace Crypts_And_Coders.Controllers
             return View(allLocations);
         }
 
-        // GET: LocationsView/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            return View(location);
-        }
-
         // GET: LocationsView/Create
         public IActionResult Create()
         {

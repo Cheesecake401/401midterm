@@ -32,24 +32,6 @@ namespace Crypts_And_Coders.Controllers
             return View(allEnemies);
         }
 
-        // GET: EnemiesView/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var enemy = await _context.Enemy
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (enemy == null)
-            {
-                return NotFound();
-            }
-
-            return View(enemy);
-        }
-
         // GET: EnemiesView/Create
         public IActionResult Create()
         {

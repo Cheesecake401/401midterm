@@ -38,8 +38,15 @@
                     <h3>@item.Name</h3>
                     <p>Species: @item.Species</p>
                     <p>Class: @item.Class</p>
+                    <p>UserName: @item.UserName</p>
+                    <p>Current Location: @item.CurrentLocation.Name</p>
                     <p>Weapon: @item.Weapon.Name</p>
                     <p>Weapon Base Damage: @item.Weapon.BaseDamage</p>
+                    <p>Stats:</p>
+                    @foreach (var stat in item.StatSheet)
+                    {
+                        <p>@stat.Stat.Name: @stat.Level</p>
+                    }
                     <p>
                         <a asp-action="Delete" asp-route-ID="@item.Id"
                            class="btn btn-danger m-1">Delete</a>
