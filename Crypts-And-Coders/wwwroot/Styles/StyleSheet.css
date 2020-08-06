@@ -31,10 +31,8 @@ main {
     background-color: #30475e;
     border-radius: 5px;
 }
-    background-color: aquamarine;
-}
 
-#lami{
+#lami {
     max-width: 200px;
     float: left;
     margin-top: 5%;
@@ -53,7 +51,6 @@ main {
     max-width: 200px;
     margin-top: 10%;
     float: left;
- 
 }
 
 #andrew-p {
