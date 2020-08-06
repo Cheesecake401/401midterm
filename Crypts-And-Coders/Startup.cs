@@ -25,9 +25,9 @@ namespace Crypts_And_Coders
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
-        public Startup(IConfiguration configuration)
+        public Startup()
         {
             var builder = new ConfigurationBuilder().AddEnvironmentVariables();
             builder.AddUserSecrets<Startup>();
