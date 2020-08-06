@@ -1,8 +1,6 @@
 ﻿using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -115,7 +113,6 @@ namespace Crypts_And_Coders.Models.Services
             return result;
         }
 
-
         /// <summary>
         /// Get a list of all characters in the database
         /// </summary>
@@ -126,10 +123,7 @@ namespace Crypts_And_Coders.Models.Services
             List<CharacterDTO> resultDTO = new List<CharacterDTO>();
             foreach (var item in result)
             {
-           
                 resultDTO.Add(await GetCharacter(item.Id));
-
-              
             }
             return resultDTO;
         }
@@ -154,7 +148,7 @@ namespace Crypts_And_Coders.Models.Services
                 WeaponId = characterDTO.WeaponId,
                 LocationId = characterDTO.LocationId,
                 UserName = characterDTO.UserName
-        };
+            };
 
             _context.Entry(character).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -214,8 +208,8 @@ namespace Crypts_And_Coders.Models.Services
                 resultDTO.Add(new InventoryDTO()
                 {
                     CharacterId = item.CharacterId,
-                    Item = new ItemDTO() 
-                    { 
+                    Item = new ItemDTO()
+                    {
                         Name = item.Item.Name,
                         Value = item.Item.Value,
                         Id = item.Item.Id

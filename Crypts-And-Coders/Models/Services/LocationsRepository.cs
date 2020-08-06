@@ -2,7 +2,6 @@
 using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -88,11 +87,11 @@ namespace Crypts_And_Coders.Models.Services
                 Name = result.Name,
                 Description = result.Description
             };
-            
+
             dto.Enemies = new List<LocationEnemyInfoDTO>();
             foreach (var enemy in result.Enemies)
             {
-                if(_enemy != null)
+                if (_enemy != null)
                 {
                     var rawEnemy = await _enemy.GetEnemy(enemy.EnemyId);
 
@@ -103,7 +102,6 @@ namespace Crypts_And_Coders.Models.Services
                         Species = rawEnemy.Species,
                         Type = rawEnemy.Type
                     });
-                       
                 }
             }
             return dto;
@@ -127,7 +125,6 @@ namespace Crypts_And_Coders.Models.Services
             await _context.SaveChangesAsync();
             return locationDTO;
         }
-
 
         /// <summary>
         /// Add an enemy to a location

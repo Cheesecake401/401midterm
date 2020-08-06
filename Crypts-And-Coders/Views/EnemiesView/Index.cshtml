@@ -35,17 +35,17 @@
         <div class="row">
             @foreach (var item in Model)
             {
-            <div class="col-sm-3">
+                <div class="col-sm-3">
 
-                <h3>@item.Species</h3>
-                <p>Type: @item.Type</p>
-                <p>Ability: @item.Abilities</p>
-                <span>Loot: </span>
-                @foreach (var lootItem in item.Loot)
-                {
-                <span>@lootItem.Item.Name, </span>
-                }
-            </div>
+                    <h3>@item.Species</h3>
+                    <p>Type: @item.Type</p>
+                    <p>Ability: @item.Abilities</p>
+                    <span>Loot: </span>
+                    @foreach (var lootItem in item.Loot)
+                    {
+                        <span>@lootItem.Item.Name, </span>
+                    }
+                </div>
             }
         </div>
     </main>

@@ -34,7 +34,6 @@ namespace CryptsAndTesters
             Assert.Equal(saved.Name, newChar.Name);
         }
 
-
         [Fact]
         public async Task CanGetCharacter()
         {
@@ -87,9 +86,6 @@ namespace CryptsAndTesters
             Assert.Equal(1, result.Id);
             Assert.Equal(newChar.Name, result.Name);
         }
-
-
-
 
         [Fact]
         public async Task CanDeleteCharacter()

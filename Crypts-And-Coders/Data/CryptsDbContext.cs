@@ -1,7 +1,6 @@
 using Crypts_And_Coders.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace Crypts_And_Coders.Data
@@ -34,6 +33,7 @@ namespace Crypts_And_Coders.Data
             modelBuilder.Entity<EnemyLoot>().HasKey(x => new { x.EnemyId, x.ItemId });
 
             #region DataSeeding
+
             // seed data
             modelBuilder.Entity<Character>().HasData(
                 new Character
@@ -363,7 +363,8 @@ namespace Crypts_And_Coders.Data
                     ItemId = 3
                 }
             );
-            #endregion
+
+            #endregion DataSeeding
         }
     }
 }

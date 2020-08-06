@@ -4,7 +4,6 @@ using Crypts_And_Coders.Models.Services;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Xunit;
 
 namespace CryptsAndTesters
 {
@@ -39,8 +38,6 @@ namespace CryptsAndTesters
             _item = new ItemRepository(_db);
             _weapon = new WeaponRepository(_db);
             _enemy = new EnemyRepository(_db);
-
-
         }
 
         public void Dispose()

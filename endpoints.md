@@ -1,5 +1,18 @@
 # Application Endpoints
 
+## Contents
+- [Account](#Account)
+- [Characters](#Characters)
+  - [Stats](#Character-Stats)
+  - [Items](#Character-Items)
+- [Enemies](#Enemies)
+  - [Loot](#Enemy-Loot)
+- [Locations](#Locations)
+  - [Enemies in Location](#Enemies-In-Location)
+- [Items](#Items)
+- [Weapons](#Weapons)
+
+
 ### Account
 */Account/Register*
 
@@ -51,7 +64,7 @@
 **Post** - Create new character by supplying: WeaponId, Current Location ID, Name, Species, and Class
 
 
-*/Characters/{id}* 
+*/Characters/\{id\}* 
 
 **Authorization** - GM can do anything, users can update and view their own character
 
@@ -218,11 +231,11 @@
 **Post** - Create new enemy by supplying: Name and Description
 
 
-*/Enemies/{id}* 
+*/Enemies/\{EnemyId\}* 
 
 **Authorization** - Get allows anonymous, Put & Delete are GM only
 
-**Get** - Enemy with the given name and their associated information.
+**Get** - Enemy with the given id and their associated information.
 
 **Put** - Update enemy info
 
@@ -271,7 +284,7 @@
 ```
 
 ---
-### Enemy Items
+### Enemy Loot
 
 *Enemy/\{EnemyId\}/Items/\{ItemId\}* 
 
@@ -294,7 +307,7 @@
 
 */Locations/\{LocationId\}* 
 
-**Authorization** - Users can get their current location, only GM for other operations
+**Authorization** - GM Only
 
 **Get** - Location with the given name and their associated information.
 
@@ -358,7 +371,7 @@
 **Post** - Create new item by supplying: Name and Value
 
 
-*/Items/\{id\}* 
+*/Items/\{ItemId\}* 
 
 **Authorization** - Allow anonymous for all gets, DM only for put
 
@@ -390,7 +403,7 @@
 
 **Post** - Create new weapon by supplying: Name and type
 
-*/Weapons/{id}* 
+*/Weapons/\{WeaponId\}* 
 
 **Authorization** - Allow anonymous for all gets, DM only for put
 
