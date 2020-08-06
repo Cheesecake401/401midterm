@@ -1,12 +1,17 @@
-﻿using Crypts_And_Coders.Data;
-using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.DTOs;
-using Crypts_And_Coders.Models.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Crypts_And_Coders.Data;
+using Crypts_And_Coders.Models;
+using Crypts_And_Coders.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Crypts_And_Coders.Models.DTOs;
+using Crypts_And_Coders.Models.Services;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -29,24 +34,6 @@ namespace Crypts_And_Coders.Controllers
             return View(allLocations);
         }
 
-        // GET: LocationsView/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            return View(location);
-        }
-
         // GET: LocationsView/Create
         public IActionResult Create()
         {
@@ -57,13 +44,14 @@ namespace Crypts_And_Coders.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<ActionResult<Location>> Create([Bind("Id,Name,Description")] LocationDTO location)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult<Location>> Create([Bind("Id,Name,Description")] Location location)
         {
             if (ModelState.IsValid)
             {
-                await _location.Create(location);
-                return CreatedAtAction("GetLocation", new { id = location.Id }, location);
+                _context.Add(location);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(location);
         }
@@ -127,8 +115,8 @@ namespace Crypts_And_Coders.Controllers
                 return NotFound();
             }
 
-            var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var location = await _context.Location.FirstOrDefaultAsync(x => x.Id == id);
+
             if (location == null)
             {
                 return NotFound();

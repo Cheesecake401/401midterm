@@ -1,13 +1,11 @@
-﻿@model Crypts_And_Coders.Models.Enemy
+﻿@model Crypts_And_Coders.Models.DTOs.EnemyDTO
 
 @{
     ViewData["Title"] = "Create";
     Layout = "_Layout";
 }
 
-<h1>Create</h1>
-
-<h4>Enemy</h4>
+<h4>Enemy Creation</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,9 +22,14 @@
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Species" class="control-label"></label>
-                <select asp-for="Species" class="form-control"></select>
-                <span asp-validation-for="Species" class="text-danger"></span>
+                <label class="control-label">Species</label>
+                <select class="form-control">
+                    @foreach (var speciesName in Enum.GetValues(typeof(Crypts_And_Coders.Models.SpeciesAndClass.Species)))
+                    {
+                        <option>@speciesName.ToString()</option>
+                    }
+                </select>
+                <span class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

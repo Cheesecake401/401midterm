@@ -29,7 +29,6 @@
             <div class="form-group">
                 <label class="control-label">Species</label>
                 <select class="form-control">
-                    <option value="" disabled selected hidden>Choose a species</option>
                     @foreach (var speciesName in Enum.GetValues(typeof(Crypts_And_Coders.Models.SpeciesAndClass.Species)))
                     {
                         <option> @speciesName.ToString() </option>
@@ -41,10 +40,9 @@
             <div class="form-group">
                 <label class="control-label">Class</label>
                 <select class="form-control">
-                    <option value="" disabled selected hidden>Choose a class</option>
                     @foreach (var className in Enum.GetValues(typeof(Crypts_And_Coders.Models.SpeciesAndClass.Class)))
                     {
-                        <option> @className.ToString() </option>
+                        <option>@className.ToString()</option>
                     }
                 </select>
                 <span class="text-danger"></span>
@@ -64,7 +62,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-@*@section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial@Model.SpeciesAndClass.Species);}
-    }*@
