@@ -1,12 +1,11 @@
-﻿@page "{id}"
-@model Crypts_And_Coders.Models.Location
+﻿@model Crypts_And_Coders.Models.DTOs.LocationDTO
 
 @{
     ViewData["Title"] = "Delete";
     Layout = "_Layout";
 }
 
-@*<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete this?</h3>
     <div>
         <h4>Location</h4>
         <hr />
@@ -30,17 +29,17 @@
             <input type="submit" value="Delete" class="btn btn-danger" /> |
             <a asp-action="Index">Back to List</a>
         </form>
-    </div>*@
-<!DOCTYPE html>
+    </div>
+<!--<!DOCTYPE html>
 <html>
 <body>
     <div class="alert alert-danger">
         <h3>Are you sure you want to delete this?</h3>
-        <form method="post">
+        <form method="post">-->
             @*<button type="submit" class="btn btn-danger">Yes</button>*@
-            <input type="submit" value="delete" class="btn btn-danger" />
+            <!--<input type="submit" value="delete" class="btn btn-danger" />
             <a asp-page="/LocationsView/Index" class="btn btn-primary">No</a>
         </form>
     </div>
 </body>
-</html>
+</html>-->

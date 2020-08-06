@@ -11,12 +11,12 @@
 
 <head>
     <title>Locations</title>
+    <link rel="stylesheet" href="~/Styles/StyleSheet.css" type="text/css" />
 </head>
 
 <body>
     <header>
         <div class="dropdown show">
-            <span class="lead">CRYPTS & CODERS</span>
             <a class="btn btn-secondary" href="Home">Home</a>
             <a class="btn btn-secondary" href="CharactersView">Characters</a>
             <a class="btn btn-secondary" href="#">Locations</a>
@@ -45,9 +45,11 @@
                     {
                         <span>@enemy.Species, </span>
                     }
+                    <p>
+                        <a asp-action="Delete" asp-route-ID="@item.Id"
+                           class="btn btn-danger m-1">Delete</a>
+                    </p>
                 </div>
-                <a asp-page="/LocationsView/Delete" asp-route-ID="@item.Id"
-                   class="btn btn-danger m-1">Delete</a>
             }
         </div>
     </main>

@@ -126,39 +126,18 @@ namespace Crypts_And_Coders.Controllers
         }
 
         // GET: LocationsView/Delete/5
-        //[BindProperty]
-        //public LocationDTO Location { get; set; }
-
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    Location = await _location.GetLocation(id);
-        //    if (Location == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    //var location = await _context.Location
-        //    //    .FirstOrDefaultAsync(m => m.Id == id);
-        //    return View(Location);
-        //}
         [BindProperty]
         public LocationDTO Location { get; set; }
 
-        public async Task<IActionResult> OnGet(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             Location = await _location.GetLocation(id);
-
             if (Location == null)
             {
-                return RedirectToPage("/NotFound");
+                return NotFound();
             }
-            return View(Location);
-        }
 
-        public async Task<IActionResult> OnPost()
-        {
-            await _location.Delete(Location.Id);
-            return RedirectToPage("Index");
+            return View(Location);
         }
 
         // POST: LocationsView/Delete/5
