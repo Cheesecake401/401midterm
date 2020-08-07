@@ -106,5 +106,23 @@ namespace Crypts_And_Coders.Controllers
 
             await _location.RemoveEnemyFromLocation(locationId, enemyId);
         }
+
+        // POST: api/Location/5/Enemies/1
+        [HttpPost("{locationId}/Enemies/{enemyId}")]
+        public async Task AddEnemyToLoot(int locationId, int enemyId)
+        {
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
+            await _location.AddEnemyToLocation(locationId, enemyId);
+        }
+
+        // DELETE: api/Locations/5/Enemies/1
+        [HttpDelete("{locationId}/Enemies/{enemyId}")]
+        public async Task DeleteEnemyFromLocation(int locationId, int enemyId)
+        {
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
+            await _location.RemoveEnemyFromLocation(locationId, enemyId);
+        }
     }
 }
