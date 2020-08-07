@@ -17,6 +17,15 @@ main {
     text-align: center;
 }
 
+.create-title {
+}
+
+.col-md-4 {
+    margin: 10px auto;
+    border-radius: 5px;
+    background-color: #30475e;
+}
+
 .col-sm-3 {
     width: auto;
     margin: 25px;
@@ -32,7 +41,6 @@ main {
     border-radius: 5px;
 }
 
-
-.table{
+.table {
     color: azure;
 }
