@@ -16,7 +16,6 @@
 <body>
     <header>
         <div class="dropdown show">
-            <span class="lead">CRYPTS & CODERS</span>
             <a class="btn btn-secondary" href="Home">Home</a>
             <a class="btn btn-secondary" href="#">Characters</a>
             <a class="btn btn-secondary" href="LocationsView">Locations</a>
@@ -25,8 +24,9 @@
             <a class="btn btn-secondary" href="WeaponsView">Weapons</a>
             <a class="btn btn-secondary" href="LogView">Logs</a>
             <a class="btn btn-secondary" href="AboutUs">About Us</a>
-
         </div>
+        <h2 class="lead">CRYPTS & CODERS</h2>
+
     </header>
 
     <main>
@@ -79,8 +79,6 @@
                         @Html.DisplayFor(modelItem => item.UserName)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
