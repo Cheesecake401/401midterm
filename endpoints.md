@@ -12,6 +12,9 @@
 - [Items](#Items)
 - [Weapons](#Weapons)
 
+## Base Route
+**https://table-top-rpg.azurewebsites.net/api**
+
 
 ### Account
 */Account/Register*
