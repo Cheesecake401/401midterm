@@ -4,9 +4,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
+.dropdown {
+    margin: 20px 0px;
+}
 
+main {
+    margin-top: 15px;
+}
 
 #lami {
     max-width: 200px;
@@ -23,7 +30,6 @@
 #andrew {
     max-width: 200px;
     margin-bottom: 15%;
-
 }
 
 #andrew-p {
@@ -35,8 +41,6 @@
 
 #nicco {
     max-width: 200px;
-    float: left;
-
 }
 
 #nicco-p {
