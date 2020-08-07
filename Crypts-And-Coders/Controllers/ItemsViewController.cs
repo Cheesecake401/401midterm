@@ -30,23 +30,6 @@ namespace Crypts_And_Coders.Views.ItemsView
             return View(result);
         }
 
-        // GET: ItemsView/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var item = await _item.GetItem((int)id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            return View(item);
-        }
-
         // GET: ItemsView/Create
         public IActionResult Create()
         {
@@ -63,50 +46,6 @@ namespace Crypts_And_Coders.Views.ItemsView
             if (ModelState.IsValid)
             {
                 await _item.Create(item);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(item);
-        }
-
-        // GET: ItemsView/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var item = await _item.GetItem((int)id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return View(item);
-        }
-
-        // POST: ItemsView/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] ItemDTO item)
-        {
-            if (id != item.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _item.Update(item);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    throw;
-
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(item);
