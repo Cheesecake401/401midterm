@@ -30,23 +30,6 @@ namespace Crypts_And_Coders.Views.LocationsView
             return View(result);
         }
 
-        // GET: LocationsView/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var location = await _location.GetLocation((int)id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            return View(location);
-        }
-
         // GET: LocationsView/Create
         public IActionResult Create()
         {
@@ -63,49 +46,6 @@ namespace Crypts_And_Coders.Views.LocationsView
             if (ModelState.IsValid)
             {
                 await _location.Create(location);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(location);
-        }
-
-        // GET: LocationsView/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var location = await _location.GetLocation((int)id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-            return View(location);
-        }
-
-        // POST: LocationsView/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] LocationDTO location)
-        {
-            if (id != location.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _location.Update(location);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    throw;
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(location);

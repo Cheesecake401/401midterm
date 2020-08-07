@@ -29,23 +29,6 @@ namespace Crypts_And_Coders.Views.WeaponsView
             return View(await _weapon.GetWeapons());
         }
 
-        // GET: WeaponsView/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var weapon = await _weapon.GetWeapon((int)id);
-            if (weapon == null)
-            {
-                return NotFound();
-            }
-
-            return View(weapon);
-        }
-
         // GET: WeaponsView/Create
         public IActionResult Create()
         {
@@ -62,49 +45,6 @@ namespace Crypts_And_Coders.Views.WeaponsView
             if (ModelState.IsValid)
             {
                 await _weapon.Create(weapon);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(weapon);
-        }
-
-        // GET: WeaponsView/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var weapon = await _weapon.GetWeapon((int)id);
-            if (weapon == null)
-            {
-                return NotFound();
-            }
-            return View(weapon);
-        }
-
-        // POST: WeaponsView/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,BaseDamage")] Weapon weapon)
-        {
-            if (id != weapon.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _weapon.Update(weapon);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-        
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(weapon);

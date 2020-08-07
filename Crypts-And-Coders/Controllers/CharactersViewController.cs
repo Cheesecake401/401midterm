@@ -30,23 +30,6 @@ namespace Crypts_And_Coders.Views.CharactersView
             return View(result);
         }
 
-        // GET: CharactersView/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var character = await _character.GetCharacter((int)id);
-            if (character == null)
-            {
-                return NotFound();
-            }
-
-            return View(character);
-        }
-
         // GET: CharactersView/Create
         public IActionResult Create()
         {
@@ -63,49 +46,6 @@ namespace Crypts_And_Coders.Views.CharactersView
             if (ModelState.IsValid)
             {
                 await _character.Create(character);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(character);
-        }
-
-        // GET: CharactersView/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var character = await _character.GetCharacter((int)id);
-            if (character == null)
-            {
-                return NotFound();
-            }
-            return View(character);
-        }
-
-        // POST: CharactersView/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] CharacterDTO character)
-        {
-            if (id != character.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _character.Update(character);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    throw;
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(character);
