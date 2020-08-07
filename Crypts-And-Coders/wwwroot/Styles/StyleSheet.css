@@ -37,9 +37,10 @@ main {
 
 .delete-container {
     width: 50%;
-    margin: 30px 0px;
+    margin: 7.5vh auto 0;
     background-color: #30475e;
     border-radius: 5px;
+    padding: 5px;
 }
 
 .table {
