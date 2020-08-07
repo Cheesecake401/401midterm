@@ -17,6 +17,16 @@ main {
     text-align: center;
 }
 
+.create-title {
+    margin-top: 2.5vh;
+}
+
+.col-md-4 {
+    margin: 7.5vh auto 0;
+    border-radius: 5px;
+    background-color: #30475e;
+}
+
 .col-sm-3 {
     width: auto;
     margin: 25px;
@@ -27,12 +37,12 @@ main {
 
 .delete-container {
     width: 50%;
-    margin: 30px 0px;
+    margin: 7.5vh auto 0;
     background-color: #30475e;
     border-radius: 5px;
+    padding: 5px;
 }
 
-
-.table{
+.table {
     color: azure;
 }
