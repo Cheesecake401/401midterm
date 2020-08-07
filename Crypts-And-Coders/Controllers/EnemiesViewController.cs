@@ -42,7 +42,7 @@ namespace Crypts_And_Coders.Views.EnemiesView
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] EnemyDTO enemy)
+        public async Task<IActionResult> Create(EnemyDTO enemy)
         {
             if (ModelState.IsValid)
             {

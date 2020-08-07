@@ -30,13 +30,14 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Species</label>
-                    <select class="form-control">
+                    <select asp-for="Species" class="form-control" required>
+                        <option value="" disabled selected hidden>Choose a species</option>
                         @foreach (var speciesName in Enum.GetValues(typeof(Crypts_And_Coders.Models.SpeciesAndClass.Species)))
                         {
-                            <option>@speciesName.ToString()</option>
+                            <option value="@speciesName.ToString()"> @speciesName.ToString() </option>
                         }
                     </select>
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="Species" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />

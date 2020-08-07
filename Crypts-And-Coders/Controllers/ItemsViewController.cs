@@ -41,7 +41,7 @@ namespace Crypts_And_Coders.Views.ItemsView
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] ItemDTO item)
+        public async Task<IActionResult> Create(ItemDTO item)
         {
             if (ModelState.IsValid)
             {
