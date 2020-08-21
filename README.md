@@ -12,7 +12,8 @@ This API serves as a handy notebook replacement for any tabletop Role-playing ga
 [Azure Deployment Link](https://table-top-rpg.azurewebsites.net/)
 
 [Requirements & Routes](requirements.md)
-[Swagger](https://dummy.com/swagger)
+
+[Swagger](https://table-top-rpg.azurewebsites.net/swagger)
 
 [Azure Boards](https://dev.azure.com/CryptsAndCoders/CryptsAndCoders)
 
